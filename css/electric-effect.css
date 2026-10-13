@@ -170,44 +170,46 @@
 
 /* 
    TARJETA ELÉCTRICA PRINCIPAL:
-   En reposo: marco neón estilizado sin vibración de turbulencia.
-   En HOVER / TOUCH: se activa el arco eléctrico animado con desplazamiento SVG reactivo.
+   Rayo y arco de plasma eléctrico en zigzag y de alta tensión.
+   Núcleo blanco incandescente con halo de plasma neón.
 */
 .electric-card-main {
     position: absolute;
-    inset: -2px;
-    border-radius: 24px;
-    border: 2px solid var(--electric-border);
-    box-shadow: 0 0 10px var(--electric-glow), inset 0 0 6px var(--electric-glow);
+    inset: -3px;
+    border-radius: 25px;
+    border: 2px solid var(--electric-light);
+    box-shadow: 0 0 4px #ffffff, 0 0 10px var(--electric-glow);
+    filter: var(--electric-filter);
+    animation: electricArcJitter 0.25s steps(2) infinite;
     pointer-events: none;
     z-index: 6;
-    opacity: 0.8;
-    contain: paint;
-    isolation: isolate;
-    will-change: transform, opacity;
-    transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    opacity: 0.95;
+    overflow: visible !important;
+    will-change: transform;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Capas de halo neón difuminado */
+/* Capa secundaria de arco voltaico de alta frecuencia */
 .electric-glow-1 {
     position: absolute;
-    inset: 0;
-    border-radius: 24px;
-    border: 1.5px solid var(--electric-glow);
-    box-shadow: 0 0 8px var(--electric-glow);
+    inset: -2px;
+    border-radius: 25px;
+    border: 1.5px solid var(--electric-border);
+    box-shadow: 0 0 14px var(--electric-glow);
+    filter: var(--electric-filter);
+    animation: electricArcJitterAlt 0.3s steps(2) infinite alternate;
     pointer-events: none;
-    z-index: 4;
-    opacity: 0.55;
-    transition: opacity 0.3s ease;
+    z-index: 5;
+    opacity: 0.85;
 }
 
 .electric-glow-2 {
     position: absolute;
     inset: 0;
     border-radius: 24px;
-    border: 1px solid var(--electric-light);
+    box-shadow: inset 0 0 14px var(--electric-glow);
     pointer-events: none;
-    z-index: 5;
+    z-index: 4;
     opacity: 0.55;
     transition: opacity 0.3s ease;
 }
@@ -217,7 +219,7 @@
     inset: 0;
     border-radius: 24px;
     background: linear-gradient(135deg, var(--electric-bg), transparent 60%);
-    opacity: 0.18;
+    opacity: 0.2;
     pointer-events: none;
     z-index: 1;
     transition: opacity 0.3s ease;
@@ -232,32 +234,29 @@
 .product-card:active,
 .product-card.electric-active {
     transform: translate3d(0, -8px, 0) rotateX(3deg) rotateY(-3deg);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 28px var(--electric-bg);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 35px var(--electric-bg);
 }
 
 .product-card:hover .electric-card-main,
+.product-card:active .electric-card-main,
 .product-card.electric-active .electric-card-main {
-    transform: translateZ(0);
+    border-color: #ffffff;
+    box-shadow: 0 0 8px #ffffff, 0 0 20px var(--electric-light), 0 0 32px var(--electric-glow);
     opacity: 1;
-    box-shadow: 0 0 24px var(--electric-glow), inset 0 0 12px var(--electric-glow);
-    animation: electricJitterGlow 1.2s infinite ease-in-out;
-    filter: var(--electric-filter);
+}
+
+.product-card:hover .electric-glow-1,
+.product-card:active .electric-glow-1,
+.product-card.electric-active .electric-glow-1 {
+    opacity: 1;
+    box-shadow: 0 0 24px var(--electric-glow);
 }
 
 .product-card:hover .electric-bg-glow,
 .product-card:active .electric-bg-glow,
 .product-card.electric-active .electric-bg-glow {
-    opacity: 0.85;
+    opacity: 0.9;
     transform: scale(1.1);
-}
-
-.product-card:hover .electric-glow-1,
-.product-card:hover .electric-glow-2,
-.product-card:active .electric-glow-1,
-.product-card:active .electric-glow-2,
-.product-card.electric-active .electric-glow-1,
-.product-card.electric-active .electric-glow-2 {
-    opacity: 1;
 }
 
 .product-card:hover .electric-overlay,
@@ -271,32 +270,29 @@
 .project-card:active,
 .project-card.electric-active {
     transform: translate3d(0, -8px, 0) rotateX(3deg) rotateY(-3deg) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--electric-bg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 38px var(--electric-bg);
 }
 
 .project-card:hover .electric-card-main,
+.project-card:active .electric-card-main,
 .project-card.electric-active .electric-card-main {
-    transform: translateZ(0);
+    border-color: #ffffff;
+    box-shadow: 0 0 8px #ffffff, 0 0 22px var(--electric-light), 0 0 35px var(--electric-glow);
     opacity: 1;
-    box-shadow: 0 0 26px var(--electric-glow), inset 0 0 14px var(--electric-glow);
-    animation: electricJitterGlow 1.2s infinite ease-in-out;
-    filter: var(--electric-filter);
+}
+
+.project-card:hover .electric-glow-1,
+.project-card:active .electric-glow-1,
+.project-card.electric-active .electric-glow-1 {
+    opacity: 1;
+    box-shadow: 0 0 26px var(--electric-glow);
 }
 
 .project-card:hover .electric-bg-glow,
 .project-card:active .electric-bg-glow,
 .project-card.electric-active .electric-bg-glow {
-    opacity: 0.9;
+    opacity: 0.95;
     transform: scale(1.12);
-}
-
-.project-card:hover .electric-glow-1,
-.project-card:hover .electric-glow-2,
-.project-card:active .electric-glow-1,
-.project-card:active .electric-glow-2,
-.project-card.electric-active .electric-glow-1,
-.project-card.electric-active .electric-glow-2 {
-    opacity: 1;
 }
 
 .project-card:hover .electric-overlay,
@@ -503,24 +499,22 @@
 }
 
 /* ========================================================
-   EFECTO ELÉCTRICO NEÓN ULTRA NOTORIO EN DISPOSITIVOS MÓVILES Y TÁCTILES
+   EFECTO ELÉCTRICO DE RAYOS Y ARCOS EN DISPOSITIVOS MÓVILES
    (Smartphones, Tablets y Pantallas Táctiles)
-   - CERO CONGELAMIENTO: Desactivación total de filtros SVG en CPU.
-   - 100% ACELERACIÓN POR GPU: Animaciones en hilo compositor (60-120 FPS).
-   - MÁXIMA VISIBILIDAD: Rayos de arco eléctrico de alto voltaje con destellos blancos y neón.
    ======================================================== */
 @media (max-width: 992px), (hover: none), (pointer: coarse) {
-    /* Desactivar motor SVG en móviles para liberar el 100% de la CPU */
+    /* El contenedor SVG de filtros de rayos permanece activo */
     .electric-svg-container {
-        display: none !important;
-    }
-
-    /* Anular filtro SVG de desplazamiento en dispositivos táctiles */
-    .product-card .electric-card-main,
-    .project-card .electric-card-main,
-    .cta-bg.futuristic-cta .electric-card-main {
-        filter: none !important;
-        transform: translateZ(0) !important;
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0.001;
+        pointer-events: none;
+        overflow: hidden;
+        visibility: visible !important;
     }
 
     /* Cuadrícula optimizada para desplazamiento vertical táctil nativo */
@@ -537,36 +531,40 @@
         will-change: auto !important;
     }
 
-    /* 1. Marco Eléctrico Principal: Arco de Alta Tensión con Descargas Neón y Destellos Blancos */
+    /* 1. Rayo Eléctrico Principal en Zigzag (Displacement SVG Activo con Escala 24) */
     .product-card .electric-card-main,
-    .project-card .electric-card-main {
+    .project-card .electric-card-main,
+    .cta-bg.futuristic-cta .electric-card-main {
         position: absolute;
-        inset: -2px;
-        border-radius: 24px !important;
-        border: 2px solid var(--electric-border) !important;
-        box-shadow: 0 0 16px var(--electric-glow), 0 0 32px var(--electric-bg), inset 0 0 10px var(--electric-glow) !important;
-        animation: mobileElectricCrackle 1.6s infinite ease-in-out !important;
-        opacity: 1 !important;
+        inset: -3px;
+        border-radius: 25px !important;
+        border: 2px solid var(--electric-light) !important;
+        box-shadow: 0 0 6px #ffffff, 0 0 14px var(--electric-glow) !important;
+        filter: var(--electric-filter) !important;
+        animation: electricArcJitter 0.25s steps(2) infinite !important;
+        opacity: 0.95 !important;
         pointer-events: none;
         z-index: 6;
+        overflow: visible !important;
     }
 
-    /* 2. Halo Neón de Alta Frecuencia (Chispas Eléctricas Rápidas) */
+    /* 2. Segundo Arco Voltaico Paralelo en Móvil */
     .product-card .electric-glow-1,
     .project-card .electric-glow-1 {
         display: block !important;
         position: absolute;
-        inset: 0;
-        border-radius: 24px !important;
-        border: 1.5px solid var(--electric-light) !important;
-        box-shadow: 0 0 14px var(--electric-glow) !important;
+        inset: -2px;
+        border-radius: 25px !important;
+        border: 1.5px solid var(--electric-border) !important;
+        box-shadow: 0 0 16px var(--electric-glow) !important;
+        filter: var(--electric-filter) !important;
+        animation: electricArcJitterAlt 0.3s steps(2) infinite alternate !important;
         opacity: 0.85 !important;
-        animation: mobileElectricFlicker 0.4s infinite alternate ease-in-out !important;
         pointer-events: none;
         z-index: 5;
     }
 
-    /* 3. Resplandor Interno de Plasma de Alta Energía */
+    /* 3. Resplandor Interno de Plasma */
     .product-card .electric-glow-2,
     .project-card .electric-glow-2 {
         display: block !important;
@@ -574,8 +572,7 @@
         inset: 1px;
         border-radius: 23px !important;
         box-shadow: inset 0 0 16px var(--electric-glow) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        opacity: 0.75 !important;
+        opacity: 0.6 !important;
         pointer-events: none;
         z-index: 4;
     }
@@ -584,11 +581,10 @@
     .product-card .electric-bg-glow,
     .project-card .electric-bg-glow {
         display: block !important;
-        opacity: 0.8 !important;
-        inset: -8px !important;
+        opacity: 0.85 !important;
+        inset: -10px !important;
         border-radius: 30px !important;
         background: radial-gradient(circle at 50% 50%, var(--electric-bg), transparent 70%) !important;
-        animation: mobileElectricAura 2.4s infinite ease-in-out !important;
         pointer-events: none;
         z-index: -1;
     }
@@ -603,13 +599,13 @@
         z-index: 1;
     }
 
-    /* 6. Interacción Táctil Inmediata (Toque / Presión con Cero Retardo) */
+    /* 6. Sobrecarga Eléctrica Instantánea al Toque (0 ms) */
     .product-card:active,
     .project-card:active,
     .product-card.electric-active,
     .project-card.electric-active {
         transform: scale(0.982) !important;
-        box-shadow: 0 0 45px var(--electric-glow), 0 0 85px var(--electric-bg), 0 0 16px #ffffff, inset 0 0 25px var(--electric-light) !important;
+        box-shadow: 0 0 45px var(--electric-glow), 0 0 85px var(--electric-bg), 0 0 16px #ffffff !important;
         transition: transform 0.1s ease, box-shadow 0.1s ease !important;
     }
 
@@ -618,95 +614,42 @@
     .product-card.electric-active .electric-card-main,
     .project-card.electric-active .electric-card-main {
         border-color: #ffffff !important;
-        box-shadow: 0 0 45px var(--electric-glow), 0 0 80px var(--electric-bg), 0 0 20px #ffffff, inset 0 0 25px #ffffff !important;
+        box-shadow: 0 0 12px #ffffff, 0 0 28px var(--electric-light), 0 0 45px var(--electric-glow) !important;
         opacity: 1 !important;
     }
 }
 
 /* ========================================================
-   KEYFRAMES DE DESCARGAS Y RAYOS ELÉCTRICOS DE ALTA ENERGÍA
+   KEYFRAMES DE VIBRACIÓN Y DESCARGAS DE ARCO ELÉCTRICO
    ======================================================== */
 
-/* Descargas de alta tensión con arcos y destellos blancos */
-@keyframes mobileElectricCrackle {
+@keyframes electricArcJitter {
     0%, 100% {
-        box-shadow: 0 0 16px var(--electric-glow), 0 0 32px var(--electric-bg), inset 0 0 10px var(--electric-glow);
-        border-color: var(--electric-border);
-        opacity: 0.92;
+        transform: translate3d(0, 0, 0);
     }
-    15% {
-        box-shadow: 0 0 28px var(--electric-glow), 0 0 52px var(--electric-bg), 0 0 6px #ffffff, inset 0 0 16px var(--electric-light);
-        border-color: var(--electric-light);
-        opacity: 1;
-    }
-    18% {
-        box-shadow: 0 0 12px var(--electric-glow), inset 0 0 6px var(--electric-glow);
-        border-color: var(--electric-border);
-        opacity: 0.78;
-    }
-    35% {
-        box-shadow: 0 0 38px var(--electric-glow), 0 0 68px var(--electric-bg), 0 0 12px #ffffff, inset 0 0 20px #ffffff;
-        border-color: #ffffff;
-        opacity: 1;
-    }
-    38% {
-        box-shadow: 0 0 15px var(--electric-glow), inset 0 0 8px var(--electric-glow);
-        border-color: var(--electric-border);
-        opacity: 0.82;
-    }
-    65% {
-        box-shadow: 0 0 28px var(--electric-glow), 0 0 48px var(--electric-bg), 0 0 8px #ffffff, inset 0 0 14px var(--electric-light);
-        border-color: var(--electric-light);
-        opacity: 1;
-    }
-    85% {
-        box-shadow: 0 0 40px var(--electric-glow), 0 0 75px var(--electric-bg), 0 0 14px #ffffff, inset 0 0 22px #ffffff;
-        border-color: #ffffff;
-        opacity: 1;
-    }
-    88% {
-        box-shadow: 0 0 18px var(--electric-glow), inset 0 0 10px var(--electric-glow);
-        border-color: var(--electric-border);
-        opacity: 0.88;
-    }
-}
-
-/* Micro-parpadeo de chispas eléctricas */
-@keyframes mobileElectricFlicker {
-    0% {
-        opacity: 0.45;
-        border-color: var(--electric-border);
-        box-shadow: 0 0 8px var(--electric-glow);
+    25% {
+        transform: translate3d(-1.5px, 1.5px, 0);
     }
     50% {
-        opacity: 1;
-        border-color: #ffffff;
-        box-shadow: 0 0 20px var(--electric-glow), 0 0 6px #ffffff;
+        transform: translate3d(1.5px, -1.5px, 0);
     }
-    100% {
-        opacity: 0.75;
-        border-color: var(--electric-light);
-        box-shadow: 0 0 14px var(--electric-glow);
+    75% {
+        transform: translate3d(-1px, -1px, 0);
     }
 }
 
-/* Pulsación de aura ambiental */
-@keyframes mobileElectricAura {
+@keyframes electricArcJitterAlt {
     0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
+        transform: translate3d(0, 0, 0);
     }
-    35%, 85% {
-        opacity: 0.95;
-        transform: scale(1.05);
+    33% {
+        transform: translate3d(1.5px, 1px, 0);
     }
-    50% {
-        opacity: 0.4;
-        transform: scale(0.98);
+    66% {
+        transform: translate3d(-1.5px, -1px, 0);
     }
 }
 
-/* Animación de pulso eléctrico para escritorio */
 @keyframes electricJitterGlow {
     0%, 100% {
         box-shadow: 0 0 22px var(--electric-glow), inset 0 0 10px var(--electric-glow);

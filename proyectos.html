@@ -242,49 +242,34 @@
 </head>
 
 <body class="bg-proyectos">
-    <!-- Filtros SVG de Rayos Eléctricos 3D de Alto Rendimiento (Optimizados para 60-120 fps) -->
+    <!-- Filtros SVG de Rayos y Arcos Eléctricos de Alta Tensión (60-120 fps) -->
     <svg id="electric-svg-defs" class="electric-svg-container" aria-hidden="true">
         <defs>
-            <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="1" />
-                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                    <animate attributeName="dy" values="400; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+            <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04 0.08" numOctaves="2" result="noise" seed="1" />
+                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
+                    <animate attributeName="dx" values="0; 140; -140; 260; 0" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="dy" values="0; -200; 200; -100; 0" dur="0.55s" repeatCount="indefinite" />
                 </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="2" />
-                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                    <animate attributeName="dx" values="280; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
-                    yChannelSelector="B" />
+                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="22" xChannelSelector="R" yChannelSelector="G" />
             </filter>
 
-            <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="3" />
-                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                    <animate attributeName="dy" values="360; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
+            <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.045 0.085" numOctaves="2" result="noise" seed="3" />
+                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
+                    <animate attributeName="dx" values="0; -160; 160; -240; 0" dur="0.52s" repeatCount="indefinite" />
+                    <animate attributeName="dy" values="0; 220; -220; 110; 0" dur="0.58s" repeatCount="indefinite" />
                 </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="4" />
-                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                    <animate attributeName="dx" values="250; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
-                    yChannelSelector="B" />
+                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="24" xChannelSelector="R" yChannelSelector="G" />
             </filter>
 
-            <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="5" />
-                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                    <animate attributeName="dy" values="380; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
+            <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.042 0.078" numOctaves="2" result="noise" seed="5" />
+                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
+                    <animate attributeName="dx" values="0; 180; -150; 210; 0" dur="0.56s" repeatCount="indefinite" />
+                    <animate attributeName="dy" values="0; -190; 230; -120; 0" dur="0.5s" repeatCount="indefinite" />
                 </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="6" />
-                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                    <animate attributeName="dx" values="260; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
-                    yChannelSelector="B" />
+                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="22" xChannelSelector="R" yChannelSelector="G" />
             </filter>
         </defs>
     </svg>

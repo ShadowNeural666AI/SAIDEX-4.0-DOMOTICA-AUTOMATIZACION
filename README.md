@@ -129,7 +129,7 @@ El sistema cuenta con un escudo de ciberseguridad integrado en [`js/script.js`](
 * **Cursor Ultrafluido 1:1**: Respuesta inmediata sin desfase ni arrastre en toda la superficie de la aplicación.
 * **Pausa en Segundo Plano (`visibilitychange`)**: Todos los bucles `requestAnimationFrame` en los lienzos canvas y en el cursor se pausan al minimizar o cambiar de pestaña.
 * **Scroll Suave en Móviles**: Eliminación de bloqueos de renderizado mediante `background-attachment: scroll !important` en dispositivos táctiles (`pointer: coarse`).
-* **Efecto Eléctrico Móvil Ultra Notorio (GPU 120 FPS)**: Sistema de arco eléctrico neón de alto voltaje con micro-destellos blancos y halos pulsantes ejecutados 100% en la GPU (sin filtros SVG en CPU), eliminando por completo cualquier congelamiento y maximizando la notoriedad visual en teléfonos y tablets.
+* **Efecto Eléctrico de Rayos y Arcos en Zigzag (120 FPS)**: Sistema de descarga eléctrica de alta tensión con núcleos blancos incandescentes y filtros procedurales SVG a escala 24 sin `color-dodge`, generando rayos y arcos voltaicos en zigzag reales y de máxima visibilidad en computadoras y móviles con cero congelamiento.
 * **Failsafe del Precargador HUD**: Cierre forzado garantizado a los 1400 ms en cualquier escenario de red lenta.
 
 ---
