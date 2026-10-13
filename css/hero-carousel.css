@@ -40,6 +40,7 @@
   max-width: 580px;
   perspective: 1000px;
   transform-style: preserve-3d;
+  margin-top: -38px; /* Sube las letras armónicamente en PC */
 }
 
 /* Metadatos: Insignia + Contador */
@@ -508,23 +509,25 @@
     grid-template-columns: 1fr !important;
     text-align: center;
     justify-items: center;
-    min-height: calc(100vh - 140px);
-    padding-top: 40px;
+    min-height: auto !important;
+    padding-top: 15px !important;
+    padding-bottom: 25px !important;
   }
 
   .hero-content {
     max-width: 620px;
-    margin: 0 auto;
+    margin: -15px auto 0 !important;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 !important;
   }
 
   .hero-circular-text-stage {
     text-align: center;
     max-width: 580px;
-    margin: 0 auto;
+    margin: -15px auto 0 !important;
   }
 
   .hero-dynamic-meta {
@@ -554,7 +557,7 @@
   .hero-carousel-controls {
     display: flex !important;
     justify-content: center;
-    margin: 24px auto 0;
+    margin: 22px auto 0;
   }
 }
 
@@ -566,14 +569,20 @@
 
   .hero-container {
     grid-template-columns: 1fr !important;
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding-top: 10px !important;
+    padding-bottom: 30px !important;
+    min-height: auto !important;
   }
 
   .hero-content {
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0 10px !important;
+    margin: -25px auto 0 !important;
     text-align: center;
+  }
+
+  .hero-circular-text-stage {
+    margin-top: -18px !important;
   }
 
   .hero-title {

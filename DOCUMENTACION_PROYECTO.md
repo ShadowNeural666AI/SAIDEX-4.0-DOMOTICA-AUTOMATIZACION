@@ -95,6 +95,7 @@ SAIDEX-4.0--DOMOTICA-Y-AUTOMATIZACION/
   * Rueda orbital 3D interactiva sincronizada con transiciones circulares de títulos, descripciones, insignias (`badges`) y píldoras (`pills`).
   * Fondo dinámico de doble capa con desvanecimiento cruzado (`cross-fade`) de alta velocidad.
   * Controles manuales mediante flechas de navegación (`heroArrowLeft`, `heroArrowRight`), miniaturas laterales y soporte para gestos táctiles de deslizamiento (*swipe*) en móviles.
+  * **Calibración Óptica Vertical**: Ajuste ergonómico de la altura de los textos (`.hero-circular-text-stage` y `.hero-content`) tanto en escritorio como en dispositivos móviles, elevando las letras para una alineación equilibrada con el carrusel circular y eliminando espacios muertos inferiores o colisiones con controles.
   * Cero intervalos automáticos invasivos para garantizar la comodidad y el control total del usuario.
 
 ### 4.3 Motor Beast Breathing Cursor (`js/beast-cursor.js`)

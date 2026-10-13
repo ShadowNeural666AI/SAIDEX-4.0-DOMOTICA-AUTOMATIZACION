@@ -693,8 +693,8 @@ img {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 150px;
-  padding-bottom: 70px;
+  padding-top: 115px;
+  padding-bottom: 60px;
   background-color: #020617;
   background-image: url('../assets/hero.webp');
   background-size: cover;
@@ -1036,8 +1036,8 @@ body.site-loaded .hero-floating-device,
   }
 
   .hero {
-    padding-top: 130px;
-    padding-bottom: 50px;
+    padding-top: 88px !important;
+    padding-bottom: 35px !important;
     background-position: 70% center;
   }
 
