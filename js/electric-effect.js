@@ -39,6 +39,23 @@
             ticking = false;
         }
 
+        // En dispositivos móviles y táctiles, el efecto eléctrico se ejecuta al 100% en GPU vía CSS
+        if (isTouchOnly || window.innerWidth <= 992) {
+            card.addEventListener('touchstart', function () {
+                card.classList.add('electric-active');
+            }, { passive: true });
+
+            card.addEventListener('touchend', function () {
+                setTimeout(() => card.classList.remove('electric-active'), 250);
+            }, { passive: true });
+
+            card.addEventListener('touchcancel', function () {
+                card.classList.remove('electric-active');
+            }, { passive: true });
+
+            return; // No añadir listeners de mouse ni tilt 3D que consuman CPU en móvil
+        }
+
         // --- Eventos de Cursor / Hover (Escritorio, Laptops y Puntero Fino) ---
         card.addEventListener('mouseenter', function (e) {
             rect = card.getBoundingClientRect();
@@ -77,68 +94,6 @@
             card.style.transform = '';
             card.style.willChange = 'auto';
         }, { passive: true });
-
-        // --- Eventos Táctiles Optimizados (Móviles y Tablets: Cero Congelamiento) ---
-        card.addEventListener('touchstart', function (e) {
-            clearTimeout(touchTimer);
-            isScrolling = false;
-
-            if (e.touches && e.touches.length > 0) {
-                const touch = e.touches[0];
-                touchStartX = touch.clientX;
-                touchStartY = touch.clientY;
-
-                // En dispositivos táctiles, activamos resplandor visual ligero sin bloquear el hilo de scroll
-                touchTimer = setTimeout(() => {
-                    if (!isScrolling) {
-                        card.classList.add('electric-active');
-                    }
-                }, 60);
-            }
-        }, { passive: true });
-
-        card.addEventListener('touchmove', function (e) {
-            if (isScrolling) return;
-
-            if (e.touches && e.touches.length > 0) {
-                const touch = e.touches[0];
-                const deltaX = Math.abs(touch.clientX - touchStartX);
-                const deltaY = Math.abs(touch.clientY - touchStartY);
-
-                // Si el usuario se desplaza más de 6px, es un gesto de scroll: cancelar inmediatamente
-                if (deltaY > 6 || deltaX > 6) {
-                    isScrolling = true;
-                    clearTimeout(touchTimer);
-                    if (rafId) {
-                        window.cancelAnimationFrame(rafId);
-                        rafId = null;
-                    }
-                    ticking = false;
-                    rect = null;
-                    card.classList.remove('electric-active');
-                    card.style.transform = '';
-                }
-            }
-        }, { passive: true });
-
-        const handleTouchEnd = function () {
-            clearTimeout(touchTimer);
-            if (rafId) {
-                window.cancelAnimationFrame(rafId);
-                rafId = null;
-            }
-            ticking = false;
-            rect = null;
-
-            touchTimer = setTimeout(() => {
-                card.classList.remove('electric-active');
-                card.style.transform = '';
-                isScrolling = false;
-            }, 250);
-        };
-
-        card.addEventListener('touchend', handleTouchEnd, { passive: true });
-        card.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     }
 
     function init() {

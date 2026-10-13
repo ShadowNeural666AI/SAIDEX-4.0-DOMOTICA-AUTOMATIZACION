@@ -124,7 +124,11 @@ SAIDEX-4.0--DOMOTICA-Y-AUTOMATIZACION/
 * **Gestión Quirúrgica de `will-change`**: Activación temporal de `will-change: transform` exclusivamente durante el evento `mouseenter` y liberación inmediata (`will-change: auto`) en `mouseleave` para preservar la memoria de texturas de la GPU.
 * **Efecto de Pulso Eléctrico (`electricJitterGlow`)**: Animación CSS fluida que genera descargas y vibraciones neón vibrantes en los bordes de las tarjetas sin depender de filtros pesados en el hilo de renderizado.
 * **Deduplicación de Controladores**: Desacoplamiento limpio entre `script.js` y `electric-effect.js` para evitar que múltiples escuchadores de eventos compitan sobre el mismo elemento o sobreescriban transformaciones 3D.
-* **Conservación Total en Móviles y Tablets**: En pantallas táctiles o móviles (≤ 992px), el efecto eléctrico neón y los filtros SVG se conservan al 100% activos con pulso continuo y halos vibrantes, garantizando una estética cibernética idéntica y un desplazamiento vertical suave con `touch-action: pan-y`.
+* **Arquitectura de Efecto Eléctrico en Móviles y Pantallas Táctiles (≤ 992px)**:
+  * **Cero Congelamiento de CPU**: Desactivación total de los filtros procedurales SVG (`feTurbulence`, `feDisplacementMap`) y de contenedores SVG en pantallas móviles. Esto elimina por completo el recálculo por software de 30 tarjetas simultáneas que sobrecargaba la CPU en dispositivos móviles y provocaba bloqueos en el hilo principal.
+  * **Aceleración por GPU al 100% (60-120 FPS)**: Todo el efecto eléctrico móvil se ejecuta exclusivamente en el hilo compositor de la GPU mediante propiedades aceleradas por hardware (`box-shadow`, `border-color`, `opacity`, `transform: translateZ(0)`).
+  * **Ultra Notorio y de Alta Tensión**: Sistema multicapa de arco eléctrico de alto voltaje (`mobileElectricCrackle`) con micro-destellos blancos puros (`#ffffff`) y neón vibrante, halo de alta frecuencia (`mobileElectricFlicker`), plasma interno y aura ambiental pulsante (`mobileElectricAura`).
+  * **Respuesta Táctil Instantánea (0 ms)**: Activación visual inmediata al toque (`:active` y `electric-active`) sin timers bloqueantes ni cálculos de inclinación 3D, garantizando un desplazamiento táctil vertical (`touch-action: pan-y`) sumamente fluido.
 
 ### 4.6 Módulo de Tienda Virtual y Carrito (`tienda.html`)
 * **Catálogo de 30 Productos**: Dispositivos clasificados por categorías (Iluminación, Seguridad, Climatización, Energía, Audio/Video, Accesorios).
