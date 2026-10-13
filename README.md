@@ -92,8 +92,8 @@ Genera un puntero interactivo cinemático con partículas estelares, relámpagos
 * **Ocultamiento Universal de Puntero OS**: Regla `@media (pointer: fine) { *, *::before, *::after { cursor: none !important; } }` que asegura que el cursor nativo nunca parpadee ni compita con el puntero cinemático en tarjetas y botones.
 * **Ahorro de Recursos**: Se detiene automáticamente cuando la pestaña está en segundo plano (`visibilitychange`) y se desactiva en pantallas puramente táctiles para mantener el dispositivo ágil y frío.
 
-### 3. Filtros SVG y Perspectiva 3D (`js/electric-effect.js` y `css/electric-effect.css`)
-Los bordes de las tarjetas utilizan una combinación de máscaras SVG animadas con ruido fractal (`feTurbulence`) y mapas de desplazamiento (`feDisplacementMap` calibrado a escala segura), combinados con animación CSS `electricJitterGlow` y perspectiva 3D acelerada por hardware (`translate3d`), simulando arcos voltaicos y rayos en constante movimiento a 60-120 fps sin provocar bloqueos del hilo principal.
+### 3. Filtros SVG y Rayos Eléctricos 3D (`js/electric-effect.js` y `css/electric-effect.css`)
+Los bordes de las tarjetas combinan filtros SVG vectoriales de alta tensión (`feTurbulence` con animación SMIL de `seed` aleatoria y `feDisplacementMap` a escala 22-24) con un rayo streamer perimetral de alta frecuencia (`conic-gradient`), núcleos blancos incandescentes (`#ffffff`) y perspectiva 3D acelerada por hardware (`translate3d(0, -9px, 0)`). En reposo las tarjetas permanecen limpias y oscuras, y al posar el cursor (`:hover`, `mouseenter`) o interactuar de forma táctil (`:active`), los rayos y arcos voltaicos en zigzag explotan con un resalte visual impactante a 60-120 FPS sin bloqueos ni congelamientos.
 
 ---
 

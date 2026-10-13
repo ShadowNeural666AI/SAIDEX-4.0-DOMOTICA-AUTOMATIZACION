@@ -39,46 +39,45 @@
             ticking = false;
         }
 
-        // En dispositivos móviles y táctiles, el efecto eléctrico se ejecuta al 100% en GPU vía CSS
-        if (isTouchOnly || window.innerWidth <= 992) {
-            card.addEventListener('touchstart', function () {
-                card.classList.add('electric-active');
-            }, { passive: true });
-
-            card.addEventListener('touchend', function () {
-                setTimeout(() => card.classList.remove('electric-active'), 250);
-            }, { passive: true });
-
-            card.addEventListener('touchcancel', function () {
-                card.classList.remove('electric-active');
-            }, { passive: true });
-
-            return; // No añadir listeners de mouse ni tilt 3D que consuman CPU en móvil
-        }
-
-        // --- Eventos de Cursor / Hover (Escritorio, Laptops y Puntero Fino) ---
-        card.addEventListener('mouseenter', function (e) {
-            rect = card.getBoundingClientRect();
-            card.style.willChange = 'transform';
+        // Soporte táctil universal
+        card.addEventListener('touchstart', function () {
             card.classList.add('electric-active');
-            card.style.transition = 'transform 0.16s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+        }, { passive: true });
 
-            // Activar inclinación inicial inmediata para visibilidad instantánea al posar el cursor
-            currentX = e.clientX ? (e.clientX - rect.left) : (rect.width / 2);
-            currentY = e.clientY ? (e.clientY - rect.top) : (rect.height / 2);
-            if (!prefersReducedMotion) {
-                updateTilt();
+        card.addEventListener('touchend', function () {
+            setTimeout(() => card.classList.remove('electric-active'), 250);
+        }, { passive: true });
+
+        card.addEventListener('touchcancel', function () {
+            card.classList.remove('electric-active');
+        }, { passive: true });
+
+        // --- Eventos de Cursor / Hover (Universal: mouseenter siempre activa los rayos) ---
+        card.addEventListener('mouseenter', function (e) {
+            card.classList.add('electric-active');
+            if (window.innerWidth > 768 && !isTouchOnly) {
+                rect = card.getBoundingClientRect();
+                card.style.willChange = 'transform';
+                card.style.transition = 'transform 0.16s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+
+                currentX = e.clientX ? (e.clientX - rect.left) : (rect.width / 2);
+                currentY = e.clientY ? (e.clientY - rect.top) : (rect.height / 2);
+                if (!prefersReducedMotion) {
+                    updateTilt();
+                }
             }
         }, { passive: true });
 
         card.addEventListener('mousemove', function (e) {
-            if (!rect) rect = card.getBoundingClientRect();
-            currentX = e.clientX - rect.left;
-            currentY = e.clientY - rect.top;
+            if (window.innerWidth > 768 && !isTouchOnly) {
+                if (!rect) rect = card.getBoundingClientRect();
+                currentX = e.clientX - rect.left;
+                currentY = e.clientY - rect.top;
 
-            if (!ticking && !prefersReducedMotion) {
-                ticking = true;
-                rafId = window.requestAnimationFrame(updateTilt);
+                if (!ticking && !prefersReducedMotion) {
+                    ticking = true;
+                    rafId = window.requestAnimationFrame(updateTilt);
+                }
             }
         }, { passive: true });
 

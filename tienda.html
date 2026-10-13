@@ -28,30 +28,24 @@
     <svg id="electric-svg-defs" class="electric-svg-container" aria-hidden="true">
         <defs>
             <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.04 0.08" numOctaves="2" result="noise" seed="1" />
-                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
-                    <animate attributeName="dx" values="0; 140; -140; 260; 0" dur="0.6s" repeatCount="indefinite" />
-                    <animate attributeName="dy" values="0; -200; 200; -100; 0" dur="0.55s" repeatCount="indefinite" />
-                </feOffset>
-                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+                <feTurbulence type="fractalNoise" baseFrequency="0.04 0.08" numOctaves="2" result="noise" seed="1">
+                    <animate attributeName="seed" values="1; 17; 39; 68; 91; 114; 42; 83; 1" dur="0.4s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
             </filter>
 
             <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.045 0.085" numOctaves="2" result="noise" seed="3" />
-                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
-                    <animate attributeName="dx" values="0; -160; 160; -240; 0" dur="0.52s" repeatCount="indefinite" />
-                    <animate attributeName="dy" values="0; 220; -220; 110; 0" dur="0.58s" repeatCount="indefinite" />
-                </feOffset>
-                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="24" xChannelSelector="R" yChannelSelector="G" />
+                <feTurbulence type="fractalNoise" baseFrequency="0.045 0.085" numOctaves="2" result="noise" seed="3">
+                    <animate attributeName="seed" values="3; 22; 47; 75; 98; 121; 35; 89; 3" dur="0.36s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="24" xChannelSelector="R" yChannelSelector="G" />
             </filter>
 
             <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.042 0.078" numOctaves="2" result="noise" seed="5" />
-                <feOffset in="noise" dx="0" dy="0" result="offsetNoise">
-                    <animate attributeName="dx" values="0; 180; -150; 210; 0" dur="0.56s" repeatCount="indefinite" />
-                    <animate attributeName="dy" values="0; -190; 230; -120; 0" dur="0.5s" repeatCount="indefinite" />
-                </feOffset>
-                <feDisplacementMap in="SourceGraphic" in2="offsetNoise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+                <feTurbulence type="fractalNoise" baseFrequency="0.042 0.078" numOctaves="2" result="noise" seed="5">
+                    <animate attributeName="seed" values="5; 19; 44; 63; 86; 109; 31; 77; 5" dur="0.38s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
             </filter>
         </defs>
     </svg>
