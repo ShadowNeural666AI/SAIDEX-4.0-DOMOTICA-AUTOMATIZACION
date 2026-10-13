@@ -241,13 +241,7 @@
     opacity: 1;
     box-shadow: 0 0 24px var(--electric-glow), inset 0 0 12px var(--electric-glow);
     animation: electricJitterGlow 1.2s infinite ease-in-out;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .product-card:hover .electric-card-main,
-    .product-card.electric-active .electric-card-main {
-        filter: var(--electric-filter);
-    }
+    filter: var(--electric-filter);
 }
 
 .product-card:hover .electric-bg-glow,
@@ -286,13 +280,7 @@
     opacity: 1;
     box-shadow: 0 0 26px var(--electric-glow), inset 0 0 14px var(--electric-glow);
     animation: electricJitterGlow 1.2s infinite ease-in-out;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .project-card:hover .electric-card-main,
-    .project-card.electric-active .electric-card-main {
-        filter: var(--electric-filter);
-    }
+    filter: var(--electric-filter);
 }
 
 .project-card:hover .electric-bg-glow,
@@ -515,26 +503,63 @@
 }
 
 /* ========================================================
-   OPTIMIZACIÓN PARA DISPOSITIVOS TÁCTILES Y MÓVILES (CERO CONGELAMIENTO)
+   CONSERVACIÓN TOTAL DEL EFECTO ELÉCTRICO EN TODO TIPO DE DISPOSITIVOS
+   (Móviles, Tablets, Laptops y Escritorios)
    ======================================================== */
 @media (max-width: 992px), (hover: none), (pointer: coarse) {
+    /* El contenedor SVG de filtros permanece activo y operativo en todo momento */
     .electric-svg-container {
-        display: none !important;
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0.001;
+        pointer-events: none;
+        overflow: hidden;
+        visibility: visible !important;
     }
+
+    /* El efecto eléctrico y filtros SVG se conservan de forma permanente y vibrante */
     .product-card .electric-card-main,
     .project-card .electric-card-main,
     .cta-bg.futuristic-cta .electric-card-main {
-        filter: none !important;
+        filter: var(--electric-filter) !important;
+        opacity: 0.95 !important;
+        box-shadow: 0 0 20px var(--electric-glow), inset 0 0 10px var(--electric-glow) !important;
+        animation: electricJitterGlow 1.8s infinite ease-in-out !important;
     }
-    .store-grid,
-    .projects-grid {
-        perspective: none !important;
+
+    .product-card .electric-bg-glow,
+    .project-card .electric-bg-glow {
+        opacity: 0.7 !important;
     }
+
+    .product-card .electric-glow-1,
+    .product-card .electric-glow-2,
+    .project-card .electric-glow-1,
+    .project-card .electric-glow-2 {
+        opacity: 0.85 !important;
+    }
+
+    .product-card .electric-overlay,
+    .project-card .electric-overlay {
+        opacity: 0.3 !important;
+    }
+
     .product-card,
     .project-card {
-        transform: none !important;
-        will-change: auto !important;
-        transform-style: flat !important;
+        touch-action: pan-y;
+        will-change: transform;
+    }
+
+    .product-card:active,
+    .project-card:active,
+    .product-card.electric-active,
+    .project-card.electric-active {
+        transform: scale(0.985);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), 0 0 28px var(--electric-bg) !important;
     }
 }
 

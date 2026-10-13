@@ -129,7 +129,7 @@ El sistema cuenta con un escudo de ciberseguridad integrado en [`js/script.js`](
 * **Cursor Ultrafluido 1:1**: Respuesta inmediata sin desfase ni arrastre en toda la superficie de la aplicación.
 * **Pausa en Segundo Plano (`visibilitychange`)**: Todos los bucles `requestAnimationFrame` en los lienzos canvas y en el cursor se pausan al minimizar o cambiar de pestaña.
 * **Scroll Suave en Móviles**: Eliminación de bloqueos de renderizado mediante `background-attachment: scroll !important` en dispositivos táctiles (`pointer: coarse`).
-* **Optimización SVG**: Filtros de turbulencia simplificados en pantallas móviles (≤ 992px) para preservar la GPU y la batería.
+* **Conservación Total del Efecto Eléctrico**: Filtros SVG procedurales y arcos eléctricos neón activos al 100% en pantallas móviles, tablets y escritorios con desplazamiento ultrafluido.
 * **Failsafe del Precargador HUD**: Cierre forzado garantizado a los 1400 ms en cualquier escenario de red lenta.
 
 ---

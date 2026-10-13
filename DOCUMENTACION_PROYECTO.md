@@ -124,7 +124,7 @@ SAIDEX-4.0--DOMOTICA-Y-AUTOMATIZACION/
 * **Gestión Quirúrgica de `will-change`**: Activación temporal de `will-change: transform` exclusivamente durante el evento `mouseenter` y liberación inmediata (`will-change: auto`) en `mouseleave` para preservar la memoria de texturas de la GPU.
 * **Efecto de Pulso Eléctrico (`electricJitterGlow`)**: Animación CSS fluida que genera descargas y vibraciones neón vibrantes en los bordes de las tarjetas sin depender de filtros pesados en el hilo de renderizado.
 * **Deduplicación de Controladores**: Desacoplamiento limpio entre `script.js` y `electric-effect.js` para evitar que múltiples escuchadores de eventos compitan sobre el mismo elemento o sobreescriban transformaciones 3D.
-* **Optimización Móvil**: En pantallas táctiles o móviles (≤ 992px), las tarjetas suspenden transformaciones 3D complejas y utilizan `touch-action: pan-y` para un desplazamiento suave y natural.
+* **Conservación Total en Móviles y Tablets**: En pantallas táctiles o móviles (≤ 992px), el efecto eléctrico neón y los filtros SVG se conservan al 100% activos con pulso continuo y halos vibrantes, garantizando una estética cibernética idéntica y un desplazamiento vertical suave con `touch-action: pan-y`.
 
 ### 4.6 Módulo de Tienda Virtual y Carrito (`tienda.html`)
 * **Catálogo de 30 Productos**: Dispositivos clasificados por categorías (Iluminación, Seguridad, Climatización, Energía, Audio/Video, Accesorios).
