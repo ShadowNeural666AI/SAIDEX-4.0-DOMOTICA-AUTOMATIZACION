@@ -1,0 +1,1414 @@
+/* Estilos Específicos de la Tienda - SAIDEX 4.0 */
+
+:root {
+    --neon-blue: #00E5FF;
+    --neon-green: #39FF14;
+    --dark-bg: #020617;
+    --deep-blue: #0f172a;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Animaciones de la Tienda */
+@keyframes glow-pulse-blue {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
+    }
+}
+
+@keyframes glow-pulse-green {
+    0% {
+        box-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+    }
+}
+
+/* Sección Hero de Tienda */
+.store-hero {
+    position: relative;
+    padding: 160px 0 100px;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #050a1f 100%);
+    overflow: hidden;
+}
+
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: url('../assets/store/hero.png') no-repeat center right;
+    background-size: cover;
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+    opacity: 0.8;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-app-mockup {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+    z-index: 3;
+    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.3));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(-50%) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-55%) translateX(10px);
+    }
+}
+
+/* Barra de Beneficios y Ventajas */
+.benefits-bar {
+    display: flex;
+    gap: 30px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #94A3B8;
+    font-size: 0.9rem;
+}
+
+.benefit-item i {
+    color: var(--neon-blue);
+}
+
+/* Píldoras de Filtro por Categoría */
+.category-pills {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 60px 0 40px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    padding: 10px 25px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pill:hover,
+.pill.active {
+    background: var(--neon-blue);
+    color: var(--dark-bg);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+/* Tarjetas de Productos */
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.product-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.product-card:hover {
+    border-color: var(--neon-blue);
+    box-shadow: 0 15px 40px rgba(0, 229, 255, 0.3), 0 0 25px rgba(0, 229, 255, 0.25);
+}
+
+.product-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.badge-best {
+    background: rgba(57, 255, 20, 0.2);
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+}
+
+.badge-new {
+    background: rgba(0, 229, 255, 0.2);
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+}
+
+.product-image-container {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image-container {
+    transform: scale(1.05);
+}
+
+.product-image-container img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.product-rating {
+    color: #FFD700;
+    font-size: 0.85rem;
+}
+
+.btn-add-cart {
+    width: 100%;
+    margin-top: 20px;
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-add-cart:hover {
+    background: var(--neon-blue);
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+/* Por Qué Elegirnos */
+.why-section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.why-card {
+    padding: 40px 30px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.why-card i {
+    font-size: 2.5rem;
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+}
+
+/* Testimonios y Reseñas */
+.testimonials-section {
+    padding: 100px 0;
+    background: rgba(15, 23, 42, 0.3);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.testimonial-card {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--neon-blue);
+}
+
+/* Elementos Flotantes */
+.whatsapp-floating {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.whatsapp-floating span {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    background: #25D366;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Flecha del Tooltip */
+.whatsapp-floating span::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    border: 8px solid transparent;
+    border-top-color: #25D366;
+}
+
+.whatsapp-floating:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.whatsapp-floating:hover span {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.cart-floating-side {
+    position: fixed;
+    bottom: 30px;
+    right: 110px;
+    background: var(--neon-blue);
+    color: var(--dark-bg);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cart-floating-side:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 229, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .cart-floating-side {
+        bottom: 100px;
+        right: 30px;
+    }
+}
+
+/* Superposición y Contenido de Modales */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%;
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.2);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+/* Métodos de Pago, Efectos y Tooltips */
+.payment-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: help;
+}
+
+.payment-item i {
+    font-size: 2.2rem;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.payment-item img {
+    height: 35px;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+/* Colores Naturales al Pasar el Cursor (Hover) */
+.payment-item:hover {
+    transform: translateY(-5px);
+}
+
+.payment-item:hover i.fa-cc-visa {
+    color: #1a1f71;
+    filter: drop-shadow(0 0 5px rgba(26, 31, 113, 0.3));
+}
+
+.payment-item:hover i.fa-cc-mastercard {
+    color: #eb001b;
+    filter: drop-shadow(0 0 5px rgba(235, 0, 27, 0.3));
+}
+
+.payment-item:hover i.fa-cc-paypal {
+    color: #003087;
+    filter: drop-shadow(0 0 5px rgba(0, 48, 135, 0.3));
+}
+
+.payment-item:hover i.fa-facebook {
+    color: #1877F2;
+    filter: drop-shadow(0 0 5px rgba(24, 119, 242, 0.3));
+}
+
+.payment-item:hover i.fa-instagram {
+    color: #E4405F;
+    filter: drop-shadow(0 0 5px rgba(228, 64, 95, 0.3));
+}
+
+.payment-item:hover i.fa-youtube {
+    color: #FF0000;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.3));
+}
+
+.payment-item:hover i.fa-tiktok {
+    color: #FFF;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.payment-item:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.payment-tooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--neon-blue);
+    color: #020617;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3);
+    z-index: 10;
+}
+
+.payment-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--neon-blue);
+}
+
+.payment-item:hover .payment-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Mejoras del Pie de Página (Footer) */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-col h4 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.payment-methods,
+.social-methods {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    color: #94A3B8;
+    font-size: 0.95rem;
+}
+
+.footer-contact-list li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.footer-contact-list i {
+    color: var(--neon-blue);
+    font-size: 1rem;
+}
+
+/* Diseño Adaptativo (Responsive) */
+@media (max-width: 991px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .footer-col h4 {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-bg-image {
+        width: 100%;
+        opacity: 0.4;
+    }
+
+    .hero-app-mockup {
+        display: none;
+    }
+
+    .hero-content {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .benefits-bar {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* ==========================================================================
+   SAIDEX 4.0 - ANIMACIONES DE CARGA DE COMPRAS Y CARRITO
+   ========================================================================== */
+
+/* 1. Insignia del Carrito en Navbar y Pulsos */
+.cart-badge-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FF4500;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    margin-left: 8px;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.6);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.25s ease;
+    vertical-align: middle;
+}
+
+@keyframes cart-bump-anim {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.22) rotate(-6deg); }
+    50% { transform: scale(0.95) rotate(4deg); }
+    75% { transform: scale(1.08) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes badge-pop-anim {
+    0% { transform: scale(1); }
+    40% {
+        transform: scale(1.55);
+        background: var(--neon-blue) !important;
+        color: #020617 !important;
+        box-shadow: 0 0 18px var(--neon-blue) !important;
+    }
+    75% { transform: scale(0.92); }
+    100% { transform: scale(1); }
+}
+
+.cart-bump-active {
+    animation: cart-bump-anim 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.8) !important;
+}
+
+.badge-pop-active {
+    animation: badge-pop-anim 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* 2. Animación de Vuelo Parabólico al Carrito (Efecto Fantasma) */
+.flying-cart-ghost {
+    position: fixed;
+    z-index: 99999;
+    pointer-events: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.3) 0%, rgba(2, 6, 23, 0.9) 100%);
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.75), inset 0 0 15px rgba(0, 229, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.flying-cart-ghost img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.6));
+}
+
+.flying-cart-ghost i {
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+    filter: drop-shadow(0 0 8px var(--neon-blue));
+}
+
+.cart-shockwave {
+    position: fixed;
+    z-index: 99998;
+    pointer-events: none;
+    border-radius: 50%;
+    border: 2px solid var(--neon-blue);
+    animation: cart-shockwave-expand 0.6s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes cart-shockwave-expand {
+    0% {
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+        box-shadow: 0 0 20px var(--neon-blue);
+    }
+    100% {
+        width: 140px;
+        height: 140px;
+        opacity: 0;
+        box-shadow: 0 0 40px rgba(0, 229, 255, 0);
+    }
+}
+
+/* 3. Botón Agregar al Carrito - Estado y Ripple */
+.btn-add-cart {
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.btn-add-cart.is-added {
+    background: linear-gradient(135deg, #00E5FF 0%, #0099cc 100%) !important;
+    color: #020617 !important;
+    border-color: #00E5FF !important;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.7) !important;
+    transform: scale(1.02);
+}
+
+.btn-add-cart .btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(0);
+    animation: btn-ripple-anim 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes btn-ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 4. Notificación Holográfica HUD (Toast) */
+.saidex-toast-hud {
+    position: fixed;
+    top: 90px;
+    right: 25px;
+    max-width: 380px;
+    width: calc(100% - 50px);
+    background: rgba(2, 6, 23, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(0, 229, 255, 0.45);
+    border-radius: 16px;
+    padding: 16px 18px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    z-index: 10000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 229, 255, 0.25);
+    transform: translateX(125%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, visibility 0.3s;
+    overflow: hidden;
+}
+
+.saidex-toast-hud.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-hud-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-green), transparent);
+    animation: toast-glow-scan 2.4s linear infinite;
+}
+
+@keyframes toast-glow-scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.toast-hud-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: rgba(0, 229, 255, 0.12);
+    border: 1px solid rgba(0, 229, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-blue);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+    overflow: hidden;
+}
+
+.toast-hud-icon-wrap img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.toast-hud-body {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.toast-hud-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.toast-hud-tag {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    font-weight: 800;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+}
+
+.toast-hud-time {
+    font-size: 0.65rem;
+    color: #64748B;
+}
+
+.toast-hud-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-hud-msg {
+    font-size: 0.78rem;
+    color: #94A3B8;
+    margin: 0 0 10px;
+}
+
+.toast-hud-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.toast-hud-price {
+    font-weight: 800;
+    color: var(--neon-green);
+    font-size: 0.95rem;
+}
+
+.toast-hud-btn {
+    background: rgba(0, 229, 255, 0.15);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toast-hud-btn:hover {
+    background: var(--neon-blue);
+    color: #020617;
+    box-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
+}
+
+.toast-hud-close {
+    background: transparent;
+    border: none;
+    color: #64748B;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    transition: color 0.2s ease;
+}
+
+.toast-hud-close:hover {
+    color: #fff;
+}
+
+.toast-hud-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.toast-hud-progress-bar {
+    height: 100%;
+    width: 100%;
+    background: var(--neon-blue);
+    transform-origin: left;
+    transition: transform linear;
+}
+
+/* 5. Artículos del Carrito - Entrada Animada y Miniaturas */
+.cart-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    animation: cart-item-enter 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    transition: transform 0.25s ease, opacity 0.25s ease, border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes cart-item-enter {
+    from {
+        opacity: 0;
+        transform: translateX(35px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.cart-item-removing {
+    transform: translateX(60px) scale(0.9) !important;
+    opacity: 0 !important;
+    max-height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.cart-item-highlight {
+    border-color: var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+    background: rgba(0, 229, 255, 0.08) !important;
+}
+
+.cart-item-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+.cart-item-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.cart-item-info h4 {
+    font-size: 0.88rem;
+    color: #fff;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-item-sub {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+}
+
+.cart-item-price {
+    color: var(--neon-blue) !important;
+    font-weight: 700;
+}
+
+.cart-item-qty {
+    color: #94A3B8;
+}
+
+.cart-item-subtotal {
+    color: var(--neon-green);
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.cart-qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: all 0.2s ease;
+}
+
+.cart-qty-btn:hover {
+    background: var(--neon-blue);
+    color: #020617;
+    border-color: var(--neon-blue);
+}
+
+.cart-qty-val {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    min-width: 16px;
+    text-align: center;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    padding: 4px;
+    margin-left: 2px;
+}
+
+.remove-item:hover {
+    color: #FF4500 !important;
+    transform: scale(1.18);
+}
+
+/* 6. Animación al Cargar y Filtrar Productos en la Tienda */
+@keyframes product-card-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.product-animate-in {
+    animation: product-card-reveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 7. Rebote Microanimado de Precio Total */
+@keyframes total-bump-anim {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); color: var(--neon-green); text-shadow: 0 0 12px var(--neon-green); }
+    100% { transform: scale(1); }
+}
+
+.total-bump-active {
+    animation: total-bump-anim 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   ADAPTACIONES RESPONSIVAS DE LA TIENDA (TODO TIPO DE DISPOSITIVOS)
+   Garantiza que ningún elemento se encime ni se desborde, y optimiza
+   el rendimiento para cero congelamientos de pantalla.
+   ========================================================================== */
+
+/* Laptops Medianas (<= 1200px) */
+@media (max-width: 1200px) {
+    .hero-content {
+        max-width: 520px;
+    }
+    .hero-app-mockup {
+        width: 310px;
+        right: 2%;
+    }
+}
+
+/* Tablets en Orientación Horizontal y Pantallas Medianas (<= 992px) */
+@media (max-width: 992px) {
+    .store-hero {
+        padding: 130px 0 60px;
+        text-align: center;
+    }
+
+    .hero-bg-image {
+        width: 100%;
+        opacity: 0.22;
+        mask-image: none;
+        -webkit-mask-image: none;
+    }
+
+    .hero-content {
+        max-width: 680px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* En pantallas menores a 992px, el mockup se posiciona abajo del contenido para NUNCA encimarse */
+    .hero-app-mockup {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        margin: 40px auto 0 !important;
+        width: 100% !important;
+        max-width: 290px !important;
+        display: block !important;
+        animation: floatMobile 5s ease-in-out infinite !important;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .benefits-bar {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .store-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 24px !important;
+        padding: 15px 0 !important;
+    }
+}
+
+/* Teléfonos Móviles y Tablets Pequeñas (<= 768px) */
+@media (max-width: 768px) {
+    .store-hero {
+        padding: 110px 0 45px;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding: 0 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 6.8vw, 2.3rem) !important;
+        line-height: 1.25 !important;
+        margin-bottom: 14px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem !important;
+        line-height: 1.45 !important;
+        margin-bottom: 24px !important;
+    }
+
+    /* Acciones del Hero: En columna para evitar que los botones se encimen o salgan de pantalla */
+    .store-hero .hero-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto 20px !important;
+    }
+
+    .store-hero .hero-actions .btn {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 14px 24px !important;
+        font-size: 0.98rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Barra de Beneficios: en columna compacta y centrada */
+    .benefits-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+        margin-top: 25px !important;
+        padding-top: 20px !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .benefit-item {
+        font-size: 0.88rem !important;
+        justify-content: center;
+    }
+
+    .hero-app-mockup {
+        max-width: 230px !important;
+        margin-top: 28px !important;
+    }
+
+    /* Sección de Productos */
+    #productos {
+        padding: 40px 0 60px !important;
+    }
+
+    /* Píldoras de Filtro */
+    .category-pills {
+        gap: 8px !important;
+        margin: 25px 0 30px !important;
+        padding: 0 4px !important;
+        justify-content: center !important;
+    }
+
+    .pill {
+        padding: 8px 15px !important;
+        font-size: 0.84rem !important;
+    }
+
+    /* Cuadrícula de Productos a 1 Columna en móviles */
+    .store-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 10px 0 !important;
+    }
+
+    .product-card {
+        padding: 20px 16px !important;
+        border-radius: 20px !important;
+        max-width: 100% !important;
+    }
+
+    .product-image-container {
+        height: 190px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .product-info h3 {
+        font-size: 1.05rem !important;
+        line-height: 1.35 !important;
+        margin: 6px 0 10px !important;
+    }
+
+    .product-meta {
+        margin-bottom: 14px !important;
+    }
+
+    .btn-add-cart {
+        padding: 12px 16px !important;
+        font-size: 0.92rem !important;
+    }
+
+    /* Botones Flotantes */
+    .whatsapp-floating {
+        bottom: 18px !important;
+        right: 18px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.3rem !important;
+        z-index: 998 !important;
+    }
+
+    .whatsapp-floating span {
+        display: none !important;
+    }
+
+    .cart-floating-side {
+        bottom: 78px !important;
+        right: 18px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.25rem !important;
+        z-index: 998 !important;
+    }
+
+    /* Carrito Lateral */
+    .cart-sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+        right: -100% !important;
+    }
+
+    .cart-sidebar.active {
+        right: 0 !important;
+    }
+
+    /* Modal de Checkout */
+    .modal-content {
+        width: calc(100% - 24px) !important;
+        max-width: calc(100% - 24px) !important;
+        margin: 12px !important;
+        padding: 26px 18px !important;
+        border-radius: 18px !important;
+        max-height: 92vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* Notificación Toast Holográfica */
+    .saidex-toast-hud {
+        top: 75px !important;
+        left: 12px !important;
+        right: 12px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        padding: 14px !important;
+        transform: translateY(-160%) !important;
+    }
+
+    .saidex-toast-hud.show {
+        transform: translateY(0) !important;
+    }
+}
+
+/* Teléfonos Pequeños (<= 380px) */
+@media (max-width: 380px) {
+    .hero-title {
+        font-size: 1.65rem !important;
+    }
+
+    .pill {
+        padding: 6px 12px !important;
+        font-size: 0.78rem !important;
+    }
+
+    .product-image-container {
+        height: 165px !important;
+    }
+
+    .product-price {
+        font-size: 1.15rem !important;
+    }
+}
+
+/* Animación de flotación suave en móviles */
+@keyframes floatMobile {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+

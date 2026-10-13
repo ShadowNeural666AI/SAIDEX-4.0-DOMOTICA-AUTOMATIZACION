@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda SAIDEX 4.0 - Domótica y Automatización</title>
+    <!-- Fuentes de Google: Inter y Outfit para estilo tecnológico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Librería de Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos CSS Personalizados -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/store.css">
+    <link rel="stylesheet" href="css/electric-effect.css">
+    <!-- Metadatos de Seguridad -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+</head>
+
+<body class="bg-dark-primary">
+    <!-- Filtros SVG de Rayos Eléctricos 3D de Alto Rendimiento (Optimizados para 60-120 fps) -->
+    <svg id="electric-svg-defs" class="electric-svg-container" aria-hidden="true">
+        <defs>
+            <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="1" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="400; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="2" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="280; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+
+            <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="3" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="360; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="4" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="250; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+
+            <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="5" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="380; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="6" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="260; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+        </defs>
+    </svg>
+    <!-- Navegación de Cabecera -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.webp" alt="SAIDEX 4.0" class="logo-img">
+                <div class="logo-text">
+                    <span class="company-name brand-highlight">SAIDEX 4.0 Domótica</span>
+                    <span class="company-name">y Automatización</span>
+                    <span class="company-tagline">Tecnología avanzada para tu hogar</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Inicio</a>
+                <div class="has-dropdown">
+                    <a href="#" class="nav-item active">Tienda</a>
+                </div>
+                <a href="index.html#contacto" class="nav-item">Contacto</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="btn btn-primary cart-toggle" id="cart-btn"
+                    style="border-radius: 50px; padding: 10px 25px; position: relative;">
+                    <i class="fa-solid fa-cart-shopping"></i> Carrito
+                    <span id="cart-count" class="cart-badge-nav">0</span>
+                </button>
+            </div>
+
+            <div class="menu-toggle" id="mobileMenu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Principal (Hero) -->
+        <section class="store-hero">
+            <div class="hero-bg-image"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title" style="font-family: 'Outfit', sans-serif;">Convierte tu hogar en una <span
+                            class="text-neon-blue">casa inteligente</span> hoy</h1>
+                    <p class="hero-subtitle" style="opacity: 0.9; margin-bottom: 30px;">Automatiza seguridad,
+                        iluminación y energía con tecnología fácil de usar.</p>
+                    <div class="hero-actions" style="display: flex; gap: 20px;">
+                        <a href="#productos" class="btn"
+                            style="background: var(--neon-blue); color: #000; border-radius: 50px; padding: 15px 35px; font-weight: 800; font-size: 1.1rem; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);">Ver
+                            productos</a>
+                        <a href="https://wa.me/51906681667" class="btn"
+                            style="background: transparent; border: 2px solid var(--neon-green); color: var(--neon-green); border-radius: 50px; padding: 15px 35px; font-weight: 800; font-size: 1.1rem;">Solicitar
+                            asesoría <i class="fa-brands fa-whatsapp" style="margin-left: 10px;"></i></a>
+                    </div>
+                    <div class="benefits-bar">
+                        <div class="benefit-item"><i class="fa-solid fa-truck-fast"></i> Envíos a todo el país</div>
+                        <div class="benefit-item"><i class="fa-solid fa-shield-check"></i> Garantía 12 meses</div>
+                        <div class="benefit-item"><i class="fa-solid fa-headset"></i> Soporte 24/7</div>
+                    </div>
+                </div>
+            </div>
+            <img src="assets/store/app_mockup.png" alt="SAIDEX App" class="hero-app-mockup">
+        </section>
+
+        <!-- Listado de Productos -->
+        <section id="productos" style="padding: 100px 0;">
+            <div class="container">
+
+                <!-- Filtros de Categorías -->
+                <div class="category-pills">
+                    <button class="pill filter-btn active" data-filter="all">Todos</button>
+                    <button class="pill filter-btn" data-filter="bestsellers"><i class="fa-solid fa-fire"
+                            style="color: #FF4500;"></i> Más vendidos</button>
+                    <button class="pill filter-btn" data-filter="seguridad">Seguridad</button>
+                    <button class="pill filter-btn" data-filter="iluminacion">Iluminación</button>
+                    <button class="pill filter-btn" data-filter="asistentes">Asistentes</button>
+                    <button class="pill filter-btn" data-filter="energia">Energía</button>
+                    <button class="pill filter-btn" data-filter="climatización">Climatización</button>
+                </div>
+
+                <div class="store-grid">
+                    <!-- Producto 1 -->
+                    <div class="product-card" data-category="seguridad" data-bestseller="true">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-best">Más vendido</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/lock.png" alt="Cerradura Inteligente">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Cerradura Inteligente WiFi con Huella Digital</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$149.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(120
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p1" data-name="Cerradura Inteligente"
+                                data-price="149.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-new">Nuevo</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/bulbs.png" alt="Focos RGB">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Kit 2x Ampolletas Inteligentes RGB WiFi</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$29.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(350
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p2" data-name="Kit 2x Ampolletas RGB"
+                                data-price="29.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="product-card" data-category="asistentes" data-bestseller="true">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-best">Más vendido</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/echo.png" alt="Echo Dot">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Asistentes</span>
+                            <h3>Amazon Echo Dot (5a Gen) Inteligencia Artificial</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$49.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 5.0 <span style="color: #64748B;">(1.2k
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p3" data-name="Amazon Echo Dot"
+                                data-price="49.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/camera.png" alt="Cámara Seguridad">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Cámara Inteligente Exterior Inalámbrica 2K</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$89.90</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(85
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p4" data-name="Cámara Exterior 2K"
+                                data-price="89.90"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 5 -->
+                    <div class="product-card" data-category="energia">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/plug.png" alt="Enchufe Inteligente">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Enchufe Inteligente Smart Plug 10A Monitor</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$19.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.6 <span style="color: #64748B;">(420
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p5" data-name="Enchufe Inteligente"
+                                data-price="19.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 6 -->
+                    <div class="product-card" data-category="climatización">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/thermostat.png" alt="Termostato">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Climatización</span>
+                            <h3>Termostato WiFi Táctil Control de Clima</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$129.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(67
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p6" data-name="Termostato WiFi Táctil"
+                                data-price="129.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 7 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/bulb2.png" alt="Bombillo RGB">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Bombillo Inteligente WiFi RGB+CCT 9W</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$14.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(156
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p7" data-name="Bombillo WiFi RGB"
+                                data-price="14.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 8 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/sensor.png" alt="Sensor Movimiento">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Sensor de Movimiento WiFi 360° Ultra-preciso</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$24.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(92
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p8" data-name="Sensor Movimiento WiFi"
+                                data-price="24.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 9 -->
+                    <div class="product-card" data-category="energia">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/switch.png" alt="Interruptor Inteligente">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Interruptor de Pared Táctil WiFi (3 Canales)</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$32.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(110
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p9" data-name="Interruptor 3 Canales"
+                                data-price="32.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 10 -->
+                    <div class="product-card" data-category="asistentes">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-new">Nuevo</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/vacuum.png" alt="Aspiradora Robot">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Asistentes</span>
+                            <h3>Aspiradora Robot Inteligente Pro con Mapeo Lidar</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$299.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(45
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p10" data-name="Aspiradora Robot Pro"
+                                data-price="299.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 11 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/ledstrip.png" alt="Tira LED">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Tira LED WiFi RGBIC 5 Metros Efectos Neon</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$35.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(210
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p11" data-name="Tira LED RGBIC"
+                                data-price="35.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 12 -->
+                    <div class="product-card" data-category="seguridad" data-bestseller="true">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-best">Más vendido</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/lock_cam.png" alt="Cerradura con Cámara">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Cerradura Biométrica con Cámara Integrada HD</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$249.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 5.0 <span style="color: #64748B;">(32
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p12" data-name="Cerradura con Cámara"
+                                data-price="249.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 13 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/doorbell.png" alt="Video Portero">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Video Portero WiFi Inteligente 1080p</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$79.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(145
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p13" data-name="Video Portero WiFi"
+                                data-price="79.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 14 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/smoke.png" alt="Sensor Humo">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Sensor de Humo WiFi con Alarma 85dB</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$29.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(38
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p14" data-name="Sensor de Humo"
+                                data-price="29.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 15 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/water.png" alt="Sensor Inundación">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Sensor de Fuga de Agua WiFi Ultra-sensible</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$19.90</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.6 <span style="color: #64748B;">(52
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p15" data-name="Sensor Inundación"
+                                data-price="19.90"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 16 -->
+                    <div class="product-card" data-category="energia">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/strip.png" alt="Regleta Inteligente">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Regleta Inteligente WiFi 4 Tomas + 2 USB</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$45.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(89
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p16" data-name="Regleta Inteligente"
+                                data-price="45.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 17 -->
+                    <div class="product-card" data-category="energia">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/blind.png" alt="Motor Persianas">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Motor para Cortinas y Persianas WiFi</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$59.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.5 <span style="color: #64748B;">(210
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p17" data-name="Motor Persianas"
+                                data-price="59.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 18 -->
+                    <div class="product-card" data-category="climatización">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/humidifier.png" alt="Humidificador">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Climatización</span>
+                            <h3>Humidificador Ultrasónico WiFi 3L RGB</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$49.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(76
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p18" data-name="Humidificador WiFi"
+                                data-price="49.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 19 -->
+                    <div class="product-card" data-category="asistentes">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/pet.png" alt="Alimentador Mascotas">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Asistentes</span>
+                            <h3>Alimentador Automático Mascotas con Cámara</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$129.90</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 5.0 <span style="color: #64748B;">(28
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p19" data-name="Alimentador Mascotas"
+                                data-price="129.90"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 20 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/panel.png" alt="Panel LED">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Panel LED Inteligente Slim WiFi 24W</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$38.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(112
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p20" data-name="Panel LED Slim"
+                                data-price="38.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 21 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/siren.png" alt="Sirena WiFi">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Sirena de Alarma WiFi 110dB con Luz Estroboscópica</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$22.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(45
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p21" data-name="Sirena Alarma WiFi"
+                                data-price="22.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 22 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/camera.png" alt="Cámara 360">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Cámara Interior WiFi 360° con Seguimiento Humano</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$55.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(310
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p22" data-name="Cámara Interior 360"
+                                data-price="55.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 23 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/lock.png" alt="Cerradura Pro">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Cerradura Inteligente Pro Max con Teclado Táctil</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$189.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(88
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p23" data-name="Cerradura Pro Max"
+                                data-price="189.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 24 -->
+                    <div class="product-card" data-category="asistentes">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/echo.png" alt="Echo Show">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Asistentes</span>
+                            <h3>Amazon Echo Show 5 (3a Gen) con Pantalla HD</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$89.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(520
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p24" data-name="Echo Show 5"
+                                data-price="89.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 25 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/bulb2.png" alt="Bombillos Vintage">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Pack 4x Bombillos Vintage WiFi Luz Cálida</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$42.50</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(125
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p25" data-name="Bombillos Vintage x4"
+                                data-price="42.50"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 26 -->
+                    <div class="product-card" data-category="energia">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/plug.png" alt="Enchufes Pack">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Pack 2x Enchufes Inteligentes con Monitoreo</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$34.90</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(95
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p26" data-name="Enchufes Smart x2"
+                                data-price="34.90"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 27 -->
+                    <div class="product-card" data-category="climatización">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/thermostat.png" alt="Termostato Calefacción">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Climatización</span>
+                            <h3>Termostato Inteligente para Calefacción Central</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$145.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.9 <span style="color: #64748B;">(42
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p27" data-name="Termostato Central"
+                                data-price="145.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 28 -->
+                    <div class="product-card" data-category="iluminacion">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/bulbs.png" alt="Lámpara Pie">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Iluminación</span>
+                            <h3>Lámpara de Pie Inteligente RGB Minimalista</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$78.00</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.8 <span style="color: #64748B;">(65
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p28" data-name="Lámpara Pie RGB"
+                                data-price="78.00"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 29 -->
+                    <div class="product-card" data-category="seguridad">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <div class="product-image-container">
+                            <img src="assets/store/sensor.png" alt="Sensor Puerta">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Seguridad</span>
+                            <h3>Sensor Magnético para Puertas y Ventanas WiFi</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$12.90</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 4.7 <span style="color: #64748B;">(180
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p29" data-name="Sensor Puerta WiFi"
+                                data-price="12.90"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 30 -->
+                    <div class="product-card" data-category="energia" data-bestseller="true">
+                        <div class="electric-fx-frame" aria-hidden="true">
+                            <div class="electric-inner">
+                                <div class="electric-border-layer">
+                                    <div class="electric-card-main"></div>
+                                </div>
+                                <div class="electric-glow-1"></div>
+                                <div class="electric-glow-2"></div>
+                            </div>
+                            <div class="electric-overlay"></div>
+                            <div class="electric-bg-glow"></div>
+                        </div>
+                        <span class="product-badge badge-best">Más vendido</span>
+                        <div class="product-image-container">
+                            <img src="assets/store/switch.png" alt="Interruptor Exterior">
+                        </div>
+                        <div class="product-info">
+                            <span
+                                style="color: var(--neon-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Energía</span>
+                            <h3>Interruptor Doble para Exteriores IP66 WiFi</h3>
+                            <div class="product-meta">
+                                <div class="product-price">$49.99</div>
+                                <div class="product-rating">
+                                    <i class="fa-solid fa-star"></i> 5.0 <span style="color: #64748B;">(41
+                                        reseñas)</span>
+                                </div>
+                            </div>
+                            <button class="btn-add-cart add-to-cart" data-id="p30" data-name="Interruptor Exterior"
+                                data-price="49.99"><i class="fa-solid fa-cart-plus"></i> Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Testimonios de Clientes -->
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="text-center" style="font-size: 2.5rem; margin-bottom: 50px;">Clientes <span
+                        class="text-neon-blue">satisfechos</span></h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars" style="color: #FFD700; margin-bottom: 15px;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"Excelente servicio e instalación. Mi casa ahora es mucho más segura e inteligente."</p>
+                        <div class="user-info">
+                            <img src="https://i.pravatar.cc/150?u=carlos" alt="Carlos M." class="user-img">
+                            <div>
+                                <h5 style="margin: 0;">Carlos M.</h5>
+                                <small style="color: #94A3B8;">Lima, Perú</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars" style="color: #FFD700; margin-bottom: 15px;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"Los productos son de gran calidad y el soporte siempre responde muy rápido."</p>
+                        <div class="user-info">
+                            <img src="https://i.pravatar.cc/150?u=ana" alt="Ana P." class="user-img">
+                            <div>
+                                <h5 style="margin: 0;">Ana P.</h5>
+                                <small style="color: #94A3B8;">Arequipa, Perú</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars" style="color: #FFD700; margin-bottom: 15px;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"Muy recomendados, hicieron realidad mi casa inteligente de manera sencilla."</p>
+                        <div class="user-info">
+                            <img src="https://i.pravatar.cc/150?u=luis" alt="Luis R." class="user-img">
+                            <div>
+                                <h5 style="margin: 0;">Luis R.</h5>
+                                <small style="color: #94A3B8;">Trujillo, Perú</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página Cibernético Futurista (SAIDEX 4.0) -->
+    <footer class="footer" id="contacto">
+        <!-- Resplandor de Iluminación Ambiental -->
+        <div class="footer-ambient-glow" aria-hidden="true"></div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="footer-grid-cyber">
+                <!-- Columna 1: Marca y Redes Sociales -->
+                <div class="footer-col-cyber col-brand">
+                    <a href="index.html" class="footer-brand-wrap">
+                        <img src="assets/logo.webp" alt="SAIDEX 4.0 Logo" class="footer-logo-img">
+                        <div class="footer-brand-text">
+                            <span class="footer-brand-title">SAIDEX <span class="cyan-num">4.0</span></span>
+                            <span class="footer-brand-sub">DOMÓTICA Y AUTOMATIZACIÓN</span>
+                        </div>
+                    </a>
+                    <p class="footer-tagline">
+                        Innovación y tecnología para transformar tu hogar en un <span class="highlight-cyan">espacio
+                            inteligente.</span>
+                    </p>
+                    <div class="footer-social-row">
+                        <div class="footer-social-item">
+                            <a href="https://www.facebook.com/share/1DKk2KMXqo/" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <span class="footer-social-label">Facebook</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://www.instagram.com/capri4431?igsh=cWtvcjdqN3Vhbjgz" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <span class="footer-social-label">Instagram</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://youtube.com/@jesusronaldocesararellanas5388/community?si=2w9Oj341CV9DP4Bu"
+                                target="_blank" rel="noopener noreferrer" class="footer-social-btn"
+                                aria-label="YouTube">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <span class="footer-social-label">YouTube</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://www.tiktok.com/@arellanasanchez2006" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="TikTok">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                            <span class="footer-social-label">TikTok</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Navegación -->
+                <div class="footer-col-cyber col-nav">
+                    <div class="footer-nav-block">
+                        <div class="footer-header-cyber">
+                            <div class="footer-header-badge" aria-hidden="true">
+                                <i class="fa-regular fa-compass"></i>
+                            </div>
+                            <div class="footer-header-text">
+                                <h4>NAVEGACIÓN</h4>
+                                <div class="footer-header-bar"></div>
+                            </div>
+                        </div>
+                        <ul class="footer-nav-list">
+                            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+                            <li><a href="proyectos.html"><i class="fa-solid fa-chevron-right"></i> Proyectos</a></li>
+                            <li><a href="tienda.html"><i class="fa-solid fa-chevron-right"></i> Tienda</a></li>
+                            <li><a href="#faq"><i class="fa-solid fa-chevron-right"></i> Preguntas frecuentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 3: Contacto -->
+                <div class="footer-col-cyber col-contact">
+                    <div class="footer-contact-block">
+                        <div class="footer-header-cyber">
+                            <div class="footer-header-badge" aria-hidden="true">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="footer-header-text">
+                                <h4>CONTACTO</h4>
+                                <div class="footer-header-bar"></div>
+                            </div>
+                        </div>
+                        <div class="footer-contact-cards">
+                            <a href="https://wa.me/51906681667" target="_blank" rel="noopener noreferrer"
+                                class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">+51 906 681 667</span>
+                                    <span class="contact-pill-sub">Llámanos o escríbenos</span>
+                                </div>
+                            </a>
+                            <a href="mailto:info@saidex40.com" class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">info@saidex40.com</span>
+                                    <span class="contact-pill-sub">Te responderemos pronto</span>
+                                </div>
+                            </a>
+                            <div class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">Lima, Perú</span>
+                                    <span class="contact-pill-sub">Atendemos todo el país</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placa de Circuito Cibernético Inferior y Derechos Reservados -->
+            <div class="footer-bottom-cyber">
+                <div class="footer-circuit-divider" aria-hidden="true">
+                    <svg viewBox="0 0 1200 65" class="footer-circuit-svg" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="cyberTraceGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <linearGradient id="cyberTraceGradRight" x1="100%" y1="0%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <filter id="cyberCircuitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Línea de trazo sutil de fondo -->
+                        <line x1="0" y1="42" x2="1200" y2="42" stroke="rgba(0, 180, 255, 0.2)" stroke-width="1.5" />
+
+                        <!-- Trazo de Circuito Izquierdo 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="url(#cyberTraceGradLeft)" stroke-width="2.5"
+                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Izquierdo 1 (Animación de haz de pulso de 0,16 a 480,42) -->
+                        <path class="circuit-pulse-beam" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos izquierdos -->
+                        <circle class="circuit-node-joint" cx="180" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="360" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="480" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="480" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="430" cy="50" r="3" fill="#0070f3" />
+
+                        <!-- Línea de puente central -->
+                        <line class="circuit-bridge-active" x1="480" y1="42" x2="720" y2="42" stroke="#00d2ff"
+                            stroke-width="2" stroke-dasharray="8,6" stroke-opacity="0.75"
+                            filter="url(#cyberCircuitGlow)" />
+
+                        <!-- Trazo de Circuito Derecho 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="url(#cyberTraceGradRight)" stroke-width="2.5"
+                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Derecho 1 (Animación de haz de pulso de 1200,16 a 720,42 SIMULTÁNEAMENTE) -->
+                        <path class="circuit-pulse-beam" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Derecho 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none"
+                            pathLength="1000" />
+
+                        <!-- Trazo Derecho 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos derechos -->
+                        <circle class="circuit-node-joint" cx="1020" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="840" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="720" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="720" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="770" cy="50" r="3" fill="#0070f3" />
+                    </svg>
+                </div>
+
+                <div class="footer-copyright-wrap">
+                    <div class="footer-copyright-row">
+                        <span class="footer-bracket-bar" aria-hidden="true"></span>
+                        <p class="footer-copyright-text">&copy; 2026 SAIDEX 4.0 Domótica y Automatización.</p>
+                        <span class="footer-bracket-bar right" aria-hidden="true"></span>
+                    </div>
+                    <p class="footer-tech-tag">Tecnología Avanzada</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</h3>
+            <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="empty-cart-msg">Tu carrito está vacío</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span class="cart-total-price" id="cart-total">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout"
+                style="width:100%; border-radius: 8px; background: var(--neon-blue) !important; color: #000 !important; font-weight: 800;">Pagar
+                Ahora</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content"
+            style="max-width: 450px; background: #020617; border: 1px solid var(--neon-blue); border-radius: 24px; padding: 40px; color: #fff;">
+            <span class="close-modal" id="close-checkout-modal"
+                style="position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <i class="fa-solid fa-cart-check"
+                    style="color: var(--neon-blue); font-size: 3rem; margin-bottom: 15px;"></i>
+                <h3>Finalizar Pedido</h3>
+                <p style="color: #94A3B8;">Completa tus datos para enviarte el pedido por WhatsApp.</p>
+            </div>
+            <form id="checkout-form">
+                <!-- Campo Trampa Antispam Honeypot (Invisible para humanos, detecta bots automáticamente) -->
+                <div class="form-bot-trap" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                    <input type="text" id="check-hp-field" name="website_hp" tabindex="-1" autocomplete="off">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; color: #94A3B8; margin-bottom: 8px;">Nombre Completo</label>
+                    <input type="text" id="check-name" required maxlength="80" autocomplete="name"
+                        style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 10px; color: #fff;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; color: #94A3B8; margin-bottom: 8px;">Teléfono / WhatsApp</label>
+                    <input type="tel" id="check-phone" required maxlength="25" autocomplete="tel"
+                        style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 10px; color: #fff;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; color: #94A3B8; margin-bottom: 8px;">Dirección de Entrega</label>
+                    <input type="text" id="check-address" required maxlength="150" autocomplete="street-address"
+                        style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 10px; color: #fff;">
+                </div>
+                <button type="submit"
+                    style="width: 100%; background: var(--neon-blue); color: #000; border: none; padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer;">Confirmar
+                    y Enviar <i class="fa-brands fa-whatsapp"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Holographic Toast Notification HUD -->
+    <div id="shop-toast" class="saidex-toast-hud" aria-live="polite">
+        <div class="toast-hud-glow"></div>
+        <div class="toast-hud-icon-wrap" id="toast-icon-wrap">
+            <i class="fa-solid fa-cart-arrow-down"></i>
+        </div>
+        <div class="toast-hud-body">
+            <div class="toast-hud-header">
+                <span class="toast-hud-tag">SAIDEX TIENDA</span>
+                <span class="toast-hud-time">Listo</span>
+            </div>
+            <h5 class="toast-hud-title" id="toast-title">Producto</h5>
+            <p class="toast-hud-msg">¡Añadido con éxito a tus compras!</p>
+            <div class="toast-hud-actions">
+                <span class="toast-hud-price" id="toast-price">$0.00</span>
+                <button type="button" class="toast-hud-btn" id="toast-open-cart">Ver Carrito <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <button type="button" class="toast-hud-close" id="toast-close" aria-label="Cerrar">&times;</button>
+        <div class="toast-hud-progress">
+            <div class="toast-hud-progress-bar" id="toast-progress"></div>
+        </div>
+    </div>
+
+    <!-- Elementos Flotantes -->
+    <a href="https://wa.me/51906681667" class="whatsapp-floating" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> <span>¿Necesitas ayuda?</span>
+    </a>
+
+    <div class="cart-floating-side cart-toggle" id="cart-btn-float">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count-float"
+            style="position: absolute; top: -10px; right: -10px; background: #FF4500; color: #fff; font-size: 0.7rem; padding: 4px 8px; border-radius: 50%; font-weight: 800; border: 2px solid var(--dark-bg);">0</span>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/electric-effect.js"></script>
+    <script src="js/beast-cursor.js"></script>
+</body>
+
+</html>

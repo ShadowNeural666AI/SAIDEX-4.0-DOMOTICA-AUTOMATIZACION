@@ -1,0 +1,619 @@
+/* ==========================================================================
+   SAIDEX 4.0 - CARRUSEL CIRCULAR ORBITAL DEL HERO
+   Adaptado con diseño cibernético de alta fidelidad para Domótica y Automatización
+   ========================================================================== */
+
+/* Fondo dinámico de diapositivas con fundido cinematográfico */
+.hero-bg-slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 8s ease-out;
+  transform: scale(1.02);
+  will-change: opacity, transform;
+}
+
+.hero-bg-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   ESCENARIO DINÁMICO DE TEXTOS CON ANIMACIÓN CIRCULAR (LADO IZQUIERDO)
+   ========================================================================== */
+
+.hero-circular-text-stage {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 580px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Metadatos: Insignia + Contador */
+.hero-dynamic-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+  transform-origin: 20% 200px;
+  will-change: transform, opacity;
+}
+
+.carousel-info-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #00E5FF;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+.carousel-info-badge i {
+  font-size: 0.88rem;
+  color: #00E5FF;
+}
+
+.carousel-card-counter {
+  font-family: monospace, 'Courier New', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #00E5FF;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  padding: 4px 12px;
+  border-radius: 14px;
+  letter-spacing: 1.2px;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+/* Título Principal Dinámico */
+.hero-dynamic-title {
+  margin-bottom: 14px;
+  line-height: 1.15;
+  transform-origin: 20% 200px;
+  will-change: transform, opacity;
+}
+
+/* Subtítulo / Descripción Dinámica */
+.hero-dynamic-desc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #CBD5E1;
+  margin-bottom: 18px;
+  max-width: 520px;
+  transform-origin: 20% 200px;
+  will-change: transform, opacity;
+}
+
+/* Píldoras / Especificaciones de Solución */
+.hero-dynamic-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  transform-origin: 20% 200px;
+  will-change: transform, opacity;
+}
+
+.hero-spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #A5F3FC;
+  background: rgba(8, 22, 45, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  padding: 5px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+}
+
+.hero-spec-pill i {
+  color: #00E5FF;
+  font-size: 0.8rem;
+}
+
+.hero-spec-pill:hover {
+  border-color: #00E5FF;
+  background: rgba(0, 229, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Barra de progreso de 2 segundos */
+.hero-stage-progress {
+  position: relative;
+  height: 3px;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(0, 229, 255, 0.14);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.carousel-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0070F3 0%, #00E5FF 100%);
+  box-shadow: 0 0 10px #00E5FF;
+}
+
+/* ==========================================================================
+   KEYFRAMES DE ANIMACIÓN CIRCULAR ORBITAL DE TEXTOS (CIRCULAR TRAJECTORY)
+   El texto rota siguiendo un arco orbital para salir, desaparece por completo,
+   y el siguiente texto entra por el arco circular opuesto.
+   ========================================================================== */
+
+/* Salida hacia adelante (Giro en arco circular hacia arriba-izquierda) */
+@keyframes circularTextExitFwd {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translate(0, 0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-24deg) translate(-50px, -22px) scale(0.85);
+    filter: blur(8px);
+  }
+}
+
+/* Entrada hacia adelante (Giro en arco circular desde abajo-derecha) */
+@keyframes circularTextEnterFwd {
+  0% {
+    opacity: 0;
+    transform: rotate(26deg) translate(55px, 28px) scale(0.86);
+    filter: blur(8px);
+  }
+  65% {
+    opacity: 0.95;
+    transform: rotate(-3deg) translate(-4px, -2px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) translate(0, 0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Salida hacia atrás (Giro en arco circular hacia arriba-derecha) */
+@keyframes circularTextExitBwd {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translate(0, 0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(24deg) translate(50px, -22px) scale(0.85);
+    filter: blur(8px);
+  }
+}
+
+/* Entrada hacia atrás (Giro en arco circular desde abajo-izquierda) */
+@keyframes circularTextEnterBwd {
+  0% {
+    opacity: 0;
+    transform: rotate(-26deg) translate(-55px, 28px) scale(0.86);
+    filter: blur(8px);
+  }
+  65% {
+    opacity: 0.95;
+    transform: rotate(3deg) translate(4px, -2px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) translate(0, 0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Clases activadas por JavaScript durante la transición */
+.hero-circular-text-stage.anim-circle-exit-forward .animate-circular-target {
+  animation: circularTextExitFwd 0.22s cubic-bezier(0.4, 0, 0.7, 1) forwards;
+}
+
+.hero-circular-text-stage.anim-circle-enter-forward .animate-circular-target {
+  animation: circularTextEnterFwd 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-circular-text-stage.anim-circle-exit-backward .animate-circular-target {
+  animation: circularTextExitBwd 0.22s cubic-bezier(0.4, 0, 0.7, 1) forwards;
+}
+
+.hero-circular-text-stage.anim-circle-enter-backward .animate-circular-target {
+  animation: circularTextEnterBwd 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Cascada escalonada en el arco orbital */
+.hero-circular-text-stage.anim-circle-enter-forward #heroDynamicTitle { animation-delay: 0.00s; }
+.hero-circular-text-stage.anim-circle-enter-forward #heroDynamicDesc { animation-delay: 0.05s; }
+.hero-circular-text-stage.anim-circle-enter-forward #heroDynamicPills { animation-delay: 0.10s; }
+
+.hero-circular-text-stage.anim-circle-enter-backward #heroDynamicTitle { animation-delay: 0.00s; }
+.hero-circular-text-stage.anim-circle-enter-backward #heroDynamicDesc { animation-delay: 0.05s; }
+.hero-circular-text-stage.anim-circle-enter-backward #heroDynamicPills { animation-delay: 0.10s; }
+
+/* ==========================================================================
+   SHOWCASE CIRCULAR ORBITAL (LADO DERECHO)
+   ========================================================================== */
+
+.hero-circular-showcase {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 580px;
+  padding: 10px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Área externa del carrusel con HUD cibernético */
+.hero-carousel-outer {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Anillos orbitales decorativos Sci-Fi de fondo */
+.hero-carousel-hud-ring {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.12);
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.05);
+}
+
+.hero-carousel-hud-ring::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.15);
+}
+
+.hero-carousel-hud-ring::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 140, 255, 0.18);
+}
+
+/* Contenedor posicionado del carrusel */
+.hero-carousel-container {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+/* La pista circular orbital */
+.hero-carousel {
+  position: relative;
+  width: 520px;
+  height: 520px;
+  border: 2px dashed rgba(0, 229, 255, 0.45);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 35px rgba(0, 229, 255, 0.18), inset 0 0 30px rgba(0, 229, 255, 0.08);
+  transition: box-shadow 0.5s ease;
+}
+
+/* Punto central de pulso del núcleo del carrusel */
+.hero-carousel-center-core {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00E5FF;
+  box-shadow: 0 0 20px #00E5FF, 0 0 40px rgba(0, 229, 255, 0.6);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Cada Diapositiva Circular Orbitando */
+.hero-carousel-slide {
+  position: absolute;
+  border-radius: 50%;
+  outline: 2px solid rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4), 0 6px 16px rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: transform 0.85s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 0.45s ease,
+              outline-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Diapositiva Activa (Posición 0 - Mayor escala, relieve y resplandor neón) */
+.hero-carousel-slide.active {
+  outline: 3px solid #00E5FF;
+  box-shadow: 0 0 32px rgba(0, 229, 255, 0.85),
+              0 0 65px rgba(0, 81, 255, 0.45),
+              0 14px 35px rgba(0, 0, 0, 0.85);
+  z-index: 10;
+}
+
+
+.hero-carousel-slide:hover:not(.active) {
+  outline-color: #38BDF8;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.6), 0 8px 20px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.15);
+}
+
+/* ==========================================================================
+   BARRA DE CONTROLES Y FLECHAS (DEBAJO Y CENTRADOS)
+   ========================================================================== */
+
+.hero-carousel-controls {
+  position: relative;
+  z-index: 5;
+  display: none; /* Oculto en pantallas grandes de escritorio para dar protagonismo a la rueda interactiva */
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Flechas de Navegación Neón */
+.hero-carousel-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  background: rgba(10, 25, 47, 0.85);
+  color: #00E5FF;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 14px rgba(0, 229, 255, 0.2);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-carousel-arrow:hover {
+  background: #00E5FF;
+  color: #020617;
+  transform: scale(1.12);
+  border-color: #00E5FF;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.8), 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-carousel-arrow:active {
+  transform: scale(0.96);
+}
+
+/* Indicadores de Puntos Cibernéticos */
+.hero-carousel-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-indicator-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: #00E5FF;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
+  border-color: #00E5FF;
+}
+
+.hero-indicator-dot:hover:not(.active) {
+  background: rgba(0, 229, 255, 0.5);
+}
+
+/* ==========================================================================
+   ADAPTACIONES RESPONSIVAS:
+   En pantallas pequeñas (<= 992px y <= 767px), la rueda derecha se oculta,
+   mientras que el escenario de textos, la animación circular, los fondos
+   y los controles centrados permanecen 100% operativos.
+   ========================================================================== */
+
+/* Laptops / Pantallas Medianas (<= 1200px) */
+@media (max-width: 1200px) {
+  .hero-carousel-outer {
+    height: 440px;
+  }
+
+  .hero-carousel-hud-ring {
+    width: 500px;
+    height: 500px;
+  }
+
+  .hero-carousel {
+    width: 460px;
+    height: 460px;
+  }
+
+  .hero-circular-text-stage,
+  .hero-carousel-controls {
+    max-width: 480px;
+  }
+}
+
+/* Tablets y Pantallas Medianas (<= 992px) */
+@media (max-width: 992px) {
+  .hero-circular-showcase {
+    display: none !important;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    justify-items: center;
+    min-height: calc(100vh - 140px);
+    padding-top: 40px;
+  }
+
+  .hero-content {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-circular-text-stage {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .hero-dynamic-meta {
+    justify-content: center;
+    transform-origin: center 200px;
+  }
+
+  .hero-dynamic-title {
+    transform-origin: center 200px;
+  }
+
+  .hero-dynamic-desc {
+    margin-left: auto;
+    margin-right: auto;
+    transform-origin: center 200px;
+  }
+
+  .hero-dynamic-pills {
+    justify-content: center;
+    transform-origin: center 200px;
+  }
+
+  .hero-stage-progress {
+    margin: 18px auto 0;
+  }
+
+  .hero-carousel-controls {
+    display: flex !important;
+    justify-content: center;
+    margin: 24px auto 0;
+  }
+}
+
+/* Móviles (<= 767px) */
+@media (max-width: 767px) {
+  .hero-circular-showcase {
+    display: none !important;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 7.5vw, 2.7rem) !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+  }
+
+  .hero-dynamic-meta {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .carousel-info-badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+
+  .hero-dynamic-pills {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .hero-spec-pill {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+  }
+
+  .hero-carousel-controls {
+    display: flex !important;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .hero-carousel-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+}

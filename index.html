@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIDEX 4.0 Domótica y Automatización</title>
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Librería de Iconos Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos CSS Personalizados -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/electric-effect.css">
+    <link rel="stylesheet" href="css/hero-carousel.css">
+    <!-- Metadatos de Seguridad -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Icono de Pestaña (Favicon) -->
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+</head>
+
+<body>
+
+    <!-- Filtros SVG de Rayos Eléctricos 3D de Alto Rendimiento (Optimizados para 60-120 fps) -->
+    <svg id="electric-svg-defs" class="electric-svg-container" aria-hidden="true">
+        <defs>
+            <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="1" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="400; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="2" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="280; 0" dur="4s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+
+            <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="3" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="360; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="4" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="250; 0" dur="4.5s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+
+            <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise1" seed="5" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="380; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="1" result="noise2" seed="6" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dx" values="260; 0" dur="4.2s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feBlend in="offsetNoise1" in2="offsetNoise2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Precargador Cibernético Futurista (SAIDEX 4.0 - HUD) -->
+    <div id="saidex-preloader" class="saidex-preloader" aria-label="Cargando SAIDEX 4.0">
+        <!-- Fondo Cibernético Ambiental -->
+        <div class="preloader-cyber-bg">
+            <div class="cyber-grid-overlay"></div>
+            <div class="preloader-core-glow"></div>
+        </div>
+
+        <!-- Trazos de Circuitos Izquierdos -->
+        <div class="cyber-circuits cyber-circuits-left" aria-hidden="true">
+            <svg viewBox="0 0 320 500" class="circuit-svg" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="circGradL" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0051ff" stop-opacity="0.2" />
+                        <stop offset="60%" stop-color="#00e5ff" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#00e5ff" stop-opacity="1" />
+                    </linearGradient>
+                    <filter id="circGlowL">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <path d="M0,120 L90,120 L150,180 L280,180" fill="none" stroke="url(#circGradL)" stroke-width="2"
+                    filter="url(#circGlowL)" />
+                <path d="M0,150 L70,150 L120,200 L250,200" fill="none" stroke="#0070f3" stroke-width="1.5"
+                    stroke-opacity="0.6" />
+                <path d="M0,250 L120,250 L180,250 L240,250" fill="none" stroke="url(#circGradL)" stroke-width="2.5"
+                    filter="url(#circGlowL)" />
+                <path d="M0,380 L90,380 L150,320 L280,320" fill="none" stroke="url(#circGradL)" stroke-width="2"
+                    filter="url(#circGlowL)" />
+                <path d="M0,350 L70,350 L120,300 L250,300" fill="none" stroke="#0070f3" stroke-width="1.5"
+                    stroke-opacity="0.6" />
+                <circle cx="280" cy="180" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+                <circle cx="240" cy="250" r="5.5" fill="#39ff14" filter="url(#circGlowL)" />
+                <circle cx="280" cy="320" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+                <rect x="180" y="247" width="18" height="6" fill="#00e5ff" rx="3" class="circuit-pulse-chip" />
+            </svg>
+        </div>
+
+        <!-- Trazos de Circuitos Derechos -->
+        <div class="cyber-circuits cyber-circuits-right" aria-hidden="true">
+            <svg viewBox="0 0 320 500" class="circuit-svg" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="circGradR" x1="100%" y1="0%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#0051ff" stop-opacity="0.2" />
+                        <stop offset="60%" stop-color="#00e5ff" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#00e5ff" stop-opacity="1" />
+                    </linearGradient>
+                </defs>
+                <path d="M320,120 L230,120 L170,180 L40,180" fill="none" stroke="url(#circGradR)" stroke-width="2"
+                    filter="url(#circGlowL)" />
+                <path d="M320,150 L250,150 L200,200 L70,200" fill="none" stroke="#0070f3" stroke-width="1.5"
+                    stroke-opacity="0.6" />
+                <path d="M320,250 L200,250 L140,250 L80,250" fill="none" stroke="url(#circGradR)" stroke-width="2.5"
+                    filter="url(#circGlowL)" />
+                <path d="M320,380 L230,380 L170,320 L40,320" fill="none" stroke="url(#circGradR)" stroke-width="2"
+                    filter="url(#circGlowL)" />
+                <path d="M320,350 L250,350 L200,300 L70,300" fill="none" stroke="#0070f3" stroke-width="1.5"
+                    stroke-opacity="0.6" />
+                <circle cx="40" cy="180" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+                <circle cx="80" cy="250" r="5.5" fill="#39ff14" filter="url(#circGlowL)" />
+                <circle cx="40" cy="320" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+                <rect x="122" y="247" width="18" height="6" fill="#00e5ff" rx="3" class="circuit-pulse-chip" />
+            </svg>
+        </div>
+
+        <!-- Núcleo Cibernético Central -->
+        <div class="cyber-preloader-content">
+            <!-- Ensamblaje de Anillos Múltiples HUD -->
+            <div class="cyber-hud-assembly">
+                <div class="hud-outer-ticks"></div>
+                <div class="hud-outer-segments"></div>
+                <div class="hud-mid-glow-ring"></div>
+                <div class="hud-inner-counter-ring"></div>
+                <!-- Emblema Central de Domótica -->
+                <div class="hud-central-orb">
+                    <img src="assets/logo.webp" alt="SAIDEX 4.0 Logo" class="preloader-logo-img">
+                </div>
+            </div>
+
+            <!-- Tipografía de la Marca -->
+            <div class="cyber-brand-block">
+                <h1 class="cyber-brand-title">SAIDEX <span class="cyber-neon-cyan">4.0</span></h1>
+                <p class="cyber-brand-tagline">DOMÓTICA &nbsp;&bull;&nbsp; AUTOMATIZACIÓN &nbsp;&bull;&nbsp; TECNOLOGÍA
+                </p>
+            </div>
+
+            <!-- Efecto de Carga de Placa de Circuito Cibernético (Animación continua de lado a lado) -->
+            <div class="cyber-loader-widget preloader-circuit-widget">
+                <div class="footer-circuit-divider preloader-circuit-divider" aria-hidden="true">
+                    <svg viewBox="0 0 1200 65" class="footer-circuit-svg" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="loadCyberTraceGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <linearGradient id="loadCyberTraceGradRight" x1="100%" y1="0%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <filter id="loadCyberCircuitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Línea de trazo sutil de fondo -->
+                        <line x1="0" y1="42" x2="1200" y2="42" stroke="rgba(0, 180, 255, 0.2)" stroke-width="1.5" />
+
+                        <!-- Trazo de Circuito Izquierdo 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="url(#loadCyberTraceGradLeft)" stroke-width="2.5"
+                            filter="url(#loadCyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Izquierdo 1 (Animación de haz de pulso de 0,16 a 480,42) -->
+                        <path class="circuit-pulse-beam" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#loadCyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#loadCyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#loadCyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos izquierdos -->
+                        <circle class="circuit-node-joint" cx="180" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="360" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="480" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="480" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="430" cy="50" r="3" fill="#0070f3" />
+
+                        <!-- Línea de puente central -->
+                        <line class="circuit-bridge-active" x1="480" y1="42" x2="720" y2="42" stroke="#00d2ff"
+                            stroke-width="2" stroke-dasharray="8,6" stroke-opacity="0.75"
+                            filter="url(#loadCyberCircuitGlow)" />
+
+                        <!-- Trazo de Circuito Derecho 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="url(#loadCyberTraceGradRight)" stroke-width="2.5"
+                            filter="url(#loadCyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Derecho 1 (Animación de haz de pulso de 1200,16 a 720,42 SIMULTÁNEAMENTE) -->
+                        <path class="circuit-pulse-beam" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#loadCyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Derecho 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#loadCyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none"
+                            pathLength="1000" />
+
+                        <!-- Trazo Derecho 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#loadCyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos derechos -->
+                        <circle class="circuit-node-joint" cx="1020" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="840" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="720" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#loadCyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="720" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="770" cy="50" r="3" fill="#0070f3" />
+                    </svg>
+                </div>
+
+                <!-- Fila de Estado y Porcentaje con Barras de Soporte Sci-Fi -->
+                <div class="preloader-circuit-meta">
+                    <div class="footer-copyright-row preloader-telemetry-row">
+                        <span class="footer-bracket-bar" aria-hidden="true"></span>
+                        <span class="cyber-status-text" id="preloader-status">Sistema SAIDEX 4.0 Activo...</span>
+                        <span class="footer-bracket-bar right" aria-hidden="true"></span>
+                    </div>
+                    <div class="preloader-percent-wrap">
+                        <span class="cyber-percent-num" id="preloader-percent">0%</span>
+                    </div>
+                </div>
+
+                <!-- Barra de Carga Cibernética Sincronizada -->
+                <div class="cyber-bar-track preloader-bar-track">
+                    <div class="cyber-bar-fill" id="preloader-bar-fill">
+                        <span class="cyber-flare-tip"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preloader Auto-Failsafe: Garantiza que la pantalla nunca se congele -->
+    <script>
+        (function () {
+            var p = document.getElementById('saidex-preloader');
+            if (!p) return;
+            setTimeout(function () {
+                if (p && !p.classList.contains('is-loaded')) {
+                    p.classList.add('is-loaded');
+                    document.body.classList.add('site-loaded');
+                    setTimeout(function () { p.style.display = 'none'; }, 600);
+                }
+            }, 1400);
+        })();
+    </script>
+
+    <!-- Navegación de Cabecera -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" aria-label="SAIDEX 4.0 Inicio">
+                <img src="assets/logo.webp" alt="SAIDEX 4.0" class="logo-img">
+                <div class="logo-text">
+                    <span class="company-name brand-highlight">SAIDEX 4.0</span>
+                    <span class="company-sub">Domótica y Automatización</span>
+                    <span class="company-tagline">Tecnología avanzada para tu hogar</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+                <a href="#inicio" class="nav-item active">Inicio</a>
+                <a href="#nosotros" class="nav-item">Nosotros</a>
+                <a href="#soluciones" class="nav-item">Soluciones</a>
+                <a href="proyectos.html" class="nav-item">Proyectos</a>
+                <a href="tienda.html" class="nav-item">Tienda</a>
+                <a href="#contacto" class="nav-item">Contacto</a>
+
+                <!-- Acciones exclusivas para dispositivos móviles -->
+                <div class="nav-actions-mobile">
+                    <a href="#cotizar" class="btn btn-primary btn-glow-intense btn-cotizar">
+                        Cotizar <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#cotizar" class="btn btn-primary btn-glow-intense btn-cotizar">
+                    Cotizar <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="mobileMenu" aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Principal (Hero) -->
+        <section class="hero" id="inicio">
+            <!-- Capas de Diapositivas de Fondo Dinámico -->
+            <div class="hero-bg-slideshow" id="heroBgSlideshow">
+                <div class="hero-bg-slide active" id="heroBgLayerA" style="background-image: url('assets/hero 1.webp');">
+                </div>
+                <div class="hero-bg-slide" id="heroBgLayerB"></div>
+            </div>
+
+            <!-- Capa de Degradado Oscuro Cinemático de Fondo -->
+            <div class="hero-overlay-cinematic" aria-hidden="true"></div>
+
+
+            <div class="container hero-container">
+                <!-- Columna de Contenido Izquierda -->
+                <div class="hero-content">
+
+                    <!-- Escenario Dinámico con Animación Circular de Textos del Hero -->
+                    <div class="hero-circular-text-stage" id="heroCircularTextStage">
+
+                        <!-- Título Principal Dinámico (Efecto Circular - Cambia en cada una de las 8 diapositivas) -->
+                        <h1 class="hero-title hero-dynamic-title animate-circular-target" id="heroDynamicTitle">
+                            Transforma tu Hogar <br><span class="text-neon-cyan">en Inteligente</span>
+                        </h1>
+
+                        <!-- Subtítulo / Descripción Dinámica (Efecto Circular - Adaptado exactamente a cada imagen) -->
+                        <p class="hero-subtitle hero-dynamic-desc animate-circular-target" id="heroDynamicDesc">
+                            Domótica y automatización de última generación. Controla iluminación biodinámica,
+                            climatización y confort con tecnología intuitiva.
+                        </p>
+
+                        <!-- Píldoras / Especificaciones Rápidas de la Solución Activa -->
+                        <div class="hero-dynamic-pills animate-circular-target" id="heroDynamicPills">
+                            <span class="hero-spec-pill"><i class="fa-solid fa-lightbulb"></i> Iluminación
+                                Biodinámica</span>
+                            <span class="hero-spec-pill"><i class="fa-solid fa-temperature-half"></i> Clima 21°C
+                                Inteligente</span>
+                            <span class="hero-spec-pill"><i class="fa-solid fa-microchip"></i> Panel Holográfico</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Controles de Flecha para Rotación Circular e Indicadores (Debajo y Centrados) -->
+                    <div class="hero-carousel-controls" aria-label="Controles del carrusel circular">
+                        <button class="hero-carousel-arrow left" id="heroArrowLeft" aria-label="Sistema anterior">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <div class="hero-carousel-indicators" id="heroIndicators"></div>
+                        <button class="hero-carousel-arrow right" id="heroArrowRight" aria-label="Sistema siguiente">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Showcase Circular Orbital del Hero (Lado Derecho) -->
+                <div class="hero-circular-showcase animate-bounce-in delay-3" id="heroCircularShowcase">
+                    <!-- Área Orbital del Carrusel -->
+                    <div class="hero-carousel-outer">
+                        <div class="hero-carousel-hud-ring" aria-hidden="true"></div>
+                        <div class="hero-carousel-container" id="heroCarouselContainer">
+                            <div class="hero-carousel" id="heroCarousel">
+                                <div class="hero-carousel-center-core" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="nosotros">
+            <div class="container relative-z">
+                <div class="section-header-modern scroll-bounce">
+                    <h2 class="section-title-modern">
+                        <span class="dots-decorator">••</span>
+                        Sobre Nosotros
+                        <span class="dots-decorator">••</span>
+                    </h2>
+                </div>
+
+                <div class="about-modern-grid">
+                    <!-- Tarjeta 1: Misión y Visión -->
+                    <div class="about-modern-card card-glow-blue scroll-bounce delay-1">
+                        <img src="assets/about-mission.webp" alt="Misión" class="about-card-icon">
+                        <h3 class="about-card-title">Nuestra Misión y Visión</h3>
+                        <ul class="about-card-list bullets">
+                            <li>Automatizamos hogares para hacer tu vida más cómoda</li>
+                            <li>Hacemos la tecnología accesible y fácil de usar.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tarjeta 2: Tecnología -->
+                    <div class="about-modern-card card-glow-cyan scroll-bounce delay-2">
+                        <img src="assets/about-tech.webp" alt="Tecnología" class="about-card-icon">
+                        <h3 class="about-card-title">Tecnología y Soluciones</h3>
+                        <ul class="about-card-list bullets">
+                            <li>Diseñamos soluciones inteligentes a tu medida.</li>
+                            <li>Integración con las mejores marcas.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tarjeta 3: Por qué SAIDEX 4.0 -->
+                    <div class="about-modern-card card-glow-green scroll-bounce delay-3">
+                        <img src="assets/about-choice.webp" alt="Confianza" class="about-card-icon">
+                        <h3 class="about-card-title">¿Por qué elegirnos?</h3>
+                        <ul class="about-card-list checks">
+                            <li><i class="fa-solid fa-check"></i> Tecnología avanzada</li>
+                            <li><i class="fa-solid fa-check"></i> Atención personalizada</li>
+                            <li><i class="fa-solid fa-check"></i> Soporte 24/7.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Franja de Características Destacadas -->
+        <section class="features-strip">
+            <div class="container features-container">
+                <div class="feature-item scroll-bounce delay-1">
+                    <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <div class="feature-text">
+                        <h4>Control Total</h4>
+                        <p>Desde tu móvil o voz</p>
+                    </div>
+                </div>
+                <div class="feature-item scroll-bounce delay-2">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="feature-text">
+                        <h4>Seguridad Avanzada</h4>
+                        <p>Vigilancia 24/7 conectada</p>
+                    </div>
+                </div>
+                <div class="feature-item scroll-bounce delay-3">
+                    <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="feature-text">
+                        <h4>Ahorro Energético</h4>
+                        <p>Optimiza el consumo</p>
+                    </div>
+                </div>
+                <div class="feature-item scroll-bounce delay-4">
+                    <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="feature-text">
+                        <h4>Automatización Total</h4>
+                        <p>Escenas y rutinas inteligentes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Sección de Soluciones y Proyectos -->
+        <section class="solutions-projects-section bg-light" id="soluciones">
+            <div class="container main-grid">
+
+                <!-- Columna Izquierda: Soluciones -->
+                <div class="solutions-column">
+                    <div class="section-header center-title scroll-bounce">
+                        <span class="dots-decorator">••</span>
+                        <h2 class="section-title dark-text">Nuestras Soluciones Inteligentes</h2>
+                        <span class="dots-decorator">••</span>
+                    </div>
+
+                    <div class="solutions-grid">
+                        <!-- Tarjeta 1 -->
+                        <div class="solution-card scroll-bounce delay-1">
+                            <div class="card-image">
+                                <div class="img-placeholder bg-blue-img"></div>
+                                <div class="card-icon"><i class="fa-solid fa-house-laptop"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Sistemas</h3>
+                                <ul>
+                                    <li><i class="fa-solid fa-check text-green"></i> Iluminación Inteligente</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Seguridad y Vigilancia</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Control de Accesos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 2 -->
+                        <div class="solution-card scroll-bounce delay-2">
+                            <div class="card-image">
+                                <div class="img-placeholder bg-blue-img2"></div>
+                                <div class="card-icon"><i class="fa-solid fa-tablet-screen-button"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Integraciones</h3>
+                                <ul>
+                                    <li><i class="fa-solid fa-check text-green"></i> App Móvil Personalizada</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Asistentes de Voz</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 -->
+                        <div class="solution-card scroll-bounce delay-3">
+                            <div class="card-image">
+                                <div class="img-placeholder bg-blue-img3"></div>
+                                <div class="card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Nuestros Servicios</h3>
+                                <ul>
+                                    <li><i class="fa-solid fa-check text-green"></i> Diseño e Instalación</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Programación a Medida</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Mantenimiento Preventivo</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Soporte Técnico 24/7</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Consultoría Especializada</li>
+                                    <li><i class="fa-solid fa-check text-green"></i> Actualizaciones y Upgrades</li>
+                                </ul>
+                                <a href="javascript:void(0)" class="btn-agenda-visita-card" id="btn-agenda-visita"
+                                    role="button">
+                                    <span>Agenda una Visita Técnica</span>
+                                    <i class="fa-solid fa-calendar-check"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Proyectos -->
+                <div class="projects-column" id="proyectos">
+                    <div class="section-header space-between scroll-bounce">
+                        <h2 class="section-title dark-text">Proyectos Destacados</h2>
+                        <a href="proyectos.html" class="btn-text-small">Ver todos <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="projects-list">
+                        <!-- Proyecto 1 -->
+                        <div class="project-mini-card scroll-bounce delay-1">
+                            <div class="project-img bg-house-img">
+                                <span class="badge">Residencial</span>
+                            </div>
+                            <div class="project-info">
+                                <h4>Casa Inteligente - 450 m²</h4>
+                                <p>Automatización completa de iluminación, clima y seguridad</p>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 2 -->
+                        <div class="project-mini-card scroll-bounce delay-2">
+                            <div class="project-img bg-office-img">
+                                <span class="badge">Comercial</span>
+                            </div>
+                            <div class="project-info">
+                                <h4>Oficina Corporativa</h4>
+                                <p>Control de accesos, clima y audio multiroom</p>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 3 -->
+                        <div class="project-mini-card scroll-bounce delay-3">
+                            <div class="project-img bg-apt-img">
+                                <span class="badge">Residencial</span>
+                            </div>
+                            <div class="project-info">
+                                <h4>Departamento Premium</h4>
+                                <p>Integración total con app móvil y voz</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Sección de Estadísticas de Rendimiento -->
+        <section class="stats-section">
+            <div class="container stats-container">
+                <div class="stat-item scroll-bounce delay-1">
+                    <div class="stat-icon"><i class="fa-solid fa-house-user text-neon-blue"></i></div>
+                    <h3 class="counter" data-target="5">0</h3>
+                    <p>Años de experiencia</p>
+                </div>
+                <div class="stat-item scroll-bounce delay-2">
+                    <div class="stat-icon"><i class="fa-regular fa-clipboard text-neon-blue"></i></div>
+                    <h3 class="counter" data-target="50">0</h3>
+                    <p>Proyectos realizados</p>
+                </div>
+                <div class="stat-item scroll-bounce delay-3">
+                    <div class="stat-icon"><i class="fa-solid fa-users text-neon-blue"></i></div>
+                    <h3 class="counter" data-target="50">0</h3>
+                    <p>Clientes satisfechos</p>
+                </div>
+                <div class="stat-item scroll-bounce delay-4">
+                    <div class="stat-icon"><i class="fa-solid fa-headset text-neon-blue"></i></div>
+                    <h3>24/7</h3>
+                    <p>Soporte técnico</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Banner de Llamada a la Acción (CTA) -->
+        <section class="cta-banner" id="cotizar">
+            <div class="container cta-container">
+                <div class="cta-bg futuristic-cta scroll-bounce electric-purple">
+                    <div class="electric-fx-frame" aria-hidden="true">
+                        <div class="electric-inner">
+                            <div class="electric-border-layer">
+                                <div class="electric-card-main"></div>
+                            </div>
+                            <div class="electric-glow-1"></div>
+                            <div class="electric-glow-2"></div>
+                        </div>
+                        <div class="electric-overlay"></div>
+                        <div class="electric-bg-glow"></div>
+                    </div>
+                    <div class="cta-content">
+                        <h2>¿Listo para automatizar<br>tu hogar o negocio?</h2>
+                        <p>Recibe asesoría gratuita y cotiza tu proyecto<br>sin compromiso.</p>
+                        <div class="cta-actions" style="justify-content: flex-start; margin-top: 20px;">
+                            <a href="https://wa.me/51906681667" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-primary btn-large btn-glow-intense"
+                                style="border-radius: 30px; font-weight: 600; padding: 15px 30px;">
+                                Hablar por WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquesina Infinita de Marcas y Aliados -->
+        <section class="partners-strip scroll-bounce">
+            <div class="container text-center">
+                <p class="partners-title" style="margin-bottom: 25px; color: var(--text-gray-dark); font-weight: 500;">
+                    Marcas y tecnologías líderes con las que trabajamos</p>
+            </div>
+            <div class="partners-marquee-wrapper" aria-label="Marcas aliadas">
+                <div class="partners-marquee-track">
+                    <div class="partner-item"><img src="assets/knx.webp" alt="KNX" class="partner-logo-img"></div>
+                    <div class="partner-item"><img src="assets/somfy.webp" alt="Somfy" class="partner-logo-img"></div>
+                    <div class="partner-item"><img src="assets/alexa.webp" alt="Alexa" class="partner-logo-img"></div>
+                    <div class="partner-item"><img src="assets/knx.webp" alt="KNX" class="partner-logo-img"></div>
+                    <div class="partner-item"><img src="assets/somfy.webp" alt="Somfy" class="partner-logo-img"></div>
+                    <div class="partner-item"><img src="assets/alexa.webp" alt="Alexa" class="partner-logo-img"></div>
+                    <!-- Duplicado para desplazamiento continuo sin cortes -->
+                    <div class="partner-item" aria-hidden="true"><img src="assets/knx.webp" alt="KNX"
+                            class="partner-logo-img"></div>
+                    <div class="partner-item" aria-hidden="true"><img src="assets/somfy.webp" alt="Somfy"
+                            class="partner-logo-img"></div>
+                    <div class="partner-item" aria-hidden="true"><img src="assets/alexa.webp" alt="Alexa"
+                            class="partner-logo-img"></div>
+                    <div class="partner-item" aria-hidden="true"><img src="assets/knx.webp" alt="KNX"
+                            class="partner-logo-img"></div>
+                    <div class="partner-item" aria-hidden="true"><img src="assets/somfy.webp" alt="Somfy"
+                            class="partner-logo-img"></div>
+                    <div class="partner-item" aria-hidden="true"><img src="assets/alexa.webp" alt="Alexa"
+                            class="partner-logo-img"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página Cibernético Futurista (SAIDEX 4.0) -->
+    <footer class="footer" id="contacto">
+        <!-- Resplandor de Iluminación Ambiental -->
+        <div class="footer-ambient-glow" aria-hidden="true"></div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="footer-grid-cyber">
+                <!-- Columna 1: Marca y Redes Sociales -->
+                <div class="footer-col-cyber col-brand">
+                    <a href="index.html" class="footer-brand-wrap">
+                        <img src="assets/logo.webp" alt="SAIDEX 4.0 Logo" class="footer-logo-img">
+                        <div class="footer-brand-text">
+                            <span class="footer-brand-title">SAIDEX <span class="cyan-num">4.0</span></span>
+                            <span class="footer-brand-sub">DOMÓTICA Y AUTOMATIZACIÓN</span>
+                        </div>
+                    </a>
+                    <p class="footer-tagline">
+                        Innovación y tecnología para transformar tu hogar en un <span class="highlight-cyan">espacio
+                            inteligente.</span>
+                    </p>
+                    <div class="footer-social-row">
+                        <div class="footer-social-item">
+                            <a href="https://www.facebook.com/share/1DKk2KMXqo/" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <span class="footer-social-label">Facebook</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://www.instagram.com/capri4431?igsh=cWtvcjdqN3Vhbjgz" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <span class="footer-social-label">Instagram</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://youtube.com/@jesusronaldocesararellanas5388/community?si=2w9Oj341CV9DP4Bu"
+                                target="_blank" rel="noopener noreferrer" class="footer-social-btn"
+                                aria-label="YouTube">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <span class="footer-social-label">YouTube</span>
+                        </div>
+                        <div class="footer-social-item">
+                            <a href="https://www.tiktok.com/@arellanasanchez2006" target="_blank"
+                                rel="noopener noreferrer" class="footer-social-btn" aria-label="TikTok">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                            <span class="footer-social-label">TikTok</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Navegación -->
+                <div class="footer-col-cyber col-nav">
+                    <div class="footer-nav-block">
+                        <div class="footer-header-cyber">
+                            <div class="footer-header-badge" aria-hidden="true">
+                                <i class="fa-regular fa-compass"></i>
+                            </div>
+                            <div class="footer-header-text">
+                                <h4>NAVEGACIÓN</h4>
+                                <div class="footer-header-bar"></div>
+                            </div>
+                        </div>
+                        <ul class="footer-nav-list">
+                            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+                            <li><a href="proyectos.html"><i class="fa-solid fa-chevron-right"></i> Proyectos</a></li>
+                            <li><a href="tienda.html"><i class="fa-solid fa-chevron-right"></i> Tienda</a></li>
+                            <li><a href="#faq"><i class="fa-solid fa-chevron-right"></i> Preguntas frecuentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Column 3: Contacto -->
+                <div class="footer-col-cyber col-contact">
+                    <div class="footer-contact-block">
+                        <div class="footer-header-cyber">
+                            <div class="footer-header-badge" aria-hidden="true">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="footer-header-text">
+                                <h4>CONTACTO</h4>
+                                <div class="footer-header-bar"></div>
+                            </div>
+                        </div>
+                        <div class="footer-contact-cards">
+                            <a href="https://wa.me/51906681667" target="_blank" rel="noopener noreferrer"
+                                class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">+51 906 681 667</span>
+                                    <span class="contact-pill-sub">Llámanos o escríbenos</span>
+                                </div>
+                            </a>
+                            <a href="mailto:info@saidex40.com" class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">info@saidex40.com</span>
+                                    <span class="contact-pill-sub">Te responderemos pronto</span>
+                                </div>
+                            </a>
+                            <div class="contact-pill-card">
+                                <div class="contact-pill-orb">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="contact-pill-info">
+                                    <span class="contact-pill-primary">Lima, Perú</span>
+                                    <span class="contact-pill-sub">Atendemos todo el país</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placa de Circuito Cibernético Inferior y Derechos Reservados -->
+            <div class="footer-bottom-cyber">
+                <div class="footer-circuit-divider" aria-hidden="true">
+                    <svg viewBox="0 0 1200 65" class="footer-circuit-svg" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="cyberTraceGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <linearGradient id="cyberTraceGradRight" x1="100%" y1="0%" x2="0%" y2="0%">
+                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                            </linearGradient>
+                            <filter id="cyberCircuitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Línea de trazo sutil de fondo -->
+                        <line x1="0" y1="42" x2="1200" y2="42" stroke="rgba(0, 180, 255, 0.2)" stroke-width="1.5" />
+
+                        <!-- Trazo de Circuito Izquierdo 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="url(#cyberTraceGradLeft)" stroke-width="2.5"
+                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Izquierdo 1 (Animación de haz de pulso de 0,16 a 480,42) -->
+                        <path class="circuit-pulse-beam" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" pathLength="1000" />
+
+                        <!-- Trazo Izquierdo 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos izquierdos -->
+                        <circle class="circuit-node-joint" cx="180" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="360" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="480" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="480" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="430" cy="50" r="3" fill="#0070f3" />
+
+                        <!-- Línea de puente central -->
+                        <line class="circuit-bridge-active" x1="480" y1="42" x2="720" y2="42" stroke="#00d2ff"
+                            stroke-width="2" stroke-dasharray="8,6" stroke-opacity="0.75"
+                            filter="url(#cyberCircuitGlow)" />
+
+                        <!-- Trazo de Circuito Derecho 1 (Base escalonada superior) -->
+                        <path class="circuit-trace-base" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="url(#cyberTraceGradRight)" stroke-width="2.5"
+                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+
+                        <!-- Trazo Derecho 1 (Animación de haz de pulso de 1200,16 a 720,42 SIMULTÁNEAMENTE) -->
+                        <path class="circuit-pulse-beam" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+                        <path class="circuit-pulse-core" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                            fill="none" pathLength="1000" />
+
+                        <!-- Trazo Derecho 1 (Segundo pulso continuo) -->
+                        <path class="circuit-pulse-beam beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" stroke="#00ffff"
+                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                        <path class="circuit-pulse-core beam-delay"
+                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none"
+                            pathLength="1000" />
+
+                        <!-- Trazo Derecho 2 (Base escalonada inferior y pulso) -->
+                        <path class="circuit-trace-base" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                        <path class="circuit-pulse-sub" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                            pathLength="1000" />
+
+                        <!-- Nodos de circuitos derechos -->
+                        <circle class="circuit-node-joint" cx="1020" cy="32" r="3.5" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-joint" cx="840" cy="32" r="3" fill="#00e5ff"
+                            filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-terminal" cx="720" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                        <circle class="circuit-node-halo" cx="720" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                        <circle class="circuit-node-joint" cx="770" cy="50" r="3" fill="#0070f3" />
+                    </svg>
+                </div>
+
+                <div class="footer-copyright-wrap">
+                    <div class="footer-copyright-row">
+                        <span class="footer-bracket-bar" aria-hidden="true"></span>
+                        <p class="footer-copyright-text">&copy; 2026 SAIDEX 4.0 Domótica y Automatización.</p>
+                        <span class="footer-bracket-bar right" aria-hidden="true"></span>
+                    </div>
+                    <p class="footer-tech-tag">Tecnología Avanzada</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Formulario de Solicitud de Visita Técnica -->
+    <div class="modal-overlay" id="visit-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button type="button" class="close-modal" id="close-visit-modal" aria-label="Cerrar modal">&times;</button>
+            <div class="modal-header-block">
+                <span class="modal-subtitle-badge"><i class="fa-solid fa-calendar-check"></i> ASESORÍA DOMÓTICA
+                    SAIDEX</span>
+                <h3 class="modal-title">Agenda tu Visita Técnica</h3>
+                <p class="modal-desc">Un ingeniero especialista evaluará tu espacio para diseñar la solución domótica
+                    ideal y a tu medida.</p>
+            </div>
+
+            <form id="visita-tecnica-form" class="modal-form">
+                <!-- Campo Trampa Antispam Honeypot (Invisible para humanos, detecta bots automáticamente) -->
+                <div class="form-bot-trap" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"
+                    aria-hidden="true">
+                    <input type="text" id="visit-hp-field" name="website_hp" tabindex="-1" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="visit-name"><i class="fa-solid fa-user"></i> Nombre Completo *</label>
+                    <input type="text" id="visit-name" placeholder="Ej: Carlos Mendoza" required autocomplete="name"
+                        maxlength="80">
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="visit-phone"><i class="fa-brands fa-whatsapp"></i> Teléfono / WhatsApp *</label>
+                        <input type="tel" id="visit-phone" placeholder="+51 900 000 000" maxlength="15" required
+                            autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="visit-distrito"><i class="fa-solid fa-location-dot"></i> Distrito / Ciudad *</label>
+                        <input type="text" id="visit-distrito" placeholder="Ej: Miraflores, Surco..." required
+                            maxlength="80">
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="visit-type"><i class="fa-solid fa-building"></i> Tipo de Proyecto *</label>
+                        <select id="visit-type" required>
+                            <option value="">Selecciona tipo de espacio</option>
+                            <option value="Residencial (Casa / Villa)">Residencial (Casa / Villa)</option>
+                            <option value="Departamento / Penthouse">Departamento / Penthouse</option>
+                            <option value="Oficina / Corporativo">Oficina / Corporativo</option>
+                            <option value="Comercial / Restaurante">Comercial / Restaurante</option>
+                            <option value="Mantenimiento o Ampliación">Mantenimiento o Ampliación</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="visit-date"><i class="fa-regular fa-calendar"></i> Fecha Tentativa *</label>
+                        <input type="date" id="visit-date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit-desc"><i class="fa-solid fa-pen-to-square"></i> ¿Qué te gustaría
+                        automatizar?</label>
+                    <textarea id="visit-desc" rows="3" maxlength="300"
+                        placeholder="Ej: Iluminación inteligente, seguridad y cámaras, audio multizona, cortinas..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-modal">
+                    <span>Confirmar y Enviar Solicitud</span>
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <p class="modal-guarantee"><i class="fa-solid fa-shield-halved"></i> Visita técnica y evaluación sin
+                    compromiso.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/51906681667?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="js/script.js"></script>
+    <script src="js/electric-effect.js"></script>
+    <script src="js/hero-carousel.js"></script>
+    <script src="js/beast-cursor.js"></script>
+</body>
+
+</html>

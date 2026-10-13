@@ -1,0 +1,560 @@
+/* ========================================================
+   SAIDEX 4.0 - TARJETAS ELÉCTRICAS 3D DE ULTRA ALTO RENDIMIENTO
+   Descargas de rayos eléctricos y animaciones activadas por interacción hover/touch.
+   Estado en reposo: Estética cyber limpia sin vibración.
+   Estado activo (Hover/Touch): Desplazamiento animado de rayo eléctrico e inclinación 3D.
+   ======================================================== */
+
+:root {
+    /* Tema 1: Pulso Esmeralda (Verde Neón) */
+    --electric-1-border: #39FF14;
+    --electric-1-light: #7dff66;
+    --electric-1-glow: rgba(57, 255, 20, 0.6);
+    --electric-1-bg: rgba(57, 255, 20, 0.25);
+
+    /* Tema 2: Pulso Oceánico (Cian Eléctrico - Distintivo SAIDEX) */
+    --electric-2-border: #00E5FF;
+    --electric-2-light: #70f3ff;
+    --electric-2-glow: rgba(0, 229, 255, 0.6);
+    --electric-2-bg: rgba(0, 229, 255, 0.25);
+
+    /* Tema 3: Sueño Neón (Magenta Vibrante) */
+    --electric-3-border: #DD48C4;
+    --electric-3-light: #ff78e8;
+    --electric-3-glow: rgba(221, 72, 196, 0.6);
+    --electric-3-bg: rgba(221, 72, 196, 0.25);
+}
+
+/* Contenedor invisible para filtros de turbulencia SVG en viewport activo para ejecución continua de animaciones SMIL */
+.electric-svg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0.001;
+    pointer-events: none;
+    overflow: hidden;
+    visibility: visible;
+}
+
+/* Perspectiva de Cuadrícula 3D */
+.store-grid,
+.projects-grid {
+    perspective: 1200px;
+}
+
+/* ========================================================
+   BASE DE TARJETAS Y TRANSICIONES 3D
+   ======================================================== */
+
+.product-card {
+    position: relative;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.98) 100%) !important;
+    overflow: visible !important;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+    will-change: transform;
+    contain: layout style;
+    touch-action: pan-y;
+}
+
+.project-card {
+    position: relative;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    overflow: visible !important;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+    will-change: transform;
+    touch-action: pan-y;
+}
+
+/* Contenedor interno de multimedia para project-card que aloja imagen y overlay deslizante */
+.project-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 2;
+    background: #000;
+}
+
+/* Asignación de Tema por Defecto: Tema 2 (Cian - Distintivo SAIDEX) */
+.product-card,
+.project-card {
+    --electric-border: var(--electric-2-border);
+    --electric-light: var(--electric-2-light);
+    --electric-glow: var(--electric-2-glow);
+    --electric-bg: var(--electric-2-bg);
+    --electric-filter: url(#turbulent-2);
+}
+
+/* Ciclo temático visual para tienda y proyectos */
+.product-card:nth-child(3n+1),
+.project-card:nth-child(3n+1),
+.electric-cyan {
+    --electric-border: var(--electric-2-border);
+    --electric-light: var(--electric-2-light);
+    --electric-glow: var(--electric-2-glow);
+    --electric-bg: var(--electric-2-bg);
+    --electric-filter: url(#turbulent-2);
+}
+
+.product-card:nth-child(3n+2),
+.project-card:nth-child(3n+2),
+.electric-green {
+    --electric-border: var(--electric-1-border);
+    --electric-light: var(--electric-1-light);
+    --electric-glow: var(--electric-1-glow);
+    --electric-bg: var(--electric-1-bg);
+    --electric-filter: url(#turbulent-1);
+}
+
+.product-card:nth-child(3n+3),
+.project-card:nth-child(3n+3),
+.electric-magenta {
+    --electric-border: var(--electric-3-border);
+    --electric-light: var(--electric-3-light);
+    --electric-glow: var(--electric-3-glow);
+    --electric-bg: var(--electric-3-bg);
+    --electric-filter: url(#turbulent-3);
+}
+
+/* ========================================================
+   MARCO ELÉCTRICO Y CAPAS DE AURA
+   ======================================================== */
+
+.electric-fx-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Aura volumétrica ambiental detrás de la tarjeta (acelerada por GPU) */
+.electric-bg-glow {
+    position: absolute;
+    inset: -10px;
+    border-radius: 30px;
+    background: radial-gradient(circle at 50% 50%, var(--electric-bg), transparent 70%);
+    opacity: 0.3;
+    z-index: -1;
+    transform: scale(1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+/* Marco eléctrico base */
+.electric-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    pointer-events: none;
+}
+
+.electric-border-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1px solid var(--electric-glow);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* 
+   TARJETA ELÉCTRICA PRINCIPAL:
+   En reposo: marco neón estilizado sin vibración de turbulencia.
+   En HOVER / TOUCH: se activa el arco eléctrico animado con desplazamiento SVG reactivo.
+*/
+.electric-card-main {
+    position: absolute;
+    inset: -2px;
+    border-radius: 24px;
+    border: 2px solid var(--electric-border);
+    box-shadow: 0 0 10px var(--electric-glow), inset 0 0 6px var(--electric-glow);
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0.8;
+    contain: paint;
+    isolation: isolate;
+    will-change: transform, opacity;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Capas de halo neón difuminado */
+.electric-glow-1 {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1.5px solid var(--electric-glow);
+    box-shadow: 0 0 8px var(--electric-glow);
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+}
+
+.electric-glow-2 {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1px solid var(--electric-light);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+}
+
+.electric-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--electric-bg), transparent 60%);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* ========================================================
+   ESTADOS HOVER E INTERACTIVOS (ACTIVADOS POR CURSOR / TOQUE)
+   ======================================================== */
+
+/* Tarjeta de Producto - Activada al pasar el cursor */
+.product-card:hover,
+.product-card:active,
+.product-card.electric-active {
+    transform: translate3d(0, -8px, 0) rotateX(3deg) rotateY(-3deg);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 28px var(--electric-bg);
+}
+
+.product-card:hover .electric-card-main,
+.product-card.electric-active .electric-card-main {
+    transform: translateZ(0);
+    opacity: 1;
+    box-shadow: 0 0 24px var(--electric-glow), inset 0 0 12px var(--electric-glow);
+    animation: electricJitterGlow 1.2s infinite ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .product-card:hover .electric-card-main,
+    .product-card.electric-active .electric-card-main {
+        filter: var(--electric-filter);
+    }
+}
+
+.product-card:hover .electric-bg-glow,
+.product-card:active .electric-bg-glow,
+.product-card.electric-active .electric-bg-glow {
+    opacity: 0.85;
+    transform: scale(1.1);
+}
+
+.product-card:hover .electric-glow-1,
+.product-card:hover .electric-glow-2,
+.product-card:active .electric-glow-1,
+.product-card:active .electric-glow-2,
+.product-card.electric-active .electric-glow-1,
+.product-card.electric-active .electric-glow-2 {
+    opacity: 1;
+}
+
+.product-card:hover .electric-overlay,
+.product-card:active .electric-overlay,
+.product-card.electric-active .electric-overlay {
+    opacity: 0.45;
+}
+
+/* Tarjeta de Proyecto - Activada al pasar el cursor */
+.project-card:hover,
+.project-card:active,
+.project-card.electric-active {
+    transform: translate3d(0, -8px, 0) rotateX(3deg) rotateY(-3deg) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--electric-bg);
+}
+
+.project-card:hover .electric-card-main,
+.project-card.electric-active .electric-card-main {
+    transform: translateZ(0);
+    opacity: 1;
+    box-shadow: 0 0 26px var(--electric-glow), inset 0 0 14px var(--electric-glow);
+    animation: electricJitterGlow 1.2s infinite ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover .electric-card-main,
+    .project-card.electric-active .electric-card-main {
+        filter: var(--electric-filter);
+    }
+}
+
+.project-card:hover .electric-bg-glow,
+.project-card:active .electric-bg-glow,
+.project-card.electric-active .electric-bg-glow {
+    opacity: 0.9;
+    transform: scale(1.12);
+}
+
+.project-card:hover .electric-glow-1,
+.project-card:hover .electric-glow-2,
+.project-card:active .electric-glow-1,
+.project-card:active .electric-glow-2,
+.project-card.electric-active .electric-glow-1,
+.project-card.electric-active .electric-glow-2 {
+    opacity: 1;
+}
+
+.project-card:hover .electric-overlay,
+.project-card:active .electric-overlay,
+.project-card.electric-active .electric-overlay {
+    opacity: 0.45;
+}
+
+/* Asegurar que el contenido interactivo esté sobre el borde eléctrico y sea 100% clickeable */
+.product-card > *:not(.electric-fx-frame) {
+    position: relative;
+    z-index: 10;
+}
+
+.product-image-container {
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.product-badge {
+    z-index: 15 !important;
+}
+
+.btn-add-cart {
+    position: relative;
+    z-index: 12 !important;
+}
+
+.project-card .glass-overlay {
+    z-index: 10 !important;
+}
+
+/* ========================================================
+   BANNER CTA - PÚRPURA ELÉCTRICO (TEMA 3)
+   Activado con cursor / toque: dispara arco de descarga eléctrica púrpura
+   ======================================================== */
+
+.cta-bg.futuristic-cta.electric-purple {
+    --electric-border: #DD48C4;
+    --electric-light: #ff78e8;
+    --electric-glow: rgba(221, 72, 196, 0.7);
+    --electric-bg: rgba(221, 72, 196, 0.3);
+    --electric-filter: url(#turbulent-3);
+    position: relative;
+    border-radius: 12px !important;
+    overflow: visible !important;
+    isolation: isolate;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+}
+
+.cta-bg.futuristic-cta.electric-purple > *:not(.electric-fx-frame) {
+    position: relative;
+    z-index: 10;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-fx-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px !important;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-inner {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px !important;
+    pointer-events: none;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-border-layer {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit !important;
+    border: none !important;
+    pointer-events: none;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-glow-1,
+.cta-bg.futuristic-cta.electric-purple .electric-glow-2 {
+    display: none !important;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-card-main {
+    position: absolute;
+    inset: -3px;
+    border-radius: 12px !important;
+    border: 2.5px solid var(--electric-border);
+    box-shadow: 0 0 12px var(--electric-glow), inset 0 0 8px var(--electric-glow);
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0.85;
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-bg-glow {
+    position: absolute;
+    inset: -14px;
+    border-radius: 20px !important;
+    background: radial-gradient(circle at 50% 50%, var(--electric-bg), transparent 70%);
+    opacity: 0;
+    z-index: -1;
+    transform: scale(0.96);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+
+.cta-bg.futuristic-cta.electric-purple .electric-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, var(--electric-bg), transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Banner CTA - Disparado al pasar el cursor o presionar de forma táctil */
+.cta-bg.futuristic-cta.electric-purple:hover,
+.cta-bg.futuristic-cta.electric-purple:active,
+.cta-bg.futuristic-cta.electric-purple.electric-active {
+    background: linear-gradient(to right, rgba(221, 72, 196, 0.15) 0%, rgba(2, 6, 23, 0.05) 50%, rgba(2, 6, 23, 0) 100%), url('../assets/cta-bg-futuristic.webp') center right/cover no-repeat !important;
+    border-color: transparent !important;
+    box-shadow: 0 0 45px rgba(221, 72, 196, 0.45),
+                inset 0 0 25px rgba(221, 72, 196, 0.18),
+                0 20px 50px rgba(0, 0, 0, 0.6) !important;
+    transform: translateY(-5px);
+}
+
+.cta-bg.futuristic-cta.electric-purple:hover .electric-fx-frame,
+.cta-bg.futuristic-cta.electric-purple:active .electric-fx-frame,
+.cta-bg.futuristic-cta.electric-purple.electric-active .electric-fx-frame {
+    opacity: 1 !important;
+}
+
+.cta-bg.futuristic-cta.electric-purple:hover .electric-card-main,
+.cta-bg.futuristic-cta.electric-purple:active .electric-card-main,
+.cta-bg.futuristic-cta.electric-purple.electric-active .electric-card-main {
+    filter: var(--electric-filter);
+    transform: translateZ(0);
+    opacity: 1 !important;
+    box-shadow: 0 0 28px var(--electric-glow), inset 0 0 16px var(--electric-glow) !important;
+}
+
+.cta-bg.futuristic-cta.electric-purple:hover .electric-bg-glow,
+.cta-bg.futuristic-cta.electric-purple:active .electric-bg-glow,
+.cta-bg.futuristic-cta.electric-purple.electric-active .electric-bg-glow {
+    opacity: 0.95 !important;
+    transform: scale(1.08) !important;
+}
+
+.cta-bg.futuristic-cta.electric-purple:hover .electric-overlay,
+.cta-bg.futuristic-cta.electric-purple:active .electric-overlay,
+.cta-bg.futuristic-cta.electric-purple.electric-active .electric-overlay {
+    opacity: 0.35 !important;
+}
+
+/* ========================================================
+   BOTONES CON RESPLANDOR NEÓN INTENSO (Activados en hover / active)
+   ======================================================== */
+
+.btn-primary,
+.btn-glow-intense {
+    position: relative;
+    background: transparent !important;
+    border: 1.5px solid var(--neon-green) !important;
+    color: var(--neon-green) !important;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.25);
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover,
+.btn-glow-intense:hover,
+.btn-primary:active,
+.btn-glow-intense:active {
+    background: var(--neon-green) !important;
+    color: #020617 !important;
+    border-color: var(--neon-green) !important;
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.9),
+                0 0 50px rgba(57, 255, 20, 0.6),
+                0 0 80px rgba(57, 255, 20, 0.35),
+                0 10px 25px rgba(0, 0, 0, 0.5) !important;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+}
+
+.btn-primary:hover i,
+.btn-glow-intense:hover i,
+.btn-primary:active i,
+.btn-glow-intense:active i {
+    transform: translateX(4px);
+    color: #020617 !important;
+}
+
+/* ========================================================
+   OPTIMIZACIÓN PARA DISPOSITIVOS TÁCTILES Y MÓVILES (CERO CONGELAMIENTO)
+   ======================================================== */
+@media (max-width: 992px), (hover: none), (pointer: coarse) {
+    .electric-svg-container {
+        display: none !important;
+    }
+    .product-card .electric-card-main,
+    .project-card .electric-card-main,
+    .cta-bg.futuristic-cta .electric-card-main {
+        filter: none !important;
+    }
+    .store-grid,
+    .projects-grid {
+        perspective: none !important;
+    }
+    .product-card,
+    .project-card {
+        transform: none !important;
+        will-change: auto !important;
+        transform-style: flat !important;
+    }
+}
+
+/* Animación de pulso eléctrico continuo de alta fidelidad */
+@keyframes electricJitterGlow {
+    0%, 100% {
+        box-shadow: 0 0 22px var(--electric-glow), inset 0 0 10px var(--electric-glow);
+        border-color: var(--electric-border);
+    }
+    25% {
+        box-shadow: 0 0 32px var(--electric-glow), 0 0 10px #ffffff, inset 0 0 16px var(--electric-glow);
+        border-color: var(--electric-light);
+    }
+    50% {
+        box-shadow: 0 0 18px var(--electric-glow), inset 0 0 8px var(--electric-glow);
+        border-color: var(--electric-border);
+    }
+    75% {
+        box-shadow: 0 0 36px var(--electric-glow), 0 0 14px #ffffff, inset 0 0 18px var(--electric-glow);
+        border-color: var(--electric-light);
+    }
+}
+
