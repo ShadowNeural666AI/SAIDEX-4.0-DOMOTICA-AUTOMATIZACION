@@ -1042,10 +1042,18 @@ body.site-loaded .hero-floating-device,
   }
 
   .hero-overlay-cinematic {
-    background: linear-gradient(to bottom,
-        rgba(2, 6, 23, 0.95) 0%,
-        rgba(2, 6, 23, 0.88) 50%,
-        rgba(2, 6, 23, 0.96) 100%);
+    background:
+      linear-gradient(to right,
+        rgba(2, 6, 23, 0.92) 0%,
+        rgba(2, 6, 23, 0.82) 32%,
+        rgba(2, 6, 23, 0.60) 50%,
+        rgba(2, 6, 23, 0.20) 72%,
+        rgba(2, 6, 23, 0.05) 100%),
+      linear-gradient(to bottom,
+        rgba(2, 6, 23, 0.70) 0%,
+        transparent 22%,
+        transparent 76%,
+        rgba(2, 6, 23, 0.92) 100%);
   }
 
   .hero-container {

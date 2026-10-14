@@ -284,7 +284,7 @@
                     document.body.classList.add('site-loaded');
                     setTimeout(function () { p.style.display = 'none'; }, 600);
                 }
-            }, 1400);
+            }, 3400);
         })();
     </script>
 
@@ -390,10 +390,24 @@
                 <div class="hero-circular-showcase animate-bounce-in delay-3" id="heroCircularShowcase">
                     <!-- Área Orbital del Carrusel -->
                     <div class="hero-carousel-outer">
-                        <div class="hero-carousel-hud-ring" aria-hidden="true"></div>
+                        <!-- Anillos y Escáner de Radar HUD Sci-Fi -->
+                        <div class="hero-carousel-hud-ring" aria-hidden="true">
+                            <div class="hud-radar-sweep"></div>
+                            <div class="hud-orbit-ring-glow"></div>
+                        </div>
                         <div class="hero-carousel-container" id="heroCarouselContainer">
+                            <!-- Pista Orbital Giratoria de Alta Tecnología -->
+                            <div class="hero-orbit-track-glow" aria-hidden="true"></div>
                             <div class="hero-carousel" id="heroCarousel">
-                                <div class="hero-carousel-center-core" aria-hidden="true"></div>
+                                <!-- Núcleo Reactor Central con Ondas Sonar de Baliza -->
+                                <div class="hero-carousel-center-core" aria-hidden="true">
+                                    <div class="core-sonar-ring wave-1"></div>
+                                    <div class="core-sonar-ring wave-2"></div>
+                                    <div class="core-sonar-ring wave-3"></div>
+                                    <div class="core-crosshair ch-h"></div>
+                                    <div class="core-crosshair ch-v"></div>
+                                    <div class="core-energy-dot"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -686,6 +700,101 @@
     <footer class="footer" id="contacto">
         <!-- Resplandor de Iluminación Ambiental -->
         <div class="footer-ambient-glow" aria-hidden="true"></div>
+
+        <style>
+            /* 2 Columnas de igual tamaño, centradas en el medio para el pie de página */
+            #contacto .footer-grid-cyber {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                max-width: 1040px;
+                margin: 0 auto 35px;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+            }
+
+            #contacto .footer-col-cyber.col-brand {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 10px 45px 10px 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            #contacto .footer-col-cyber.col-brand .footer-tagline {
+                max-width: 440px;
+                margin-bottom: 24px;
+            }
+
+            #contacto .footer-col-cyber.col-brand .footer-social-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            #contacto .footer-col-cyber.col-contact {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 10px 15px 10px 45px;
+                border-left: 1px solid rgba(0, 180, 255, 0.25);
+                box-shadow: -1px 0 15px rgba(0, 210, 255, 0.08);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            #contacto .footer-contact-block {
+                width: 100%;
+                max-width: 440px;
+            }
+
+            #contacto .contact-pill-card {
+                width: 100%;
+            }
+
+            @media (max-width: 991px) {
+                #contacto .footer-grid-cyber {
+                    grid-template-columns: 1fr;
+                    max-width: 480px;
+                    margin: 0 auto 30px;
+                    gap: 0;
+                }
+
+                #contacto .footer-col-cyber.col-brand {
+                    padding: 0 15px 35px !important;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                #contacto .footer-col-cyber.col-brand .footer-tagline {
+                    text-align: center;
+                    margin: 0 auto 24px;
+                }
+
+                #contacto .footer-col-cyber.col-brand .footer-social-row {
+                    justify-content: center;
+                }
+
+                #contacto .footer-col-cyber.col-contact {
+                    border-left: none !important;
+                    border-top: 1px solid rgba(0, 180, 255, 0.22);
+                    box-shadow: 0 -8px 20px rgba(0, 180, 255, 0.04);
+                    padding: 35px 15px 10px !important;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                #contacto .footer-contact-block {
+                    margin: 0 auto;
+                    align-items: center;
+                }
+            }
+        </style>
 
         <div class="container" style="position: relative; z-index: 2;">
             <div class="footer-grid-cyber">

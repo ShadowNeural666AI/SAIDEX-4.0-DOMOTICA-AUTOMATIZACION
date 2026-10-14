@@ -115,17 +115,17 @@
 
         let currentProgress = 0;
         const startTime = performance.now();
-        const minDuration = 900; // Carga ágil y fluida de 900ms
+        const minDuration = 3000; // Duración ajustada a 3 segundos completos
         let isWindowLoaded = document.readyState === 'complete';
 
         window.addEventListener('load', () => {
             isWindowLoaded = true;
         }, { once: true });
 
-        // Temporizador estricto de seguridad: cierre garantizado tras 1.4s en cualquier circunstancia
+        // Temporizador estricto de seguridad garantizado a 3.5s
         const safetyTimer = setTimeout(() => {
             dismissPreloader();
-        }, 1400);
+        }, 3500);
 
         function updateStatus(val) {
             if (!status) return;
@@ -158,22 +158,22 @@
 
         function step(now) {
             const elapsed = now - startTime;
-            let targetProgress = Math.min((elapsed / minDuration) * 92, 95);
-            if (isWindowLoaded && elapsed > 400) {
-                targetProgress = 100;
+            // Progreso fluido y armónico a lo largo de los 3000ms
+            const progressRatio = Math.min(elapsed / minDuration, 1);
+            // Curva de aceleración y desaceleración natural
+            const easedProgress = Math.min(progressRatio * 100, 100);
+
+            if (currentProgress < easedProgress) {
+                currentProgress += (easedProgress - currentProgress) * 0.28 + 0.5;
+                if (currentProgress > easedProgress) currentProgress = easedProgress;
             }
 
-            if (currentProgress < targetProgress) {
-                currentProgress += (targetProgress - currentProgress) * 0.22 + 0.8;
-                if (currentProgress > 100) currentProgress = 100;
-            }
-
-            const rounded = Math.floor(currentProgress);
+            const rounded = Math.min(Math.floor(currentProgress), 100);
             if (fill) fill.style.width = `${rounded}%`;
             if (percent) percent.innerText = `${rounded}%`;
             updateStatus(rounded);
 
-            if (rounded >= 100 || (isWindowLoaded && elapsed >= minDuration)) {
+            if (elapsed >= minDuration && rounded >= 100) {
                 dismissPreloader();
             } else {
                 requestAnimationFrame(step);
@@ -1314,6 +1314,7 @@
         const easeOutQuad = (t) => t * (2 - t);
 
         const animate = (counter) => {
+            if (!counter || !counter.dataset) return;
             if (counter.dataset.animated === 'true') return;
             counter.dataset.animated = 'true';
 

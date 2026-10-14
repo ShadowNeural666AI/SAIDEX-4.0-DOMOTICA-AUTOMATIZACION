@@ -135,10 +135,21 @@
       div.setAttribute("role", "button");
       div.setAttribute("aria-label", `Diapositiva ${index + 1}`);
 
+      // Efectos cybernéticos internos HUD
+      div.innerHTML = `
+        <div class="slide-hud-reticle" aria-hidden="true"></div>
+        <div class="slide-sonar-ping" aria-hidden="true"></div>
+        <div class="slide-status-badge" aria-hidden="true">
+          <span class="badge-dot"></span>
+          <span>SISTEMA 0${index + 1}</span>
+        </div>
+      `;
+
       div.addEventListener("click", () => {
         if (!isAnimating && currentSlide !== index) {
           const dir = index > currentSlide ? 1 : -1;
           moveToSlide(index, dir);
+          resetAutoPlay();
         }
       });
 
@@ -157,6 +168,7 @@
           if (!isAnimating && currentSlide !== idx) {
             const dir = idx > currentSlide ? 1 : -1;
             moveToSlide(idx, dir);
+            resetAutoPlay();
           }
         });
         indicatorsContainer.appendChild(dot);
@@ -324,11 +336,38 @@
       }, 550);
     }
 
+    // =========================================================================
+    // ROTACIÓN AUTOMÁTICA DEL CARRUSEL CIRCULAR CADA 3 SEGUNDOS
+    // =========================================================================
+    const AUTOPLAY_INTERVAL = 3000; // 3 segundos
+    let autoPlayTimer = null;
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(() => {
+        const nextIdx = (currentSlide + 1) % heroSlidesData.length;
+        moveToSlide(nextIdx, 1);
+      }, AUTOPLAY_INTERVAL);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
     // Eventos de flechas (navegación por botones)
     if (leftArrow) {
       leftArrow.addEventListener("click", () => {
         const nextIdx = (currentSlide - 1 + heroSlidesData.length) % heroSlidesData.length;
         moveToSlide(nextIdx, -1);
+        resetAutoPlay();
       });
     }
 
@@ -336,6 +375,7 @@
       rightArrow.addEventListener("click", () => {
         const nextIdx = (currentSlide + 1) % heroSlidesData.length;
         moveToSlide(nextIdx, 1);
+        resetAutoPlay();
       });
     }
 
@@ -354,10 +394,19 @@
         const threshold = 40;
         if (touchEndX < touchStartX - threshold) {
           moveToSlide((currentSlide + 1) % heroSlidesData.length, 1);
+          resetAutoPlay();
         } else if (touchEndX > touchStartX + threshold) {
           moveToSlide((currentSlide - 1 + heroSlidesData.length) % heroSlidesData.length, -1);
+          resetAutoPlay();
         }
       }, { passive: true });
+    }
+
+    // Pausar rotación al pasar el mouse por encima del showcase para facilitar inspección o clic
+    const showcase = document.getElementById("heroCircularShowcase");
+    if (showcase) {
+      showcase.addEventListener("mouseenter", stopAutoPlay);
+      showcase.addEventListener("mouseleave", startAutoPlay);
     }
 
     // Reajustar en redimensionamiento de ventana
@@ -372,6 +421,27 @@
     // Inicializar primer estado
     applyTextContent(0);
     updateSlidesVisuals(0);
+
+    // Iniciar rotación automática sincronizada con el preloader
+    function initAutoPlay() {
+      const preloader = document.getElementById('saidex-preloader');
+      if (!preloader || preloader.classList.contains('is-loaded') || document.body.classList.contains('site-loaded')) {
+        startAutoPlay();
+      } else {
+        const checkPreloader = setInterval(() => {
+          if (!preloader || preloader.classList.contains('is-loaded') || document.body.classList.contains('site-loaded')) {
+            clearInterval(checkPreloader);
+            startAutoPlay();
+          }
+        }, 150);
+        setTimeout(() => {
+          clearInterval(checkPreloader);
+          startAutoPlay();
+        }, 3600);
+      }
+    }
+
+    initAutoPlay();
   }
 
   // Ejecutar cuando el DOM esté listo

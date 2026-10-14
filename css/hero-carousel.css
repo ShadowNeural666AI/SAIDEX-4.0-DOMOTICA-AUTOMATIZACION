@@ -305,10 +305,11 @@
   width: 580px;
   height: 580px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.15);
   pointer-events: none;
   z-index: 1;
-  box-shadow: 0 0 50px rgba(0, 229, 255, 0.05);
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.08);
+  overflow: hidden;
 }
 
 .hero-carousel-hud-ring::before {
@@ -316,7 +317,8 @@
   position: absolute;
   inset: -18px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 229, 255, 0.15);
+  border: 1px dashed rgba(0, 229, 255, 0.2);
+  animation: hudRingSpinOuter 90s linear infinite;
 }
 
 .hero-carousel-hud-ring::after {
@@ -324,7 +326,35 @@
   position: absolute;
   inset: 22px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 140, 255, 0.18);
+  border: 1px solid rgba(0, 140, 255, 0.2);
+}
+
+/* Escáner de Radar Cónico 360° Sci-Fi */
+.hud-radar-sweep {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(0, 229, 255, 0.03) 320deg, rgba(0, 229, 255, 0.16) 360deg);
+  animation: hudRadarSweepRotate 6s linear infinite;
+  pointer-events: none;
+}
+
+.hud-orbit-ring-glow {
+  position: absolute;
+  inset: 35px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 229, 255, 0.25);
+  animation: hudRingSpinOuter 60s linear infinite reverse;
+}
+
+@keyframes hudRadarSweepRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hudRingSpinOuter {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Contenedor posicionado del carrusel */
@@ -337,67 +367,271 @@
   pointer-events: auto;
 }
 
-/* La pista circular orbital */
+/* Pista Orbital Giratoria de Alta Tecnología */
+.hero-orbit-track-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 35px rgba(0, 229, 255, 0.2), inset 0 0 25px rgba(0, 229, 255, 0.1);
+  animation: hudOrbitTrackRotate 75s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes hudOrbitTrackRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* La pista circular orbital (coordenadas para las diapositivas) */
 .hero-carousel {
   position: relative;
   width: 520px;
   height: 520px;
-  border: 2px dashed rgba(0, 229, 255, 0.45);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 35px rgba(0, 229, 255, 0.18), inset 0 0 30px rgba(0, 229, 255, 0.08);
   transition: box-shadow 0.5s ease;
 }
 
-/* Punto central de pulso del núcleo del carrusel */
+/* Núcleo Reactor Central con Ondas Sonar y Baliza */
 .hero-carousel-center-core {
   position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.core-energy-dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #00E5FF;
-  box-shadow: 0 0 20px #00E5FF, 0 0 40px rgba(0, 229, 255, 0.6);
+  background: radial-gradient(circle, #FFFFFF 0%, #00E5FF 60%, #0070F3 100%);
+  box-shadow: 0 0 16px #00E5FF, 0 0 32px rgba(0, 229, 255, 0.8), 0 0 50px rgba(0, 112, 243, 0.6);
+  animation: corePulseBreath 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes corePulseBreath {
+  0% { transform: scale(0.85); box-shadow: 0 0 10px #00E5FF, 0 0 20px rgba(0, 229, 255, 0.6); }
+  100% { transform: scale(1.15); box-shadow: 0 0 22px #00FFFF, 0 0 45px rgba(0, 229, 255, 0.95), 0 0 65px rgba(0, 112, 243, 0.7); }
+}
+
+/* Ondas de radar sonar expandiéndose desde el centro */
+.core-sonar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
   pointer-events: none;
-  opacity: 0.6;
+  animation: coreSonarPing 3.6s cubic-bezier(0.1, 0.45, 0.35, 1) infinite;
+}
+
+.core-sonar-ring.wave-1 { animation-delay: 0s; }
+.core-sonar-ring.wave-2 { animation-delay: 1.2s; }
+.core-sonar-ring.wave-3 { animation-delay: 2.4s; }
+
+@keyframes coreSonarPing {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 0.95;
+    border-color: rgba(0, 255, 255, 0.95);
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    width: 520px;
+    height: 520px;
+    opacity: 0;
+    border-color: rgba(0, 112, 243, 0);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0);
+  }
+}
+
+.core-crosshair {
+  position: absolute;
+  background: rgba(0, 229, 255, 0.4);
+  pointer-events: none;
+}
+.core-crosshair.ch-h {
+  width: 42px;
+  height: 1px;
+}
+.core-crosshair.ch-v {
+  width: 1px;
+  height: 42px;
 }
 
 /* Cada Diapositiva Circular Orbitando */
 .hero-carousel-slide {
   position: absolute;
   border-radius: 50%;
-  outline: 2px solid rgba(0, 229, 255, 0.7);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4), 0 6px 16px rgba(0, 0, 0, 0.5);
   width: 50px;
   height: 50px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
+  border: 1.5px solid rgba(0, 229, 255, 0.8);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.5), 0 8px 22px rgba(0, 0, 0, 0.65);
   transition: transform 0.85s cubic-bezier(0.25, 0.1, 0.25, 1),
               opacity 0.45s ease,
-              outline-color 0.35s ease,
-              box-shadow 0.35s ease;
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              filter 0.35s ease;
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Diapositiva Activa (Posición 0 - Mayor escala, relieve y resplandor neón) */
-.hero-carousel-slide.active {
-  outline: 3px solid #00E5FF;
-  box-shadow: 0 0 32px rgba(0, 229, 255, 0.85),
-              0 0 65px rgba(0, 81, 255, 0.45),
-              0 14px 35px rgba(0, 0, 0, 0.85);
-  z-index: 10;
+/* Efecto de lente de cristal y reflejo óptico curvado */
+.hero-carousel-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
 }
 
+/* Sombra interior de profundidad (vignette) */
+.hero-carousel-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 12px rgba(0, 10, 30, 0.6);
+  pointer-events: none;
+  z-index: 1;
+}
 
+/* Diapositiva Activa (Posición 0 - Mayor escala, resplandor neón multicapa y retícula HUD) */
+.hero-carousel-slide.active {
+  border: 1.8px solid #00FFFF;
+  box-shadow: 0 0 0 1px rgba(0, 255, 255, 0.8),
+              0 0 28px rgba(0, 229, 255, 0.9),
+              0 0 60px rgba(0, 112, 243, 0.6),
+              0 0 95px rgba(0, 229, 255, 0.35),
+              0 18px 45px rgba(0, 0, 0, 0.9);
+  z-index: 10;
+  animation: activeSlideBreath 3s ease-in-out infinite alternate;
+}
+
+@keyframes activeSlideBreath {
+  0% {
+    box-shadow: 0 0 0 1px rgba(0, 255, 255, 0.8),
+                0 0 25px rgba(0, 229, 255, 0.85),
+                0 0 50px rgba(0, 112, 243, 0.5),
+                0 18px 40px rgba(0, 0, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 1.5px rgba(0, 255, 255, 1),
+                0 0 38px rgba(0, 255, 255, 1),
+                0 0 75px rgba(0, 180, 255, 0.8),
+                0 0 115px rgba(0, 229, 255, 0.45),
+                0 22px 50px rgba(0, 0, 0, 0.95);
+  }
+}
+
+/* Elementos internos Sci-Fi de la Diapositiva Activa */
+.hero-carousel-slide .slide-hud-reticle,
+.hero-carousel-slide .slide-sonar-ping,
+.hero-carousel-slide .slide-status-badge {
+  display: none;
+}
+
+.hero-carousel-slide.active .slide-hud-reticle {
+  display: block;
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  pointer-events: none;
+  animation: reticleRotateSpin 18s linear infinite;
+  z-index: 3;
+}
+
+@keyframes reticleRotateSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-carousel-slide.active .slide-sonar-ping {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.2px solid rgba(0, 255, 255, 0.85);
+  pointer-events: none;
+  animation: activeSonarPing 2.5s cubic-bezier(0.1, 0.45, 0.35, 1) infinite;
+  z-index: 1;
+}
+
+@keyframes activeSonarPing {
+  0% { transform: scale(1); opacity: 0.9; box-shadow: 0 0 6px #00E5FF; }
+  100% { transform: scale(1.35); opacity: 0; box-shadow: 0 0 20px rgba(0, 229, 255, 0); }
+}
+
+.hero-carousel-slide.active .slide-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(2, 12, 34, 0.9);
+  border: 0.8px solid #00E5FF;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+  border-radius: 8px;
+  padding: 1.2px 5px;
+  font-size: 3.8px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hero-carousel-slide.active .slide-status-badge .badge-dot {
+  width: 2.2px;
+  height: 2.2px;
+  border-radius: 50%;
+  background: #39FF14;
+  box-shadow: 0 0 4px #39FF14;
+  animation: liveBadgeDotBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes liveBadgeDotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Hover en Diapositivas Inactivas */
 .hero-carousel-slide:hover:not(.active) {
-  outline-color: #38BDF8;
-  box-shadow: 0 0 24px rgba(0, 229, 255, 0.6), 0 8px 20px rgba(0, 0, 0, 0.6);
-  filter: brightness(1.15);
+  border-color: #00FFFF;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.85), 0 0 45px rgba(0, 112, 243, 0.55), 0 10px 24px rgba(0, 0, 0, 0.7);
+  filter: brightness(1.2) contrast(1.06);
 }
 
 /* ==========================================================================
@@ -509,6 +743,21 @@
 @media (max-width: 992px) {
   .hero-circular-showcase {
     display: none !important;
+  }
+
+  .hero-overlay-cinematic {
+    background:
+      linear-gradient(to right,
+        rgba(2, 6, 23, 0.92) 0%,
+        rgba(2, 6, 23, 0.82) 32%,
+        rgba(2, 6, 23, 0.60) 50%,
+        rgba(2, 6, 23, 0.20) 72%,
+        rgba(2, 6, 23, 0.05) 100%),
+      linear-gradient(to bottom,
+        rgba(2, 6, 23, 0.70) 0%,
+        transparent 22%,
+        transparent 76%,
+        rgba(2, 6, 23, 0.92) 100%) !important;
   }
 
   .hero-container {

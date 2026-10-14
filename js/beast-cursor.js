@@ -52,6 +52,7 @@
     C.id = "beast-cursor-c";
     document.body.appendChild(C);
   }
+  if (!C || typeof C.getContext !== "function") return;
   const ctx = C.getContext("2d", { alpha: true, desynchronized: true });
   if (!ctx) return;
 

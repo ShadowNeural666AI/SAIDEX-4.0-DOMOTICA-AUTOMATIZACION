@@ -63,9 +63,8 @@
 
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-item">Inicio</a>
-                <div class="has-dropdown">
-                    <a href="#" class="nav-item active">Tienda</a>
-                </div>
+                <a href="proyectos.html" class="nav-item">Proyectos</a>
+                <a href="tienda.html" class="nav-item active">Tienda</a>
                 <a href="index.html#contacto" class="nav-item">Contacto</a>
             </nav>
 
@@ -77,9 +76,10 @@
                 </button>
             </div>
 
-            <div class="menu-toggle" id="mobileMenu">
+            <button class="menu-toggle" id="mobileMenu" aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="navLinks">
                 <span></span><span></span><span></span>
-            </div>
+            </button>
         </div>
     </header>
 
@@ -1158,6 +1158,101 @@
     <footer class="footer" id="contacto">
         <!-- Resplandor de Iluminación Ambiental -->
         <div class="footer-ambient-glow" aria-hidden="true"></div>
+
+        <style>
+            /* 2 Columnas de igual tamaño, centradas en el medio para el pie de página */
+            #contacto .footer-grid-cyber {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                max-width: 1040px;
+                margin: 0 auto 35px;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+            }
+
+            #contacto .footer-col-cyber.col-brand {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 10px 45px 10px 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            #contacto .footer-col-cyber.col-brand .footer-tagline {
+                max-width: 440px;
+                margin-bottom: 24px;
+            }
+
+            #contacto .footer-col-cyber.col-brand .footer-social-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            #contacto .footer-col-cyber.col-contact {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 10px 15px 10px 45px;
+                border-left: 1px solid rgba(0, 180, 255, 0.25);
+                box-shadow: -1px 0 15px rgba(0, 210, 255, 0.08);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            #contacto .footer-contact-block {
+                width: 100%;
+                max-width: 440px;
+            }
+
+            #contacto .contact-pill-card {
+                width: 100%;
+            }
+
+            @media (max-width: 991px) {
+                #contacto .footer-grid-cyber {
+                    grid-template-columns: 1fr;
+                    max-width: 480px;
+                    margin: 0 auto 30px;
+                    gap: 0;
+                }
+
+                #contacto .footer-col-cyber.col-brand {
+                    padding: 0 15px 35px !important;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                #contacto .footer-col-cyber.col-brand .footer-tagline {
+                    text-align: center;
+                    margin: 0 auto 24px;
+                }
+
+                #contacto .footer-col-cyber.col-brand .footer-social-row {
+                    justify-content: center;
+                }
+
+                #contacto .footer-col-cyber.col-contact {
+                    border-left: none !important;
+                    border-top: 1px solid rgba(0, 180, 255, 0.22);
+                    box-shadow: 0 -8px 20px rgba(0, 180, 255, 0.04);
+                    padding: 35px 15px 10px !important;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                #contacto .footer-contact-block {
+                    margin: 0 auto;
+                    align-items: center;
+                }
+            }
+        </style>
 
         <div class="container" style="position: relative; z-index: 2;">
             <div class="footer-grid-cyber">
