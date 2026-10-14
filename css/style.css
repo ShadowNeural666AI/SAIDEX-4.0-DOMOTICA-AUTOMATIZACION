@@ -2015,52 +2015,36 @@ body.site-loaded .hero-floating-device,
   z-index: 0;
 }
 
-/* 3-Column Futuristic Grid (Desktop >= 1024px) */
+/* 2-Column Futuristic Grid (Desktop >= 1024px) */
 .footer-grid-cyber {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1.25fr;
+  grid-template-columns: 1.2fr 1fr;
   align-items: start;
-  gap: 0;
+  gap: 50px;
   margin-bottom: 35px;
 }
 
 .footer-col-cyber {
-  padding: 0 35px;
+  padding: 0;
 }
 
 .footer-col-cyber.col-brand {
   padding-left: 0;
-  padding-right: 35px;
+  padding-right: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.footer-col-cyber.col-nav {
-  border-left: 1px solid rgba(0, 180, 255, 0.22);
-  border-right: 1px solid rgba(0, 180, 255, 0.22);
-  box-shadow: inset 1px 0 12px rgba(0, 180, 255, 0.04), inset -1px 0 12px rgba(0, 180, 255, 0.04);
-  padding: 0 35px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footer-nav-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: fit-content;
 }
 
 .footer-col-cyber.col-contact {
-  padding-left: 35px;
+  padding-left: 45px;
   padding-right: 0;
+  border-left: 1px solid rgba(0, 180, 255, 0.22);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .footer-contact-block {
@@ -2662,64 +2646,18 @@ body.site-loaded .hero-floating-device,
     gap: 20px;
   }
 
-  /* Column 2: Navigation (Centered with glowing horizontal dividers) */
-  .footer-col-cyber.col-nav {
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid rgba(0, 180, 255, 0.22);
-    border-bottom: 1px solid rgba(0, 180, 255, 0.22);
-    box-shadow: 0 0 20px rgba(0, 180, 255, 0.05);
-    padding: 35px 15px !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-nav-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  .footer-header-cyber {
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .footer-header-text {
-    align-items: center;
-  }
-
-  .footer-header-bar {
-    margin: 6px auto 0;
-  }
-
-  .footer-nav-list {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    gap: 16px;
-  }
-
-  .footer-nav-list li a {
-    justify-content: center;
-  }
-
-  .footer-nav-list li a:hover {
-    transform: translateY(-2px);
-  }
-
-  /* Column 3: Contact (Centered) */
+  /* Column 2: Contact (Centered) */
   .footer-col-cyber.col-contact {
+    border-left: none !important;
+    border-top: 1px solid rgba(0, 180, 255, 0.22);
+    box-shadow: 0 -8px 20px rgba(0, 180, 255, 0.04);
     padding: 35px 15px 10px !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
 
   .footer-contact-block {
     width: 100%;
