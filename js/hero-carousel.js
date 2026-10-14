@@ -56,7 +56,7 @@
     {
       image: "assets/hero 5.webp",
       badgeIcon: "fa-solid fa-water-ladder",
-      titleHtml: 'Automatización<br><span class="text-neon-cyan">Exterior</span>',
+      titleHtml: 'Automatización <br><span class="text-neon-cyan">Exterior</span>',
       desc: "Climatización de piscinas, cascadas inteligentes, iluminación sumergible RGB y sistemas de riego predictivo con detección climática en tiempo real.",
       pills: [
         { icon: "fa-solid fa-water", text: "Piscina Climatizada" },
@@ -89,7 +89,7 @@
     {
       image: "assets/hero 8.webp",
       badgeIcon: "fa-solid fa-mobile-screen-button",
-      titleHtml: 'Tu Hogar<br><span class="text-neon-cyan">en tu Mano</span>',
+      titleHtml: 'Tu Hogar <br><span class="text-neon-cyan">en tu Mano</span>',
       desc: "Control total de todas las funciones de tu residencia desde una sola aplicación intuitiva o mediante asistentes de voz Alexa y Google Home.",
       pills: [
         { icon: "fa-solid fa-mobile-screen", text: "App Todo en Uno" },

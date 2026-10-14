@@ -94,6 +94,12 @@
   line-height: 1.15;
   transform-origin: 20% 200px;
   will-change: transform, opacity;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.hero-dynamic-title br {
+  display: block !important;
 }
 
 /* Subtítulo / Descripción Dinámica */
@@ -537,6 +543,13 @@
 
   .hero-dynamic-title {
     transform-origin: center 200px;
+    text-align: center !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .hero-dynamic-title br {
+    display: block !important;
   }
 
   .hero-dynamic-desc {
@@ -586,7 +599,9 @@
   }
 
   .hero-title {
-    font-size: clamp(1.9rem, 7.5vw, 2.7rem) !important;
+    font-size: clamp(1.8rem, 7.2vw, 2.45rem) !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
   }
 
   .hero-subtitle {

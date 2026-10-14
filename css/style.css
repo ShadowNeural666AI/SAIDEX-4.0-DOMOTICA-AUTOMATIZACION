@@ -3077,7 +3077,7 @@ body.site-loaded .hero-floating-device,
   }
 
   .hero {
-    padding-top: 160px !important;
+    padding-top: 88px !important;
   }
 
   .company-name {
@@ -3092,7 +3092,7 @@ body.site-loaded .hero-floating-device,
     padding: 60px 0;
   }
 
-  .hero-title {
+  .hero-title:not(.hero-dynamic-title) {
     font-size: 2.2rem;
     line-height: 1.2;
 
@@ -3103,7 +3103,7 @@ body.site-loaded .hero-floating-device,
     /* Remove manual breaks on mobile */
   }
 
-  .hero-subtitle {
+  .hero-subtitle:not(.hero-dynamic-desc) {
     font-size: 0.95rem;
     margin-bottom: 25px;
 
