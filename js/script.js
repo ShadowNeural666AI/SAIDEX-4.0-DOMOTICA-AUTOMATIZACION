@@ -363,13 +363,26 @@
         if (cartOverlay) cartOverlay.addEventListener('click', toggleCart);
 
         // --- 3.3 Retroalimentación de Impacto y Onda Expansiva del Carrito ---
+        function getVisibleCartTarget() {
+            const floatBtn = document.getElementById('cart-btn-float');
+            const navBtn = document.getElementById('cart-btn');
+
+            if (floatBtn && (window.innerWidth <= 1150 || window.scrollY > 120 || !navBtn || navBtn.offsetParent === null)) {
+                return floatBtn;
+            }
+            if (navBtn && navBtn.offsetParent !== null) {
+                return navBtn;
+            }
+            return floatBtn || navBtn;
+        }
+
         function triggerCartBump(targetElement) {
-            const allCartButtons = document.querySelectorAll('#cart-btn, #cart-btn-float');
+            const allCartButtons = document.querySelectorAll('#cart-btn, #cart-btn-float, .cart-toggle');
             allCartButtons.forEach(btn => {
                 btn.classList.remove('cart-bump-active');
                 void btn.offsetWidth;
                 btn.classList.add('cart-bump-active');
-                setTimeout(() => btn.classList.remove('cart-bump-active'), 600);
+                setTimeout(() => btn.classList.remove('cart-bump-active'), 650);
             });
 
             const badges = document.querySelectorAll('#cart-count, #cart-count-float');
@@ -377,29 +390,49 @@
                 badge.classList.remove('badge-pop-active');
                 void badge.offsetWidth;
                 badge.classList.add('badge-pop-active');
-                setTimeout(() => badge.classList.remove('badge-pop-active'), 600);
+                setTimeout(() => badge.classList.remove('badge-pop-active'), 650);
             });
 
-            if (targetElement) {
-                const rect = targetElement.getBoundingClientRect();
-                const shockwave = document.createElement('div');
-                shockwave.className = 'cart-shockwave';
-                shockwave.style.left = `${rect.left + rect.width / 2}px`;
-                shockwave.style.top = `${rect.top + rect.height / 2}px`;
-                document.body.appendChild(shockwave);
-                setTimeout(() => shockwave.remove(), 600);
+            const target = targetElement || getVisibleCartTarget();
+            if (target && typeof target.getBoundingClientRect === 'function') {
+                const rect = target.getBoundingClientRect();
+                if (rect.width > 0 || rect.height > 0) {
+                    const shockwave = document.createElement('div');
+                    shockwave.className = 'cart-shockwave';
+                    shockwave.style.left = `${rect.left + rect.width / 2}px`;
+                    shockwave.style.top = `${rect.top + rect.height / 2}px`;
+                    document.body.appendChild(shockwave);
+                    setTimeout(() => shockwave.remove(), 650);
+                }
             }
         }
 
-        // --- 3.4 Animación de Vuelo Parabólico al Carrito (Trayectoria Curva) ---
+        // --- 3.4 Animación de Vuelo Parabólico al Carrito (Trayectoria Curva Fluida) ---
         function flyGhostToCart(sourceElement, targetElement, imageSrc, onComplete) {
-            if (!sourceElement || !targetElement) {
-                if (onComplete) onComplete();
-                return;
+            const source = sourceElement || document.body;
+            const target = targetElement || getVisibleCartTarget();
+
+            let startX = window.innerWidth / 2;
+            let startY = window.innerHeight / 2;
+
+            if (source && typeof source.getBoundingClientRect === 'function') {
+                const sRect = source.getBoundingClientRect();
+                if (sRect.width > 0 || sRect.height > 0) {
+                    startX = sRect.left + sRect.width / 2;
+                    startY = sRect.top + sRect.height / 2;
+                }
             }
 
-            const sourceRect = sourceElement.getBoundingClientRect();
-            const targetRect = targetElement.getBoundingClientRect();
+            let endX = window.innerWidth - 45;
+            let endY = window.innerHeight - 80;
+
+            if (target && typeof target.getBoundingClientRect === 'function') {
+                const tRect = target.getBoundingClientRect();
+                if (tRect.width > 0 || tRect.height > 0) {
+                    endX = tRect.left + tRect.width / 2;
+                    endY = tRect.top + tRect.height / 2;
+                }
+            }
 
             const ghost = document.createElement('div');
             ghost.className = 'flying-cart-ghost';
@@ -410,11 +443,6 @@
                 ghost.innerHTML = `<i class="fa-solid fa-cart-shopping"></i>`;
             }
 
-            const startX = sourceRect.left + sourceRect.width / 2;
-            const startY = sourceRect.top + sourceRect.height / 2;
-            const endX = targetRect.left + targetRect.width / 2;
-            const endY = targetRect.top + targetRect.height / 2;
-
             ghost.style.left = `${startX}px`;
             ghost.style.top = `${startY}px`;
             document.body.appendChild(ghost);
@@ -422,42 +450,60 @@
             const deltaX = endX - startX;
             const deltaY = endY - startY;
 
-            // Trayectoria parabólica curva mediante la Web Animations API
-            if (typeof ghost.animate === 'function') {
-                const keyframes = [
-                    {
-                        transform: 'translate(-50%, -50%) scale(1) rotate(0deg)',
-                        opacity: 1,
-                        offset: 0
-                    },
-                    {
-                        transform: `translate(calc(-50% + ${deltaX * 0.45}px), calc(-50% + ${deltaY * 0.3 - 50}px)) scale(1.18) rotate(-10deg)`,
-                        opacity: 0.95,
-                        offset: 0.45
-                    },
-                    {
-                        transform: `translate(calc(-50% + ${deltaX}px), calc(-50% + ${deltaY}px)) scale(0.2) rotate(20deg)`,
-                        opacity: 0.2,
-                        offset: 1
-                    }
-                ];
+            // Arco parabólico estético con elevación suave
+            const midX = deltaX * 0.45;
+            const midY = (deltaY * 0.28) - 75;
 
-                const anim = ghost.animate(keyframes, {
-                    duration: 680,
-                    easing: 'cubic-bezier(0.25, 0.9, 0.25, 1)',
-                    fill: 'forwards'
-                });
-
-                anim.onfinish = () => {
-                    ghost.remove();
-                    if (onComplete) onComplete();
-                };
-            } else {
-                // Alternativa de respaldo para navegadores antiguos
-                ghost.remove();
+            let finished = false;
+            const cleanup = () => {
+                if (finished) return;
+                finished = true;
+                if (ghost.parentNode) ghost.parentNode.removeChild(ghost);
                 if (onComplete) onComplete();
+            };
+
+            try {
+                if (typeof ghost.animate === 'function') {
+                    const keyframes = [
+                        {
+                            transform: 'translate(-50%, -50%) translate3d(0px, 0px, 0px) scale(1) rotate(0deg)',
+                            opacity: 1,
+                            boxShadow: '0 0 25px rgba(0, 229, 255, 0.85)'
+                        },
+                        {
+                            transform: `translate(-50%, -50%) translate3d(${midX}px, ${midY}px, 0px) scale(1.22) rotate(-14deg)`,
+                            opacity: 0.95,
+                            boxShadow: '0 0 35px rgba(0, 229, 255, 1)',
+                            offset: 0.45
+                        },
+                        {
+                            transform: `translate(-50%, -50%) translate3d(${deltaX}px, ${deltaY}px, 0px) scale(0.18) rotate(25deg)`,
+                            opacity: 0.1,
+                            boxShadow: '0 0 10px rgba(0, 229, 255, 0.2)'
+                        }
+                    ];
+
+                    const anim = ghost.animate(keyframes, {
+                        duration: 680,
+                        easing: 'cubic-bezier(0.2, 0.85, 0.25, 1)',
+                        fill: 'forwards'
+                    });
+
+                    anim.onfinish = cleanup;
+                    anim.oncancel = cleanup;
+                } else {
+                    throw new Error('Web Animations API fallback');
+                }
+            } catch (err) {
+                ghost.style.transition = 'transform 0.65s cubic-bezier(0.2, 0.85, 0.25, 1), opacity 0.65s ease, box-shadow 0.65s ease';
+                requestAnimationFrame(() => {
+                    ghost.style.transform = `translate(-50%, -50%) translate3d(${deltaX}px, ${deltaY}px, 0px) scale(0.18) rotate(25deg)`;
+                    ghost.style.opacity = '0.1';
+                });
+                setTimeout(cleanup, 680);
             }
         }
+
 
         // --- 3.5 Notificación Holográfica Flotante (Toast HUD) ---
         const toast = document.getElementById('shop-toast');
@@ -559,14 +605,11 @@
                 }, 1200);
 
                 // 3. Determinar el mejor icono de carrito como destino (Navbar o Botón Flotante)
-                const isMobileOrScrolled = window.innerWidth <= 768 || window.scrollY > 150;
-                let targetBtn = cartToggleBtn;
-                if (cartFloatBtn && (isMobileOrScrolled || !cartToggleBtn)) {
-                    targetBtn = cartFloatBtn;
-                }
+                const targetBtn = getVisibleCartTarget();
+                const sourceEl = (imgEl && imgEl.getBoundingClientRect().width > 0) ? imgEl : btn;
 
                 // 4. Disparar animación parabólica de vuelo e impacto de onda
-                flyGhostToCart(imgEl || btn, targetBtn, imageSrc, () => {
+                flyGhostToCart(sourceEl, targetBtn, imageSrc, () => {
                     triggerCartBump(targetBtn);
                 });
 
