@@ -15,7 +15,6 @@
     <!-- Estilos CSS Personalizados -->
     <link rel="stylesheet" href="css/style.css?v=5.1">
     <link rel="stylesheet" href="css/electric-effect.css?v=5.1">
-    <link rel="stylesheet" href="css/hero-carousel.css?v=5.1">
     <!-- Metadatos de Seguridad -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -31,23 +30,29 @@
         <defs>
             <filter id="turbulent-1" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.04 0.08" numOctaves="2" result="noise" seed="1">
-                    <animate attributeName="seed" values="1; 17; 39; 68; 91; 114; 42; 83; 1" dur="0.4s" repeatCount="indefinite" />
+                    <animate attributeName="seed" values="1; 17; 39; 68; 91; 114; 42; 83; 1" dur="0.4s"
+                        repeatCount="indefinite" />
                 </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R"
+                    yChannelSelector="G" />
             </filter>
 
             <filter id="turbulent-2" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.045 0.085" numOctaves="2" result="noise" seed="3">
-                    <animate attributeName="seed" values="3; 22; 47; 75; 98; 121; 35; 89; 3" dur="0.36s" repeatCount="indefinite" />
+                    <animate attributeName="seed" values="3; 22; 47; 75; 98; 121; 35; 89; 3" dur="0.36s"
+                        repeatCount="indefinite" />
                 </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="24" xChannelSelector="R" yChannelSelector="G" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="24" xChannelSelector="R"
+                    yChannelSelector="G" />
             </filter>
 
             <filter id="turbulent-3" color-interpolation-filters="sRGB" x="-25%" y="-25%" width="150%" height="150%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.042 0.078" numOctaves="2" result="noise" seed="5">
-                    <animate attributeName="seed" values="5; 19; 44; 63; 86; 109; 31; 77; 5" dur="0.38s" repeatCount="indefinite" />
+                    <animate attributeName="seed" values="5; 19; 44; 63; 86; 109; 31; 77; 5" dur="0.38s"
+                        repeatCount="indefinite" />
                 </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R"
+                    yChannelSelector="G" />
             </filter>
         </defs>
     </svg>
@@ -60,7 +65,7 @@
             <div class="preloader-core-glow"></div>
         </div>
 
-        <!-- Trazos de Circuitos Izquierdos -->
+        <!-- Trazos de Circuitos Izquierdos con Animación de Haces de Fluido Eléctrico en Bucle -->
         <div class="cyber-circuits cyber-circuits-left" aria-hidden="true">
             <svg viewBox="0 0 320 500" class="circuit-svg" preserveAspectRatio="none">
                 <defs>
@@ -77,24 +82,53 @@
                         </feMerge>
                     </filter>
                 </defs>
-                <path d="M0,120 L90,120 L150,180 L280,180" fill="none" stroke="url(#circGradL)" stroke-width="2"
+                <!-- Trazos Base -->
+                <path class="circuit-trace-base" d="M0,120 L90,120 L150,180 L280,180" fill="none" stroke="url(#circGradL)" stroke-width="2"
                     filter="url(#circGlowL)" />
-                <path d="M0,150 L70,150 L120,200 L250,200" fill="none" stroke="#0070f3" stroke-width="1.5"
+                <path class="circuit-trace-base" d="M0,150 L70,150 L120,200 L250,200" fill="none" stroke="#0070f3" stroke-width="1.5"
                     stroke-opacity="0.6" />
-                <path d="M0,250 L120,250 L180,250 L240,250" fill="none" stroke="url(#circGradL)" stroke-width="2.5"
+                <path class="circuit-trace-base" d="M0,250 L120,250 L180,250 L240,250" fill="none" stroke="url(#circGradL)" stroke-width="2.5"
                     filter="url(#circGlowL)" />
-                <path d="M0,380 L90,380 L150,320 L280,320" fill="none" stroke="url(#circGradL)" stroke-width="2"
+                <path class="circuit-trace-base" d="M0,380 L90,380 L150,320 L280,320" fill="none" stroke="url(#circGradL)" stroke-width="2"
                     filter="url(#circGlowL)" />
-                <path d="M0,350 L70,350 L120,300 L250,300" fill="none" stroke="#0070f3" stroke-width="1.5"
+                <path class="circuit-trace-base" d="M0,350 L70,350 L120,300 L250,300" fill="none" stroke="#0070f3" stroke-width="1.5"
                     stroke-opacity="0.6" />
-                <circle cx="280" cy="180" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
-                <circle cx="240" cy="250" r="5.5" fill="#39ff14" filter="url(#circGlowL)" />
-                <circle cx="280" cy="320" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+
+                <!-- Haz de pulso fluido que viaja de un punto a otro en bucle (Superior) -->
+                <path class="circuit-pulse-beam" d="M0,120 L90,120 L150,180 L280,180" fill="none" stroke="#00ffff" stroke-width="2.5" filter="url(#circGlowL)" pathLength="1000" />
+                <path class="circuit-pulse-core" d="M0,120 L90,120 L150,180 L280,180" fill="none" pathLength="1000" />
+
+                <!-- Haz de pulso secundario con retraso continuo (Superior intermedio) -->
+                <path class="circuit-pulse-sub" d="M0,150 L70,150 L120,200 L250,200" fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#circGlowL)" pathLength="1000" />
+
+                <!-- Haz central verde neón que recorre directo al nodo (Medio) -->
+                <path class="circuit-pulse-beam beam-delay" d="M0,250 L120,250 L180,250 L240,250" fill="none" stroke="#39ff14" stroke-width="3" filter="url(#circGlowL)" pathLength="1000" />
+                <path class="circuit-pulse-core beam-delay" d="M0,250 L120,250 L180,250 L240,250" fill="none" pathLength="1000" />
+
+                <!-- Haz de pulso inferior cian (Inferior) -->
+                <path class="circuit-pulse-beam" d="M0,380 L90,380 L150,320 L280,320" fill="none" stroke="#00ffff" stroke-width="2.5" filter="url(#circGlowL)" pathLength="1000" />
+                <path class="circuit-pulse-core" d="M0,380 L90,380 L150,320 L280,320" fill="none" pathLength="1000" />
+                <path class="circuit-pulse-sub beam-delay" d="M0,350 L70,350 L120,300 L250,300" fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#circGlowL)" pathLength="1000" />
+
+                <!-- Nodos terminales pulsantes con halos de energía expansivos -->
+                <circle class="circuit-node-terminal" cx="280" cy="180" r="4.5" fill="#ffffff" stroke="#00e5ff" stroke-width="2" filter="url(#circGlowL)" />
+                <circle class="circuit-node-halo" cx="280" cy="180" r="4.5" fill="none" stroke="#00ffff" />
+
+                <circle class="circuit-node-terminal" cx="250" cy="200" r="3.5" fill="#ffffff" stroke="#0070f3" stroke-width="1.5" />
+
+                <circle class="circuit-node-terminal" cx="240" cy="250" r="5.5" fill="#ffffff" stroke="#39ff14" stroke-width="2" filter="url(#circGlowL)" />
+                <circle class="circuit-node-halo" cx="240" cy="250" r="5.5" fill="none" stroke="#39ff14" />
+
+                <circle class="circuit-node-terminal" cx="280" cy="320" r="4.5" fill="#ffffff" stroke="#00e5ff" stroke-width="2" filter="url(#circGlowL)" />
+                <circle class="circuit-node-halo" cx="280" cy="320" r="4.5" fill="none" stroke="#00ffff" />
+
+                <circle class="circuit-node-terminal" cx="250" cy="300" r="3.5" fill="#ffffff" stroke="#0070f3" stroke-width="1.5" />
+
                 <rect x="180" y="247" width="18" height="6" fill="#00e5ff" rx="3" class="circuit-pulse-chip" />
             </svg>
         </div>
 
-        <!-- Trazos de Circuitos Derechos -->
+        <!-- Trazos de Circuitos Derechos con Animación de Haces de Fluido Eléctrico en Bucle -->
         <div class="cyber-circuits cyber-circuits-right" aria-hidden="true">
             <svg viewBox="0 0 320 500" class="circuit-svg" preserveAspectRatio="none">
                 <defs>
@@ -103,20 +137,56 @@
                         <stop offset="60%" stop-color="#00e5ff" stop-opacity="0.8" />
                         <stop offset="100%" stop-color="#00e5ff" stop-opacity="1" />
                     </linearGradient>
+                    <filter id="circGlowR">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
-                <path d="M320,120 L230,120 L170,180 L40,180" fill="none" stroke="url(#circGradR)" stroke-width="2"
-                    filter="url(#circGlowL)" />
-                <path d="M320,150 L250,150 L200,200 L70,200" fill="none" stroke="#0070f3" stroke-width="1.5"
+                <!-- Trazos Base -->
+                <path class="circuit-trace-base" d="M320,120 L230,120 L170,180 L40,180" fill="none" stroke="url(#circGradR)" stroke-width="2"
+                    filter="url(#circGlowR)" />
+                <path class="circuit-trace-base" d="M320,150 L250,150 L200,200 L70,200" fill="none" stroke="#0070f3" stroke-width="1.5"
                     stroke-opacity="0.6" />
-                <path d="M320,250 L200,250 L140,250 L80,250" fill="none" stroke="url(#circGradR)" stroke-width="2.5"
-                    filter="url(#circGlowL)" />
-                <path d="M320,380 L230,380 L170,320 L40,320" fill="none" stroke="url(#circGradR)" stroke-width="2"
-                    filter="url(#circGlowL)" />
-                <path d="M320,350 L250,350 L200,300 L70,300" fill="none" stroke="#0070f3" stroke-width="1.5"
+                <path class="circuit-trace-base" d="M320,250 L200,250 L140,250 L80,250" fill="none" stroke="url(#circGradR)" stroke-width="2.5"
+                    filter="url(#circGlowR)" />
+                <path class="circuit-trace-base" d="M320,380 L230,380 L170,320 L40,320" fill="none" stroke="url(#circGradR)" stroke-width="2"
+                    filter="url(#circGlowR)" />
+                <path class="circuit-trace-base" d="M320,350 L250,350 L200,300 L70,300" fill="none" stroke="#0070f3" stroke-width="1.5"
                     stroke-opacity="0.6" />
-                <circle cx="40" cy="180" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
-                <circle cx="80" cy="250" r="5.5" fill="#39ff14" filter="url(#circGlowL)" />
-                <circle cx="40" cy="320" r="4.5" fill="#00e5ff" filter="url(#circGlowL)" />
+
+                <!-- Haz de pulso fluido que viaja de un punto a otro en bucle (Superior) -->
+                <path class="circuit-pulse-beam" d="M320,120 L230,120 L170,180 L40,180" fill="none" stroke="#00ffff" stroke-width="2.5" filter="url(#circGlowR)" pathLength="1000" />
+                <path class="circuit-pulse-core" d="M320,120 L230,120 L170,180 L40,180" fill="none" pathLength="1000" />
+
+                <!-- Haz de pulso secundario con retraso continuo (Superior intermedio) -->
+                <path class="circuit-pulse-sub" d="M320,150 L250,150 L200,200 L70,200" fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#circGlowR)" pathLength="1000" />
+
+                <!-- Haz central verde neón que recorre directo al nodo (Medio) -->
+                <path class="circuit-pulse-beam beam-delay" d="M320,250 L200,250 L140,250 L80,250" fill="none" stroke="#39ff14" stroke-width="3" filter="url(#circGlowR)" pathLength="1000" />
+                <path class="circuit-pulse-core beam-delay" d="M320,250 L200,250 L140,250 L80,250" fill="none" pathLength="1000" />
+
+                <!-- Haz de pulso inferior cian (Inferior) -->
+                <path class="circuit-pulse-beam" d="M320,380 L230,380 L170,320 L40,320" fill="none" stroke="#00ffff" stroke-width="2.5" filter="url(#circGlowR)" pathLength="1000" />
+                <path class="circuit-pulse-core" d="M320,380 L230,380 L170,320 L40,320" fill="none" pathLength="1000" />
+                <path class="circuit-pulse-sub beam-delay" d="M320,350 L250,350 L200,300 L70,300" fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#circGlowR)" pathLength="1000" />
+
+                <!-- Nodos terminales pulsantes con halos de energía expansivos -->
+                <circle class="circuit-node-terminal" cx="40" cy="180" r="4.5" fill="#ffffff" stroke="#00e5ff" stroke-width="2" filter="url(#circGlowR)" />
+                <circle class="circuit-node-halo" cx="40" cy="180" r="4.5" fill="none" stroke="#00ffff" />
+
+                <circle class="circuit-node-terminal" cx="70" cy="200" r="3.5" fill="#ffffff" stroke="#0070f3" stroke-width="1.5" />
+
+                <circle class="circuit-node-terminal" cx="80" cy="250" r="5.5" fill="#ffffff" stroke="#39ff14" stroke-width="2" filter="url(#circGlowR)" />
+                <circle class="circuit-node-halo" cx="80" cy="250" r="5.5" fill="none" stroke="#39ff14" />
+
+                <circle class="circuit-node-terminal" cx="40" cy="320" r="4.5" fill="#ffffff" stroke="#00e5ff" stroke-width="2" filter="url(#circGlowR)" />
+                <circle class="circuit-node-halo" cx="40" cy="320" r="4.5" fill="none" stroke="#00ffff" />
+
+                <circle class="circuit-node-terminal" cx="70" cy="300" r="3.5" fill="#ffffff" stroke="#0070f3" stroke-width="1.5" />
+
                 <rect x="122" y="247" width="18" height="6" fill="#00e5ff" rx="3" class="circuit-pulse-chip" />
             </svg>
         </div>
@@ -135,9 +205,15 @@
                 </div>
             </div>
 
-            <!-- Tipografía de la Marca -->
+            <!-- Tipografía de la Marca con Animación Eléctrica Letra por Letra en Bucle (Efecto Hero Title) -->
             <div class="cyber-brand-block">
-                <h1 class="cyber-brand-title">SAIDEX <span class="cyber-neon-cyan">4.0</span></h1>
+                <h1 class="cyber-brand-title hero-electric-title" aria-label="SAIDEX 4.0">
+                    <span class="electric-row row-1" aria-hidden="true">
+                        <span class="elec-char" style="--c-idx: 0">S</span><span class="elec-char" style="--c-idx: 1">A</span><span class="elec-char" style="--c-idx: 2">I</span><span class="elec-char" style="--c-idx: 3">D</span><span class="elec-char" style="--c-idx: 4">E</span><span class="elec-char" style="--c-idx: 5">X</span>
+                        <span class="elec-space">&nbsp;</span>
+                        <span class="cyber-neon-cyan text-neon-cyan"><span class="elec-char" style="--c-idx: 6">4</span><span class="elec-char" style="--c-idx: 7">.</span><span class="elec-char" style="--c-idx: 8">0</span></span>
+                    </span>
+                </h1>
                 <p class="cyber-brand-tagline">DOMÓTICA &nbsp;&bull;&nbsp; AUTOMATIZACIÓN &nbsp;&bull;&nbsp; TECNOLOGÍA
                 </p>
             </div>
@@ -333,81 +409,128 @@
 
     <main>
         <!-- Sección Principal (Hero) -->
-        <section class="hero" id="inicio">
-            <!-- Capas de Diapositivas de Fondo Dinámico -->
-            <div class="hero-bg-slideshow" id="heroBgSlideshow">
-                <div class="hero-bg-slide active" id="heroBgLayerA" style="background-image: url('assets/hero 1.webp');">
-                </div>
-                <div class="hero-bg-slide" id="heroBgLayerB"></div>
-            </div>
-
+        <section class="hero" id="inicio"
+            style="background-image: url('assets/Villa%20tropical%20al%20anochecer%20con%20piscina%20infinita.png');">
             <!-- Capa de Degradado Oscuro Cinemático de Fondo -->
             <div class="hero-overlay-cinematic" aria-hidden="true"></div>
-
 
             <div class="container hero-container">
                 <!-- Columna de Contenido Izquierda -->
                 <div class="hero-content">
 
-                    <!-- Escenario Dinámico con Animación Circular de Textos del Hero -->
-                    <div class="hero-circular-text-stage" id="heroCircularTextStage">
+                    <!-- Título con Corriente Eléctrica en Bucle Continuo -->
+                    <h1 class="hero-title hero-electric-title hero-bounce-item item-1"
+                        aria-label="Transforma tu Hogar en Inteligente">
+                        <span class="electric-row row-1" aria-hidden="true">
+                            <span class="elec-char" style="--c-idx: 0">T</span><span class="elec-char"
+                                style="--c-idx: 1">r</span><span class="elec-char" style="--c-idx: 2">a</span><span
+                                class="elec-char" style="--c-idx: 3">n</span><span class="elec-char"
+                                style="--c-idx: 4">s</span><span class="elec-char" style="--c-idx: 5">f</span><span
+                                class="elec-char" style="--c-idx: 6">o</span><span class="elec-char"
+                                style="--c-idx: 7">r</span><span class="elec-char" style="--c-idx: 8">m</span><span
+                                class="elec-char" style="--c-idx: 9">a</span>
+                            <span class="elec-space">&nbsp;</span>
+                            <span class="elec-char" style="--c-idx: 10">t</span><span class="elec-char"
+                                style="--c-idx: 11">u</span>
+                            <span class="elec-space">&nbsp;</span>
+                            <span class="elec-char" style="--c-idx: 12">H</span><span class="elec-char"
+                                style="--c-idx: 13">o</span><span class="elec-char" style="--c-idx: 14">g</span><span
+                                class="elec-char" style="--c-idx: 15">a</span><span class="elec-char"
+                                style="--c-idx: 16">r</span>
+                        </span>
+                        <br>
+                        <span class="electric-row row-2 text-neon-cyan" aria-hidden="true">
+                            <span class="elec-char" style="--c-idx: 17">e</span><span class="elec-char"
+                                style="--c-idx: 18">n</span>
+                            <span class="elec-space">&nbsp;</span>
+                            <span class="elec-char" style="--c-idx: 19">I</span><span class="elec-char"
+                                style="--c-idx: 20">n</span><span class="elec-char" style="--c-idx: 21">t</span><span
+                                class="elec-char" style="--c-idx: 22">e</span><span class="elec-char"
+                                style="--c-idx: 23">l</span><span class="elec-char" style="--c-idx: 24">i</span><span
+                                class="elec-char" style="--c-idx: 25">g</span><span class="elec-char"
+                                style="--c-idx: 26">e</span><span class="elec-char" style="--c-idx: 27">n</span><span
+                                class="elec-char" style="--c-idx: 28">t</span><span class="elec-char"
+                                style="--c-idx: 29">e</span>
+                        </span>
+                    </h1>
 
-                        <!-- Título Principal Dinámico (Efecto Circular - Cambia en cada una de las 8 diapositivas) -->
-                        <h1 class="hero-title hero-dynamic-title animate-circular-target" id="heroDynamicTitle">
-                            Transforma tu Hogar <br><span class="text-neon-cyan">en Inteligente</span>
-                        </h1>
+                    <p class="hero-subtitle hero-bounce-item item-2">
+                        Elevamos tu confort y seguridad con <strong class="text-highlight-cyan">tecnología inteligente
+                            de vanguardia</strong>. Control total de iluminación, clima, accesos y energía desde tu
+                        smartphone o con tu voz.
+                    </p>
 
-                        <!-- Subtítulo / Descripción Dinámica (Efecto Circular - Adaptado exactamente a cada imagen) -->
-                        <p class="hero-subtitle hero-dynamic-desc animate-circular-target" id="heroDynamicDesc">
-                            Domótica y automatización de última generación. Controla iluminación biodinámica,
-                            climatización y confort con tecnología intuitiva.
-                        </p>
-
-                        <!-- Píldoras / Especificaciones Rápidas de la Solución Activa -->
-                        <div class="hero-dynamic-pills animate-circular-target" id="heroDynamicPills">
-                            <span class="hero-spec-pill"><i class="fa-solid fa-lightbulb"></i> Iluminación
-                                Biodinámica</span>
-                            <span class="hero-spec-pill"><i class="fa-solid fa-temperature-half"></i> Clima 21°C
-                                Inteligente</span>
-                            <span class="hero-spec-pill"><i class="fa-solid fa-microchip"></i> Panel Holográfico</span>
-                        </div>
-
-                    </div>
-
-                    <!-- Controles de Flecha para Rotación Circular e Indicadores (Debajo y Centrados) -->
-                    <div class="hero-carousel-controls" aria-label="Controles del carrusel circular">
-                        <button class="hero-carousel-arrow left" id="heroArrowLeft" aria-label="Sistema anterior">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <div class="hero-carousel-indicators" id="heroIndicators"></div>
-                        <button class="hero-carousel-arrow right" id="heroArrowRight" aria-label="Sistema siguiente">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
+                    <!-- Botones de Acción (CTA) -->
+                    <div class="hero-action-buttons hero-bounce-item item-3">
+                        <a href="#contacto" class="btn-hero-quote btn-agenda-visita-card">
+                            <span>Cotizar Proyecto</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Showcase Circular Orbital del Hero (Lado Derecho) -->
-                <div class="hero-circular-showcase animate-bounce-in delay-3" id="heroCircularShowcase">
-                    <!-- Área Orbital del Carrusel -->
-                    <div class="hero-carousel-outer">
-                        <!-- Anillos y Escáner de Radar HUD Sci-Fi -->
-                        <div class="hero-carousel-hud-ring" aria-hidden="true">
-                            <div class="hud-radar-sweep"></div>
-                            <div class="hud-orbit-ring-glow"></div>
+                <!-- Columna Derecha: Iconos Dispersos de Alta Tecnología con Movimiento y Colores -->
+                <div class="hero-crescent-showcase" aria-label="Ecosistema de Soluciones Inteligentes">
+
+                    <!-- 5 Nodos de Iconos Curvados en Medialuna -->
+                    <div class="crescent-nodes-container">
+                        <!-- Nodo 1: Iluminación (Dorado Ámbar) -->
+                        <div class="crescent-node node-1 color-gold hero-bounce-item item-4" tabindex="0" role="button"
+                            aria-label="Iluminación Inteligente">
+                            <div class="node-icon-circle">
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </div>
+                            <div class="node-label-popup">
+                                <span class="node-status-dot"></span>
+                                <span class="node-name-text">Iluminación Inteligente</span>
+                            </div>
                         </div>
-                        <div class="hero-carousel-container" id="heroCarouselContainer">
-                            <!-- Pista Orbital Giratoria de Alta Tecnología -->
-                            <div class="hero-orbit-track-glow" aria-hidden="true"></div>
-                            <div class="hero-carousel" id="heroCarousel">
-                                <!-- Núcleo Reactor Central con Ondas Sonar de Baliza -->
-                                <div class="hero-carousel-center-core" aria-hidden="true">
-                                    <div class="core-sonar-ring wave-1"></div>
-                                    <div class="core-sonar-ring wave-2"></div>
-                                    <div class="core-sonar-ring wave-3"></div>
-                                    <div class="core-crosshair ch-h"></div>
-                                    <div class="core-crosshair ch-v"></div>
-                                    <div class="core-energy-dot"></div>
-                                </div>
+
+                        <!-- Nodo 2: Climatización (Cian Neón) -->
+                        <div class="crescent-node node-2 color-cyan hero-bounce-item item-5" tabindex="0" role="button"
+                            aria-label="Climatización Automática">
+                            <div class="node-icon-circle">
+                                <i class="fa-solid fa-temperature-three-quarters"></i>
+                            </div>
+                            <div class="node-label-popup">
+                                <span class="node-status-dot"></span>
+                                <span class="node-name-text">Climatización Automática</span>
+                            </div>
+                        </div>
+
+                        <!-- Nodo 3: Seguridad (Verde Esmeralda) -->
+                        <div class="crescent-node node-3 color-green hero-bounce-item item-6" tabindex="0" role="button"
+                            aria-label="Seguridad Avanzada">
+                            <div class="node-icon-circle">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="node-label-popup">
+                                <span class="node-status-dot"></span>
+                                <span class="node-name-text">Seguridad Avanzada</span>
+                            </div>
+                        </div>
+
+                        <!-- Nodo 4: Smartphone (Púrpura Magenta) -->
+                        <div class="crescent-node node-4 color-purple hero-bounce-item item-7" tabindex="0"
+                            role="button" aria-label="Control desde tu Smartphone">
+                            <div class="node-icon-circle">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <div class="node-label-popup">
+                                <span class="node-status-dot"></span>
+                                <span class="node-name-text">Control Smartphone</span>
+                            </div>
+                        </div>
+
+                        <!-- Nodo 5: Control por Voz (Rojo Coral) -->
+                        <div class="crescent-node node-5 color-red hero-bounce-item item-8" tabindex="0" role="button"
+                            aria-label="Control por Voz">
+                            <div class="node-icon-circle">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                            <div class="node-label-popup">
+                                <span class="node-status-dot"></span>
+                                <span class="node-name-text">Control por Voz</span>
                             </div>
                         </div>
                     </div>
@@ -696,147 +819,440 @@
         </section>
     </main>
 
-    <!-- Pie de Página Cibernético Futurista (SAIDEX 4.0) -->
-    <footer class="footer" id="contacto">
+    <!-- Pie de Página Cibernético Futurista (SAIDEX 4.0 - Diseño de Referencia) -->
+    <style>
+        /* Estilos exclusivos del pie de página cibernético para index.html (Diseño de Referencia) */
+        .footer-index-cyber {
+            position: relative;
+            background: radial-gradient(circle at 50% 15%, #03163b 0%, #010a1e 50%, #000410 100%) !important;
+            border-top: 1px solid rgba(0, 210, 255, 0.25) !important;
+            padding: 55px 0 25px !important;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        .footer-index-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #0051ff 20%, #00d2ff 50%, #0051ff 80%, transparent 100%);
+            box-shadow: 0 0 15px #00d2ff, 0 0 35px rgba(0, 210, 255, 0.5);
+            z-index: 2;
+        }
+
+        .footer-index-cyber .footer-main-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-index-cyber .footer-grid-cyber {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 50px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .footer-index-cyber .col-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+        }
+
+        .footer-index-cyber .footer-brand-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+
+        .footer-index-cyber .footer-logo-img {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 14px rgba(0, 210, 255, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .footer-index-cyber .footer-brand-wrap:hover .footer-logo-img {
+            transform: scale(1.05);
+        }
+
+        .footer-index-cyber .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.15;
+        }
+
+        .footer-index-cyber .footer-brand-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            margin: 0;
+            display: block;
+        }
+
+        .footer-index-cyber .footer-brand-title .cyan-num {
+            color: #00D2FF;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8), 0 0 30px rgba(0, 210, 255, 0.4);
+        }
+
+        .footer-index-cyber .footer-brand-sub {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            color: #94A3B8;
+            text-transform: uppercase;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Animación Eléctrica que fluye por cada palabra y letra tipo Hero Title */
+        .footer-index-cyber .footer-brand-text.hero-electric-title {
+            display: inline-flex;
+            flex-direction: column;
+            position: relative;
+            animation: electricTitleGrandSurge 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .footer-index-cyber .elec-char {
+            display: inline-block;
+            color: #F8FAFC;
+            transition: transform 0.16s ease, color 0.16s ease;
+            animation: electricCurrentWave 4.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+            animation-delay: calc(var(--c-idx) * 0.055s);
+            will-change: transform, text-shadow, color;
+        }
+
+        .footer-index-cyber .cyan-num .elec-char {
+            color: #00E5FF;
+        }
+
+        .footer-index-cyber .footer-brand-sub .elec-char {
+            color: #94A3B8;
+        }
+
+        .footer-index-cyber .footer-tagline {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0 0 24px 0;
+            max-width: 440px;
+        }
+
+        .footer-index-cyber .footer-tagline .highlight-cyan {
+            color: #00D2FF;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        .footer-index-cyber .footer-social-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 22px;
+        }
+
+        .footer-index-cyber .footer-social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-index-cyber .footer-social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0, 210, 255, 0.65);
+            background: radial-gradient(circle at center, rgba(0, 150, 255, 0.2) 0%, rgba(2, 14, 40, 0.85) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 1.25rem;
+            text-decoration: none;
+            box-shadow: 0 0 16px rgba(0, 210, 255, 0.35), inset 0 0 10px rgba(0, 180, 255, 0.25);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .footer-index-cyber .footer-social-btn:hover {
+            transform: translateY(-4px) scale(1.08);
+            border-color: #00E5FF;
+            color: #00E5FF;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.7), inset 0 0 15px rgba(0, 229, 255, 0.5);
+        }
+
+        .footer-index-cyber .footer-social-label {
+            font-size: 0.76rem;
+            color: #94A3B8;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* Columna de Contacto en Tarjeta Cibernética Estilizada */
+        .footer-index-cyber .col-contact {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0;
+        }
+
+        .footer-index-cyber .footer-contact-panel {
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(135deg, rgba(2, 16, 45, 0.5) 0%, rgba(1, 8, 25, 0.75) 100%);
+            border: 1.2px solid rgba(0, 180, 255, 0.28);
+            border-radius: 20px;
+            padding: 24px 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 180, 255, 0.06), 0 0 25px rgba(0, 210, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .footer-index-cyber .footer-header-cyber {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .footer-index-cyber .footer-header-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0, 210, 255, 0.7);
+            background: radial-gradient(circle, rgba(0, 180, 255, 0.2) 0%, rgba(2, 16, 45, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00D2FF;
+            font-size: 1.05rem;
+            box-shadow: 0 0 14px rgba(0, 210, 255, 0.4), inset 0 0 8px rgba(0, 210, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .footer-index-cyber .footer-header-text h4 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            letter-spacing: 1.5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .footer-index-cyber .footer-contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-index-cyber .contact-pill-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 9px 18px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, rgba(0, 30, 75, 0.35) 0%, rgba(2, 12, 32, 0.6) 100%);
+            border: 1.2px solid rgba(0, 180, 255, 0.35);
+            box-shadow: inset 0 0 15px rgba(0, 150, 255, 0.1), 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .footer-index-cyber .contact-pill-card:hover {
+            transform: translateY(-2px);
+            border-color: #00E5FF;
+            background: linear-gradient(135deg, rgba(0, 45, 110, 0.45) 0%, rgba(3, 18, 48, 0.75) 100%);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.35), inset 0 0 20px rgba(0, 180, 255, 0.2);
+        }
+
+        .footer-index-cyber .contact-pill-orb {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #0088ff 0%, #0040aa 70%, #001f5c 100%);
+            border: 2px solid #00D2FF;
+            box-shadow: 0 0 16px rgba(0, 210, 255, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-index-cyber .contact-pill-card:hover .contact-pill-orb {
+            transform: scale(1.06);
+            box-shadow: 0 0 22px rgba(0, 229, 255, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-index-cyber .contact-pill-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-index-cyber .contact-pill-primary {
+            color: #FFFFFF;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-index-cyber .contact-pill-sub {
+            color: #7DD3FC;
+            font-size: 0.76rem;
+            margin-top: 2px;
+        }
+
+        /* Divisor de circuito fluido que viaja de un punto a otro */
+        .footer-index-cyber .footer-circuit-divider {
+            width: 100%;
+            max-width: 1140px;
+            margin: 15px auto 14px;
+            height: 52px;
+            position: relative;
+        }
+
+        .footer-index-cyber .footer-circuit-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .footer-index-cyber .footer-copyright-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+        }
+
+        .footer-index-cyber .footer-copyright-text {
+            color: #94A3B8;
+            font-size: 0.88rem;
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-index-cyber .footer-tech-tag {
+            color: #00D2FF;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.7), 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Adaptación Responsiva para móviles y tablets */
+        @media (max-width: 991px) {
+            .footer-index-cyber .footer-grid-cyber {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                max-width: 480px;
+                margin: 0 auto 25px;
+            }
+
+            .footer-index-cyber .col-brand {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-index-cyber .footer-brand-wrap {
+                justify-content: center;
+            }
+
+            .footer-index-cyber .footer-brand-text {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-index-cyber .footer-tagline {
+                text-align: center;
+                margin: 0 auto 20px;
+            }
+
+            .footer-index-cyber .footer-social-row {
+                justify-content: center;
+            }
+
+            .footer-index-cyber .col-contact {
+                justify-content: center;
+            }
+
+            .footer-index-cyber .footer-contact-panel {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+
+    <footer class="footer footer-index-cyber" id="contacto">
         <!-- Resplandor de Iluminación Ambiental -->
         <div class="footer-ambient-glow" aria-hidden="true"></div>
 
-        <style>
-            /* 2 Columnas de igual tamaño, centradas en el medio para el pie de página */
-            #contacto .footer-grid-cyber {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 0;
-                max-width: 1040px;
-                margin: 0 auto 35px;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                z-index: 1;
-            }
-
-            #contacto .footer-col-cyber.col-brand {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
-                padding: 10px 45px 10px 15px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            #contacto .footer-col-cyber.col-brand .footer-tagline {
-                max-width: 440px;
-                margin-bottom: 24px;
-            }
-
-            #contacto .footer-col-cyber.col-brand .footer-social-row {
-                display: flex;
-                align-items: flex-start;
-                gap: 20px;
-            }
-
-            #contacto .footer-col-cyber.col-contact {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
-                padding: 10px 15px 10px 45px;
-                border-left: 1px solid rgba(0, 180, 255, 0.25);
-                box-shadow: -1px 0 15px rgba(0, 210, 255, 0.08);
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            #contacto .footer-contact-block {
-                width: 100%;
-                max-width: 440px;
-            }
-
-            #contacto .contact-pill-card {
-                width: 100%;
-            }
-
-            @media (max-width: 991px) {
-                #contacto .footer-grid-cyber {
-                    grid-template-columns: 1fr;
-                    max-width: 480px;
-                    margin: 0 auto 30px;
-                    gap: 0;
-                }
-
-                #contacto .footer-col-cyber.col-brand {
-                    padding: 0 15px 35px !important;
-                    align-items: center;
-                    text-align: center;
-                }
-
-                #contacto .footer-col-cyber.col-brand .footer-tagline {
-                    text-align: center;
-                    margin: 0 auto 24px;
-                }
-
-                #contacto .footer-col-cyber.col-brand .footer-social-row {
-                    justify-content: center;
-                }
-
-                #contacto .footer-col-cyber.col-contact {
-                    border-left: none !important;
-                    border-top: 1px solid rgba(0, 180, 255, 0.22);
-                    box-shadow: 0 -8px 20px rgba(0, 180, 255, 0.04);
-                    padding: 35px 15px 10px !important;
-                    align-items: center;
-                    text-align: center;
-                }
-
-                #contacto .footer-contact-block {
-                    margin: 0 auto;
-                    align-items: center;
-                }
-            }
-        </style>
-
-        <div class="container" style="position: relative; z-index: 2;">
+        <div class="container footer-main-container">
+            <!-- Contenedor Superior de 2 Columnas: Marca (Izquierda) y Contacto (Derecha) -->
             <div class="footer-grid-cyber">
-                <!-- Columna 1: Marca y Redes Sociales -->
+                <!-- Columna 1: Identidad de Marca y Redes Sociales -->
                 <div class="footer-col-cyber col-brand">
-                    <a href="index.html" class="footer-brand-wrap">
+                    <div class="footer-brand-wrap">
                         <img src="assets/logo.webp" alt="SAIDEX 4.0 Logo" class="footer-logo-img">
-                        <div class="footer-brand-text">
-                            <span class="footer-brand-title">SAIDEX <span class="cyan-num">4.0</span></span>
-                            <span class="footer-brand-sub">DOMÓTICA Y AUTOMATIZACIÓN</span>
+                        <div class="footer-brand-text hero-electric-title" aria-label="SAIDEX 4.0 Domótica y Automatización">
+                            <div class="footer-brand-title electric-row row-1">
+                                <span class="elec-char" style="--c-idx: 0">S</span><span class="elec-char" style="--c-idx: 1">A</span><span class="elec-char" style="--c-idx: 2">I</span><span class="elec-char" style="--c-idx: 3">D</span><span class="elec-char" style="--c-idx: 4">E</span><span class="elec-char" style="--c-idx: 5">X</span>
+                                <span class="elec-space">&nbsp;</span>
+                                <span class="cyan-num text-neon-cyan"><span class="elec-char" style="--c-idx: 6">4</span><span class="elec-char" style="--c-idx: 7">.</span><span class="elec-char" style="--c-idx: 8">0</span></span>
+                            </div>
+                            <div class="footer-brand-sub electric-row row-2">
+                                <span class="elec-char" style="--c-idx: 9">D</span><span class="elec-char" style="--c-idx: 10">O</span><span class="elec-char" style="--c-idx: 11">M</span><span class="elec-char" style="--c-idx: 12">Ó</span><span class="elec-char" style="--c-idx: 13">T</span><span class="elec-char" style="--c-idx: 14">I</span><span class="elec-char" style="--c-idx: 15">C</span><span class="elec-char" style="--c-idx: 16">A</span>
+                                <span class="elec-space">&nbsp;</span>
+                                <span class="elec-char" style="--c-idx: 17">Y</span>
+                                <span class="elec-space">&nbsp;</span>
+                                <span class="elec-char" style="--c-idx: 18">A</span><span class="elec-char" style="--c-idx: 19">U</span><span class="elec-char" style="--c-idx: 20">T</span><span class="elec-char" style="--c-idx: 21">O</span><span class="elec-char" style="--c-idx: 22">M</span><span class="elec-char" style="--c-idx: 23">A</span><span class="elec-char" style="--c-idx: 24">T</span><span class="elec-char" style="--c-idx: 25">I</span><span class="elec-char" style="--c-idx: 26">Z</span><span class="elec-char" style="--c-idx: 27">A</span><span class="elec-char" style="--c-idx: 28">C</span><span class="elec-char" style="--c-idx: 29">I</span><span class="elec-char" style="--c-idx: 30">Ó</span><span class="elec-char" style="--c-idx: 31">N</span>
+                            </div>
                         </div>
-                    </a>
+                    </div>
+
                     <p class="footer-tagline">
-                        Innovación y tecnología para transformar tu hogar en un <span class="highlight-cyan">espacio
-                            inteligente.</span>
+                        Innovación y tecnología para transformar tu hogar en un <span class="highlight-cyan">espacio inteligente.</span>
                     </p>
+
+                    <!-- Fila de Redes Sociales Circulares con etiquetas abajo -->
                     <div class="footer-social-row">
                         <div class="footer-social-item">
-                            <a href="https://www.facebook.com/share/1DKk2KMXqo/" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
+                            <a href="https://www.facebook.com/share/1DKk2KMXqo/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Facebook">
                                 <i class="fa-brands fa-facebook-f"></i>
                             </a>
                             <span class="footer-social-label">Facebook</span>
                         </div>
                         <div class="footer-social-item">
-                            <a href="https://www.instagram.com/capri4431?igsh=cWtvcjdqN3Vhbjgz" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
+                            <a href="https://www.instagram.com/capri4431?igsh=cWtvcjdqN3Vhbjgz" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Instagram">
                                 <i class="fa-brands fa-instagram"></i>
                             </a>
                             <span class="footer-social-label">Instagram</span>
                         </div>
                         <div class="footer-social-item">
-                            <a href="https://youtube.com/@jesusronaldocesararellanas5388/community?si=2w9Oj341CV9DP4Bu"
-                                target="_blank" rel="noopener noreferrer" class="footer-social-btn"
-                                aria-label="YouTube">
+                            <a href="https://youtube.com/@jesusronaldocesararellanas5388/community?si=2w9Oj341CV9DP4Bu" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="YouTube">
                                 <i class="fa-brands fa-youtube"></i>
                             </a>
                             <span class="footer-social-label">YouTube</span>
                         </div>
                         <div class="footer-social-item">
-                            <a href="https://www.tiktok.com/@arellanasanchez2006" target="_blank"
-                                rel="noopener noreferrer" class="footer-social-btn" aria-label="TikTok">
+                            <a href="https://www.tiktok.com/@arellanasanchez2006" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="TikTok">
                                 <i class="fa-brands fa-tiktok"></i>
                             </a>
                             <span class="footer-social-label">TikTok</span>
@@ -844,22 +1260,19 @@
                     </div>
                 </div>
 
-
-                <!-- Column 3: Contacto -->
+                <!-- Columna 2: Tarjeta Cibernética de Contacto -->
                 <div class="footer-col-cyber col-contact">
-                    <div class="footer-contact-block">
+                    <div class="footer-contact-panel">
                         <div class="footer-header-cyber">
                             <div class="footer-header-badge" aria-hidden="true">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                             <div class="footer-header-text">
                                 <h4>CONTACTO</h4>
-                                <div class="footer-header-bar"></div>
                             </div>
                         </div>
                         <div class="footer-contact-cards">
-                            <a href="https://wa.me/51906681667" target="_blank" rel="noopener noreferrer"
-                                class="contact-pill-card">
+                            <a href="https://wa.me/51906681667" target="_blank" rel="noopener noreferrer" class="contact-pill-card">
                                 <div class="contact-pill-orb">
                                     <i class="fa-solid fa-phone"></i>
                                 </div>
@@ -891,123 +1304,117 @@
                 </div>
             </div>
 
-            <!-- Placa de Circuito Cibernético Inferior y Derechos Reservados -->
-            <div class="footer-bottom-cyber">
-                <div class="footer-circuit-divider" aria-hidden="true">
-                    <svg viewBox="0 0 1200 65" class="footer-circuit-svg" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="cyberTraceGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
-                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
-                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
-                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
-                            </linearGradient>
-                            <linearGradient id="cyberTraceGradRight" x1="100%" y1="0%" x2="0%" y2="0%">
-                                <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
-                                <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
-                                <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
-                                <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
-                            </linearGradient>
-                            <filter id="cyberCircuitGlow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
+            <!-- Divisor de Circuito Cibernético Animado con Efecto Fluido -->
+            <div class="footer-circuit-divider" aria-hidden="true">
+                <svg viewBox="0 0 1200 65" class="footer-circuit-svg" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="cyberTraceGradLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                            <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                            <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                            <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                        </linearGradient>
+                        <linearGradient id="cyberTraceGradRight" x1="100%" y1="0%" x2="0%" y2="0%">
+                            <stop offset="0%" stop-color="#0051ff" stop-opacity="0" />
+                            <stop offset="20%" stop-color="#00d2ff" stop-opacity="0.8" />
+                            <stop offset="85%" stop-color="#00d2ff" stop-opacity="1" />
+                            <stop offset="100%" stop-color="#00ffff" stop-opacity="1" />
+                        </linearGradient>
+                        <filter id="cyberCircuitGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                            <feMerge>
+                                <feMergeNode in="coloredBlur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
 
-                        <!-- Línea de trazo sutil de fondo -->
-                        <line x1="0" y1="42" x2="1200" y2="42" stroke="rgba(0, 180, 255, 0.2)" stroke-width="1.5" />
+                    <!-- Línea sutil de fondo -->
+                    <line x1="0" y1="42" x2="1200" y2="42" stroke="rgba(0, 180, 255, 0.2)" stroke-width="1.5" />
 
-                        <!-- Trazo de Circuito Izquierdo 1 (Base escalonada superior) -->
-                        <path class="circuit-trace-base" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
-                            fill="none" stroke="url(#cyberTraceGradLeft)" stroke-width="2.5"
-                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+                    <!-- Trazo de Circuito Izquierdo 1 (Base escalonada superior) -->
+                    <path class="circuit-trace-base" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                        fill="none" stroke="url(#cyberTraceGradLeft)" stroke-width="2.5"
+                        filter="url(#cyberCircuitGlow)" opacity="0.6" />
 
-                        <!-- Trazo Izquierdo 1 (Animación de haz de pulso de 0,16 a 480,42) -->
-                        <path class="circuit-pulse-beam" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
-                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
-                            pathLength="1000" />
-                        <path class="circuit-pulse-core" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
-                            fill="none" pathLength="1000" />
+                    <!-- Trazo Izquierdo 1 (Animación de haz de pulso de 0,16 a 480,42) -->
+                    <path class="circuit-pulse-beam" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                        fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                        pathLength="1000" />
+                    <path class="circuit-pulse-core" d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42"
+                        fill="none" pathLength="1000" />
 
-                        <!-- Trazo Izquierdo 1 (Segundo pulso continuo) -->
-                        <path class="circuit-pulse-beam beam-delay"
-                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" stroke="#00ffff"
-                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
-                        <path class="circuit-pulse-core beam-delay"
-                            d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" pathLength="1000" />
+                    <!-- Trazo Izquierdo 1 (Segundo pulso continuo con retraso) -->
+                    <path class="circuit-pulse-beam beam-delay"
+                        d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" stroke="#00ffff"
+                        stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                    <path class="circuit-pulse-core beam-delay"
+                        d="M 0,16 L 140,16 L 180,32 L 360,32 L 390,42 L 480,42" fill="none" pathLength="1000" />
 
-                        <!-- Trazo Izquierdo 2 (Base escalonada inferior y pulso) -->
-                        <path class="circuit-trace-base" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
-                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
-                        <path class="circuit-pulse-sub" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
-                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
-                            pathLength="1000" />
+                    <!-- Trazo Izquierdo 2 (Base escalonada inferior y pulso) -->
+                    <path class="circuit-trace-base" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                        fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                    <path class="circuit-pulse-sub" d="M 30,55 L 210,55 L 240,42 L 330,42 L 350,50 L 430,50"
+                        fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                        pathLength="1000" />
 
-                        <!-- Nodos de circuitos izquierdos -->
-                        <circle class="circuit-node-joint" cx="180" cy="32" r="3.5" fill="#00e5ff"
-                            filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-joint" cx="360" cy="32" r="3" fill="#00e5ff"
-                            filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-terminal" cx="480" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
-                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-halo" cx="480" cy="42" r="4.5" fill="none" stroke="#00ffff" />
-                        <circle class="circuit-node-joint" cx="430" cy="50" r="3" fill="#0070f3" />
+                    <!-- Nodos de circuitos izquierdos -->
+                    <circle class="circuit-node-joint" cx="180" cy="32" r="3.5" fill="#00e5ff"
+                        filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-joint" cx="360" cy="32" r="3" fill="#00e5ff"
+                        filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-terminal" cx="480" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                        stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-halo" cx="480" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                    <circle class="circuit-node-joint" cx="430" cy="50" r="3" fill="#0070f3" />
 
-                        <!-- Línea de puente central -->
-                        <line class="circuit-bridge-active" x1="480" y1="42" x2="720" y2="42" stroke="#00d2ff"
-                            stroke-width="2" stroke-dasharray="8,6" stroke-opacity="0.75"
-                            filter="url(#cyberCircuitGlow)" />
+                    <!-- Línea de puente central activa con corriente tipo fluido -->
+                    <line class="circuit-bridge-active" x1="480" y1="42" x2="720" y2="42" stroke="#00d2ff"
+                        stroke-width="2" stroke-dasharray="8,6" stroke-opacity="0.75"
+                        filter="url(#cyberCircuitGlow)" />
 
-                        <!-- Trazo de Circuito Derecho 1 (Base escalonada superior) -->
-                        <path class="circuit-trace-base" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
-                            fill="none" stroke="url(#cyberTraceGradRight)" stroke-width="2.5"
-                            filter="url(#cyberCircuitGlow)" opacity="0.6" />
+                    <!-- Trazo de Circuito Derecho 1 (Base escalonada superior) -->
+                    <path class="circuit-trace-base" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                        fill="none" stroke="url(#cyberTraceGradRight)" stroke-width="2.5"
+                        filter="url(#cyberCircuitGlow)" opacity="0.6" />
 
-                        <!-- Trazo Derecho 1 (Animación de haz de pulso de 1200,16 a 720,42 SIMULTÁNEAMENTE) -->
-                        <path class="circuit-pulse-beam" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
-                            fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
-                            pathLength="1000" />
-                        <path class="circuit-pulse-core" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
-                            fill="none" pathLength="1000" />
+                    <!-- Trazo Derecho 1 (Animación de haz de pulso de 1200,16 a 720,42) -->
+                    <path class="circuit-pulse-beam" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                        fill="none" stroke="#00ffff" stroke-width="3" filter="url(#cyberCircuitGlow)"
+                        pathLength="1000" />
+                    <path class="circuit-pulse-core" d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42"
+                        fill="none" pathLength="1000" />
 
-                        <!-- Trazo Derecho 1 (Segundo pulso continuo) -->
-                        <path class="circuit-pulse-beam beam-delay"
-                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" stroke="#00ffff"
-                            stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
-                        <path class="circuit-pulse-core beam-delay"
-                            d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none"
-                            pathLength="1000" />
+                    <!-- Trazo Derecho 1 (Segundo pulso continuo con retraso) -->
+                    <path class="circuit-pulse-beam beam-delay"
+                        d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" stroke="#00ffff"
+                        stroke-width="3" filter="url(#cyberCircuitGlow)" pathLength="1000" />
+                    <path class="circuit-pulse-core beam-delay"
+                        d="M 1200,16 L 1060,16 L 1020,32 L 840,32 L 810,42 L 720,42" fill="none" pathLength="1000" />
 
-                        <!-- Trazo Derecho 2 (Base escalonada inferior y pulso) -->
-                        <path class="circuit-trace-base" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
-                            fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
-                        <path class="circuit-pulse-sub" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
-                            fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
-                            pathLength="1000" />
+                    <!-- Trazo Derecho 2 (Base escalonada inferior y pulso) -->
+                    <path class="circuit-trace-base" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                        fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.45" />
+                    <path class="circuit-pulse-sub" d="M 1170,55 L 990,55 L 960,42 L 870,42 L 850,50 L 770,50"
+                        fill="none" stroke="#00d2ff" stroke-width="2" filter="url(#cyberCircuitGlow)"
+                        pathLength="1000" />
 
-                        <!-- Nodos de circuitos derechos -->
-                        <circle class="circuit-node-joint" cx="1020" cy="32" r="3.5" fill="#00e5ff"
-                            filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-joint" cx="840" cy="32" r="3" fill="#00e5ff"
-                            filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-terminal" cx="720" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
-                            stroke-width="2" filter="url(#cyberCircuitGlow)" />
-                        <circle class="circuit-node-halo" cx="720" cy="42" r="4.5" fill="none" stroke="#00ffff" />
-                        <circle class="circuit-node-joint" cx="770" cy="50" r="3" fill="#0070f3" />
-                    </svg>
-                </div>
+                    <!-- Nodos de circuitos derechos -->
+                    <circle class="circuit-node-joint" cx="1020" cy="32" r="3.5" fill="#00e5ff"
+                        filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-joint" cx="840" cy="32" r="3" fill="#00e5ff"
+                        filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-terminal" cx="720" cy="42" r="4.5" fill="#ffffff" stroke="#00e5ff"
+                        stroke-width="2" filter="url(#cyberCircuitGlow)" />
+                    <circle class="circuit-node-halo" cx="720" cy="42" r="4.5" fill="none" stroke="#00ffff" />
+                    <circle class="circuit-node-joint" cx="770" cy="50" r="3" fill="#0070f3" />
+                </svg>
+            </div>
 
-                <div class="footer-copyright-wrap">
-                    <div class="footer-copyright-row">
-                        <span class="footer-bracket-bar" aria-hidden="true"></span>
-                        <p class="footer-copyright-text">&copy; 2026 SAIDEX 4.0 Domótica y Automatización.</p>
-                        <span class="footer-bracket-bar right" aria-hidden="true"></span>
-                    </div>
-                    <p class="footer-tech-tag">Tecnología Avanzada</p>
-                </div>
+            <!-- Fila Inferior de Copyright y Tecnología Avanzada -->
+            <div class="footer-copyright-wrap">
+                <p class="footer-copyright-text">&copy; 2026 SAIDEX 4.0 Domótica y Automatización.</p>
+                <p class="footer-tech-tag">Tecnología Avanzada</p>
             </div>
         </div>
     </footer>
@@ -1084,6 +1491,24 @@
         </div>
     </div>
 
+    <!-- Modal de Video Demostrativo Hero -->
+    <div class="modal-overlay" id="hero-video-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-content video-modal-content">
+            <button type="button" class="close-modal" id="close-video-modal" aria-label="Cerrar video">&times;</button>
+            <div class="modal-header-block" style="margin-bottom: 14px; text-align: left;">
+                <span class="modal-subtitle-badge"><i class="fa-solid fa-play"></i> EXPERIENCIA SAIDEX 4.0</span>
+                <h3 class="modal-title" style="font-size: 1.35rem; margin-top: 6px;">Automatización y Domótica
+                    Residencial</h3>
+            </div>
+            <div class="video-container-responsive">
+                <iframe id="hero-video-iframe" width="100%" height="360" src=""
+                    title="SAIDEX 4.0 Domótica y Automatización" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen style="border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.35);"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Botón Flotante de WhatsApp -->
     <a href="https://wa.me/51906681667?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios"
         class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
@@ -1092,8 +1517,6 @@
 
     <script src="js/script.js?v=5.2"></script>
     <script src="js/electric-effect.js?v=5.2"></script>
-    <script src="js/hero-carousel.js?v=5.2"></script>
-    <script src="js/beast-cursor.js?v=5.2"></script>
 </body>
 
 </html>

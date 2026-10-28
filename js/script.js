@@ -1302,6 +1302,42 @@
                 });
             }
         }
+
+        // Controlador de Modal de Video Demostrativo del Hero
+        const heroVideoModal = document.getElementById('hero-video-modal');
+        const openHeroVideoBtn = document.getElementById('btn-hero-watch-video');
+        const closeHeroVideoBtn = document.getElementById('close-video-modal');
+        const heroVideoIframe = document.getElementById('hero-video-iframe');
+        const demoVideoUrl = 'https://www.youtube-nocookie.com/embed/g2gS3y690c0?autoplay=1&rel=0';
+
+        if (heroVideoModal && openHeroVideoBtn) {
+            openHeroVideoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (heroVideoIframe) heroVideoIframe.src = demoVideoUrl;
+                heroVideoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            const closeHeroVideo = () => {
+                heroVideoModal.classList.remove('active');
+                if (heroVideoIframe) heroVideoIframe.src = '';
+                document.body.style.overflow = '';
+            };
+
+            if (closeHeroVideoBtn) {
+                closeHeroVideoBtn.addEventListener('click', closeHeroVideo);
+            }
+
+            window.addEventListener('click', (e) => {
+                if (e.target === heroVideoModal) closeHeroVideo();
+            });
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && heroVideoModal.classList.contains('active')) {
+                    closeHeroVideo();
+                }
+            });
+        }
     }
 
     // =========================================================================
@@ -1376,27 +1412,150 @@
     }
 
     // =========================================================================
-    // 8. ANIMACIONES DE APARICIÓN AL DESPLAZAR (SCROLL REVEAL)
+    // 8. ANIMACIONES DE APARICIÓN AL DESPLAZAR (SCROLL REVEAL & SECTION SPY)
     // =========================================================================
     function initScrollReveal() {
-        const revealEls = document.querySelectorAll('.scroll-bounce');
+        // Asignar retardo escalonado automático a grupos stagger
+        document.querySelectorAll('.scroll-stagger-group').forEach(group => {
+            Array.from(group.children).forEach((child, idx) => {
+                if (!child.classList.contains('scroll-bounce') &&
+                    !child.classList.contains('scroll-bounce-left') &&
+                    !child.classList.contains('scroll-bounce-right') &&
+                    !child.classList.contains('scroll-bounce-scale')) {
+                    child.classList.add('scroll-bounce');
+                }
+                if (!child.style.transitionDelay) {
+                    child.style.transitionDelay = `${(idx % 6) * 0.1}s`;
+                }
+            });
+        });
+
+        const revealSelector = '.scroll-bounce, .scroll-bounce-left, .scroll-bounce-right, .scroll-bounce-scale, [data-scroll-reveal]';
+        const revealEls = document.querySelectorAll(revealSelector);
         if (revealEls.length === 0) return;
 
+        // Función de animación progresiva para contadores numéricos
+        function runCounter(el) {
+            if (el.dataset.counterDone) return;
+            el.dataset.counterDone = 'true';
+            const raw = el.getAttribute('data-target') || el.innerText.trim();
+            const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+            if (isNaN(num)) return;
+            const prefix = raw.match(/^[^\d]*/)?.[0] || '';
+            const suffix = raw.match(/[^\d]*$/)?.[0] || '';
+            const isDec = raw.includes('.');
+            const dur = 1600;
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / dur, 1);
+                const ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+                const cur = num * ease;
+                el.innerText = `${prefix}${isDec ? cur.toFixed(1) : Math.floor(cur)}${suffix}`;
+                if (p < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.innerText = raw;
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
         if (!('IntersectionObserver' in window)) {
-            revealEls.forEach(el => el.classList.add('is-visible'));
+            revealEls.forEach(el => {
+                el.classList.add('is-visible');
+                el.querySelectorAll?.('[data-counter], .stat-counter, .counter[data-target]').forEach(runCounter);
+            });
             return;
         }
 
-        const observer = new IntersectionObserver((entries) => {
+        // Observador de revelación fluida para tarjetas y elementos de cada sección
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
+                    entry.target.querySelectorAll?.('[data-counter], .stat-counter, .counter[data-target]').forEach(runCounter);
+                    if (entry.target.matches?.('[data-counter], .stat-counter, .counter[data-target]')) {
+                        runCounter(entry.target);
+                    }
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12 });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
+        });
 
-        revealEls.forEach(el => observer.observe(el));
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // Observador de cambio de sección activo para la barra de navegación (ScrollSpy)
+        const sections = document.querySelectorAll('section[id], footer[id], div[id="proyectos"]');
+        const navLinks = document.querySelectorAll('.nav-links .nav-item[href^="#"]');
+
+        if (sections.length > 0 && navLinks.length > 0) {
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        entry.target.classList.add('section-revealed');
+                        if (id) {
+                            navLinks.forEach(link => {
+                                const href = link.getAttribute('href');
+                                if (href === `#${id}`) {
+                                    link.classList.add('active');
+                                } else if (href.startsWith('#')) {
+                                    link.classList.remove('active');
+                                }
+                            });
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.22,
+                rootMargin: '-70px 0px -45% 0px'
+            });
+
+            sections.forEach(sec => sectionObserver.observe(sec));
+        }
+
+        // Navegación suave con compensación exacta del header fijo al cambiar de sección
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId.length > 1 && targetId.startsWith('#')) {
+                    try {
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            e.preventDefault();
+                            const navEl = document.querySelector('.navbar');
+                            const navHeight = navEl ? navEl.offsetHeight : 75;
+                            const targetRect = targetEl.getBoundingClientRect();
+                            const targetPos = targetRect.top + window.pageYOffset - navHeight + 5;
+
+                            window.scrollTo({
+                                top: Math.max(0, targetPos),
+                                behavior: 'smooth'
+                            });
+
+                            // Revelar de inmediato los elementos de la sección objetivo
+                            const innerReveals = targetEl.querySelectorAll('.scroll-bounce');
+                            innerReveals.forEach(child => child.classList.add('is-visible'));
+
+                            // Actualizar estado activo en la barra de navegación
+                            navLinks.forEach(item => {
+                                if (item.getAttribute('href') === targetId) {
+                                    item.classList.add('active');
+                                } else if (item.getAttribute('href')?.startsWith('#')) {
+                                    item.classList.remove('active');
+                                }
+                            });
+                        }
+                    } catch (err) {
+                        // Selector no estándar, dejar comportamiento nativo
+                    }
+                }
+            });
+        });
     }
 
     // =========================================================================

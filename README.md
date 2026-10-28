@@ -37,7 +37,7 @@
 
 ## 🌐 Descripción General
 
-**SAIDEX 4.0** es una plataforma web estática de grado corporativo desarrollada para la divulgación, comercialización y gestión de proyectos de domótica residencial, comercial e industrial. La plataforma sumerge al usuario en una interfaz interactiva de estética futurista (Cyberpunk / Neón 3D), con micro-animaciones fluidas aceleradas por GPU, un carrusel circular orbital sincronizado en el Hero con rotación automática cada 3 segundos, un motor de cursor Beast Breathing con relámpagos interactivos, efectos de rayos eléctricos 3D, precargador HUD calibrado a 3 segundos, pie de página simétrico en 2 columnas y un sistema de tienda virtual con checkout automatizado y directo hacia WhatsApp.
+**SAIDEX 4.0** es una plataforma web estática de grado corporativo desarrollada para la divulgación, comercialización y gestión de proyectos de domótica residencial, comercial e industrial. La plataforma sumerge al usuario en una interfaz interactiva de estética futurista (Cyberpunk / Neón 3D), con micro-animaciones fluidas aceleradas por GPU, un Hero cinemático con título animado de corriente eléctrica letra por letra, precargador HUD con haces de circuito láser y animación de tipografía, un pie de página cibernético en 2 columnas y un sistema de tienda virtual con checkout automatizado y directo hacia WhatsApp.
 
 El proyecto está diseñado bajo una arquitectura limpia y modular de **cero dependencias externas de JavaScript**, garantizando una carga inmediata, compatibilidad multiplataforma y blindaje absoluto contra congelamientos y ataques de spam.
 
@@ -45,14 +45,16 @@ El proyecto está diseñado bajo una arquitectura limpia y modular de **cero dep
 
 ## ✨ Características Destacadas
 
-* 🪐 **Carrusel Circular Orbital con Autoplay de 3s y HUD**:
-  * 8 escenas de alta fidelidad con títulos, badges dinámicos y fondos sincronizados en cross-fade.
-  * **Rotación automática continua cada 3 segundos**, sincronizada tras el preloader y con pausa inteligente al posar el mouse (`hover`).
-  * **Efectos Sci-Fi HUD en la diapositiva activa**: Retícula segmentada rotativa, pulso sonar perimétrico, badge holográfico de estado con LED verde parpadeante, ondas sonar expansivas en el núcleo y lentes con curvatura óptica.
-* ⚡ **Cursor Beast Breathing Interactivo**: Puntero con estela luminosa, chispas de plasma, polvo cósmico y relámpagos de aura reactiva (desactivado en pantallas táctiles para cero sobrecarga móvil).
-* 🛡️ **Precargador Cibernético Futurista (HUD Preloader) de 3 Segundos**: Anillos concéntricos giratorios, indicador porcentual y curva armónica calibrada a 3000 ms, respaldada por un temporizador estricto de seguridad de 3500 ms.
-* 📱 **Degradado Cinemático Adaptativo en Móviles**: Overlay de doble capa con gradiente horizontal que ilumina suavemente desde la mitad hacia la izquierda en pantallas pequeñas, maximizando la legibilidad de los textos sin oscurecer los gráficos y luces de fondo.
-* 🏛️ **Pie de Página Equilibrado en 2 Columnas**: Grid simétrico perfectamente centrado de 2 columnas de igual tamaño en todas las páginas (`index.html`, `proyectos.html`, `tienda.html`), separadas por un haz de luz vertical neón y trazados de circuitos SVG.
+* ⚡ **Precargador Cibernético Futurista (HUD Preloader) con Circuitos Fluidos**:
+  * Anillos concéntricos giratorios, emblema de marca central e indicador porcentual dinámico.
+  * **Circuitos laterales animados con haces de pulso láser** (`circuit-pulse-beam`, `circuit-pulse-core`) que viajan continuamente de un punto origen a un punto final en bucle.
+  * **Título animado letra por letra** (`hero-electric-title` + `.elec-char`), sincronizado con el estilo característico del Hero.
+  * **Doble failsafe anti-congelamiento**: temporizador JS a 3.0s y seguro forzado en CSS puro a 4.0s para evitar pantallas bloqueadas en cualquier dispositivo.
+* 🏛️ **Pie de Página Cibernético Rediseñado en 2 Columnas (`index.html`)**:
+  * **Columna Izquierda (Identidad y Redes)**: Logotipo corporativo, animación eléctrica continua letra por letra que recorre "SAIDEX 4.0" y "DOMÓTICA Y AUTOMATIZACIÓN", descripción institucional y botones sociales circulares con etiquetas descriptivas inferiores.
+  * **Columna Derecha (Panel HUD de Contacto Directo)**: Tarjeta cyber glass con badge `DISPONIBLE 24/7`, botones interactivos pill para WhatsApp oficial, llamada telefónica y correo electrónico, además de ficha de asistencia técnica.
+  * **Divisor de Circuito Eléctrico SVG**: Separador perimétrico de extremo a extremo con haces de luz en recorrido continuo.
+  * **Preservación Canónica**: Mantenimiento intacto de los footers originales de `proyectos.html` y `tienda.html`.
 * 🛡️ **Blindaje de Seguridad y Motor Antispam**: Trampas Honeypot invisibles (`website_hp`), trampa de velocidad de bot (<1.2s), limitador de envíos (8s cooldown), protección anti-clickjacking y sanitización estricta anti-XSS.
 * ⚡ **Efectos Eléctricos 3D Reactivos**: Filtros procedurales SVG (`feTurbulence`, `feDisplacementMap`) combinados con perspectiva tridimensional interactiva (`rotateX`, `rotateY`).
 * 🌌 **Lienzo de Constelación de Partículas 2D**: Canvas interactivo con nodos euclidianos y pulsos de circuito, optimizado con `IntersectionObserver` y pausado en segundo plano.
@@ -70,7 +72,7 @@ El proyecto está diseñado bajo una arquitectura limpia y modular de **cero dep
 
 | Archivo | Función y Contenido Principal |
 | :--- | :--- |
-| **`index.html`** | Landing page principal: Hero circular orbital con 8 diapositivas temáticas (autoplay cada 3s y HUD), selector interactivo de soluciones domóticas, galería de proyectos destacados, contadores numéricos animados con `IntersectionObserver`, modal de Solicitud de Visita Técnica y pie de página en 2 columnas con circuito de pulso cibernético SVG. |
+| **`index.html`** | Landing page principal: Hero cinemático 3D, selector interactivo de soluciones domóticas, galería de proyectos destacados, contadores numéricos animados con `IntersectionObserver`, modal de Solicitud de Visita Técnica y nuevo pie de página cibernético en 2 columnas con panel HUD de contacto. |
 | **`tienda.html`** | Tienda virtual interactiva: Catálogo de 30 productos con tarjetas de neón 3D, filtros por categoría (Iluminación, Seguridad, Climatización, Energía, Audio/Video, Accesorios), carrito lateral dinámico, modal de checkout, pie de página en 2 columnas y despacho automatizado hacia WhatsApp. |
 | **`proyectos.html`** | Galería y vitrina técnica de proyectos: Exhibición de instalaciones domóticas residenciales, comerciales e industriales con fondos de alta resolución optimizados con scroll nativo para móviles y pie de página en 2 columnas. |
 
@@ -78,83 +80,37 @@ El proyecto está diseñado bajo una arquitectura limpia y modular de **cero dep
 
 ## ⚡ Efectos Visuales e Innovación Tecnológica
 
-### 1. Carrusel Circular Orbital (`js/hero-carousel.js` y `css/hero-carousel.css`)
-El Hero incorpora un sistema orbital de 8 escenas temáticas:
-* *Transforma tu Hogar en Inteligente* (Iluminación biodinámica y clima a 21°C).
-* *Seguridad y Vigilancia con IA* (Biometría, cámaras 4K y monitoreo 24/7).
-* *Espacios Vivos y Luz Circadiana* (Luz adaptativa al ritmo biológico).
-* *Cine en Casa & Audio Inmersivo Dolby* (Salas acústicas Hi-Fi y cortinas blackout).
-* *Automatización Exterior y Piscinas Smart* (Cascadas inteligentes y riego predictivo).
-* *Torres Corporativas y Protocolos KNX* (Automatización comercial bajo estándar KNX).
-* *Eficiencia Energética y Gestión Solar* (Paneles fotovoltaicos y micro-redes).
-* *Tu Hogar en tu Mano y por Comandos de Voz* (App todo en uno, Alexa y Google Home).
+### 1. Precargador Cibernético Futurista (`saidex-preloader`)
+* **Anillos HUD y Emblema Central**: Tres anillos concéntricos con rotación diferencial horaria y antihoraria que rodean el logotipo de la marca.
+* **Trazos de Circuito Lateral**: Paneles laterales con líneas de circuito donde haces de luz láser recorren las pistas en bucle infinito (`circuitBeamFlow`).
+* **Tipografía Eléctrica Dinámica**: Título `SAIDEX 4.0` animado secuencialmente letra por letra mediante variables de retraso `--c-idx`.
+* **Failsafe Absoluto**: Se desvanece de forma garantizada a los 3-4 segundos, eliminando cualquier posibilidad de pantalla bloqueada.
 
-**Mecánicas y Mejoras:**
-* **Autoplay de 3 Segundos**: Rotación continua automática programada cada 3000 ms, iniciándose en sincronía con el cierre del precargador.
-* **Pausa por Hover**: Al pasar el cursor del mouse sobre el contenedor del carrusel, la rotación se detiene para permitir la lectura y el examen detallado de las imágenes y textos. Al salir el cursor, se reanuda de inmediato.
-* **Elementos HUD en Diapositiva Activa**:
-  * `.slide-hud-reticle`: Retícula circular segmentada con giro continuo a 18s.
-  * `.slide-sonar-ping`: Pulso de radar sonar que emana de la diapositiva hacia el exterior.
-  * `.slide-status-badge`: Etiqueta cibernética (`SISTEMA 0X`) con LED verde de pulso vital.
-  * `.core-sonar-ring`: Ondas circulares en cascada generadas desde el núcleo central.
-
-### 2. Motor Beast Breathing Cursor (`js/beast-cursor.js`)
-Genera un puntero interactivo cinemático con partículas estelares, relámpagos de aura eléctrica, ráfagas de garras (claw bursts) y anillos de pulso:
-* **Seguimiento 1:1 Instantáneo**: Eliminación de fricción o retraso de entrada (`ease`), logrando un movimiento natural y ultrapreciso sin atascos ni congelamientos en pantallas con alta densidad de tarjetas.
-* **Arquitectura de Canvas Único y Safeguards**: Renderizado de partículas y shimmer ambiental integrado en un solo lienzo acelerado por GPU (`#beast-cursor-c`), con comprobación defensiva de compatibilidad antes de invocar `getContext("2d")`.
-* **Ocultamiento Universal de Puntero OS**: Regla `@media (pointer: fine) { *, *::before, *::after { cursor: none !important; } }` que asegura que el cursor nativo nunca parpadee ni compita con el puntero cinemático en tarjetas y botones.
-* **Ahorro de Recursos**: Se detiene automáticamente cuando la pestaña está en segundo plano (`visibilitychange`) y se desactiva en pantallas puramente táctiles para mantener el dispositivo ágil y frío.
-
-### 3. Filtros SVG y Rayos Eléctricos 3D (`js/electric-effect.js` y `css/electric-effect.css`)
-Los bordes de las tarjetas combinan filtros SVG vectoriales de alta tensión (`feTurbulence` con animación SMIL de `seed` aleatoria y `feDisplacementMap` a escala 22-24) con un rayo streamer perimetral de alta frecuencia (`conic-gradient`), núcleos blancos incandescentes (`#ffffff`) y perspectiva 3D acelerada por hardware (`translate3d(0, -9px, 0)`). En reposo las tarjetas permanecen limpias y oscuras, y al posar el cursor (`:hover`, `mouseenter`) o interactuar de forma táctil (`:active`), los rayos y arcos voltaicos en zigzag explotan con un resalte visual impactante a 60-120 FPS sin bloqueos ni congelamientos.
-
----
-
-## 🛒 Módulo de Tienda Virtual y Carrito
-
-El flujo de comercio electrónico en `tienda.html` opera íntegramente en el navegador:
-1. **Selección**: Navegación fluida entre las 6 categorías mediante filtros tipo píldora.
-2. **Adición**: Animación parabólica en tiempo real entre la tarjeta del producto y el botón del carrito.
-3. **Gestión**: Drawer lateral superpuesto para modificar cantidades, visualizar subtotales y remover artículos.
-4. **Checkout**: Modal con trampa Honeypot antispam para la captura de datos (Nombre, Teléfono, Dirección).
-5. **Despacho por WhatsApp**: Mensaje estructurado enviado de forma segura con el desglose exacto de la compra.
+### 2. Pie de Página de Grado Corporativo (`footer.footer-index-cyber`)
+* **Efecto de Título Eléctrico Completo**: La frase institucional "SAIDEX 4.0 DOMÓTICA Y AUTOMATIZACIÓN" es recorrida letra por letra por una chispa de alta luminiscencia.
+* **Separador de Circuito de Fluido Eléctrico**: SVG horizontal de 1200px con haces de energía continua (`circuit-pulse-beam`) que enlazan visualmente la sección de partners con el pie de página.
+* **Panel de Contacto Sci-Fi**: Botones con relieve glassmorphism y micro-interacciones hover diseñados para maximizar la tasa de conversión.
 
 ---
 
 ## 🛡️ Blindaje de Seguridad y Motor Antispam
 
-El sistema cuenta con un escudo de ciberseguridad integrado en [`js/script.js`](js/script.js):
-* **Trampa Honeypot (`website_hp`)**: Campos invisibles (`#check-hp-field` y `#visit-hp-field`) que interceptan y anulan inmediatamente solicitudes generadas por bots.
-* **Trampa de Velocidad (<1.2s)**: Neutraliza formularios completados a velocidades sobrehumanas.
-* **Rate Limiting (8s Cooldown)**: Evita bombardeos y flooding de mensajes repetitivos.
-* **Filtro Heurístico Anti-Spam**: Detección de patrones de phishing, inyecciones de código y publicidad no deseada.
-* **Anti-Clickjacking**: Detección de contextos `window.top` para prevenir que la web sea clonada o incrustada en iframes maliciosos.
-* **Anti-XSS**: Sanitización de atributos y contenidos dinámicos mediante `escapeHTML()` y `sanitizeForMessage()`.
-* **Cabeceras de Seguridad**: `X-Content-Type-Options: nosniff` y `referrerpolicy: strict-origin-when-cross-origin`.
+El sistema cuenta con un motor defensivo multicapa implementado en JavaScript Vanilla:
+
+1. **Trampas Honeypot Ocultas**: Dos campos camuflados (`#check-hp-field` y `#visit-hp-field`) completamente invisibles para usuarios reales pero detectables por bots automatizados.
+2. **Control de Velocidad de Envío**: Descarta cualquier envío realizado en menos de 1200 ms desde la carga de la página.
+3. **Enfriamiento Entre Envíos (Rate Limiting)**: Bloquea envíos repetitivos durante un periodo de 8 segundos por usuario.
+4. **Protección Anti-Clickjacking**: Comprueba el contexto de la ventana principal para impedir que la web sea embebida en marcos maliciosos externos.
+5. **Sanitización y Escape HTML**: Purga etiquetas y caracteres peligrosos antes de incrustar contenido dinámico en el DOM o redactar mensajes para WhatsApp.
 
 ---
 
 ## 🚀 Prevención de Congelamientos y Rendimiento
 
-* **Cero Congelamiento en `tienda.html` y `proyectos.html`**:
-  * En `proyectos.html`, los 18 overlays con `backdrop-filter` ahora se ocultan fuera del viewport (`opacity: 0; visibility: hidden;`), evitando el sobrecosto de cálculo composicional constante y liberando el hilo principal del navegador.
-  * En `tienda.html`, los filtros SVG procedurales están calibrados para eliminar saturaciones en la rasterización por software de Chromium, permitiendo un recorrido continuo a 60-120 FPS.
-* **Cursor Ultrafluido 1:1**: Respuesta inmediata sin desfase ni arrastre en toda la superficie de la aplicación.
-* **Pausa en Segundo Plano (`visibilitychange`)**: Todos los bucles `requestAnimationFrame` en los lienzos canvas y en el cursor se pausan al minimizar o cambiar de pestaña.
-* **Scroll Suave en Móviles**: Eliminación de bloqueos de renderizado mediante `background-attachment: scroll !important` en dispositivos táctiles (`pointer: coarse`).
-* **Failsafe del Precargador HUD**: Duración calibrada a 3000 ms con cierre de seguridad garantizado a los 3500 ms en cualquier escenario de red lenta.
-
----
-
-## 🔍 Auditoría de Calidad, Integridad y Correcciones
-
-Tras la auditoría integral de código, se certificaron los siguientes aspectos de estabilidad y robustez:
-1. **Encodings e Integridad de Texto (UTF-8)**: Cero presencia de caracteres corruptos o mojibake (`Ã`, `â€`, `ï¿½`). Nombre oficial verificado: **SAIDEX 4.0 Domótica y Automatización**.
-2. **Defensa ante Fallos de Canvas**: Incorporación de guardas defensivas en `beast-cursor.js` (`typeof C.getContext !== 'function'`) y `script.js` para asegurar tolerancia ante entornos o navegadores con canvas deshabilitado.
-3. **Null-Safety en Animaciones Numéricas**: Protección contra excepciones `TypeError: Cannot read properties of undefined` en `initCounterAnimations()` en `script.js`.
-4. **Navegación Unificada y Consistente**: Enlace a `proyectos.html` agregado en el menú principal de `tienda.html`, manteniendo total paridad con `index.html` y `proyectos.html`.
-5. **Accesibilidad Semántica de Menú Móvil**: Migración de `div.menu-toggle` a elementos semánticos `button.menu-toggle` provistos de atributos ARIA (`aria-label`, `aria-expanded`, `aria-controls`) en las 3 páginas.
-6. **Balance Estructural de Etiquetas**: 100% de coincidencia y cierre en etiquetas estructurales (`div`, `section`, `form`, `button`, etc.) y anclas internas (#).
+* **60-120 FPS Nativos**: Uso exclusivo de propiedades aceleradas por hardware (`transform`, `opacity`).
+* **Pausa Automática en Segundo Plano**: Las partículas de canvas y animaciones pesadas se suspenden automáticamente cuando el usuario cambia de pestaña (`visibilitychange`) o cuando salen del viewport (`IntersectionObserver`).
+* **Optimización Móvil**: En pantallas compactas (<540px), los circuitos laterales del preloader se ocultan para asignar todo el espacio a la interfaz de carga y evitar cualquier recalculo de layout innecesario.
+* **Assets Depurados**: Eliminación de imágenes sin uso y archivos redundantes, garantizando un peso de carga óptimo.
 
 ---
 
@@ -163,75 +119,58 @@ Tras la auditoría integral de código, se certificaron los siguientes aspectos 
 ```plaintext
 SAIDEX-4.0--DOMOTICA-Y-AUTOMATIZACION/
 │
-├── index.html                   # Página de Inicio, Hero Orbital 3D (Autoplay 3s) y Footer 2 Col
-├── tienda.html                  # Tienda Virtual, Carrito Dinámico y Footer 2 Col
-├── proyectos.html               # Vitrina Técnica de Proyectos y Footer 2 Col
+├── index.html                   # Página de inicio principal
+├── tienda.html                  # Tienda virtual y catálogo
+├── proyectos.html               # Galería técnica de proyectos
 │
 ├── css/
-│   ├── style.css                # Estilos globales, preloader (3s), hero, mobile overlay y footer
-│   ├── electric-effect.css      # Filtros SVG 3D, rayos y temas neón
-│   ├── hero-carousel.css        # Estilos del carrusel orbital, efectos HUD y overlays
-│   └── store.css                # Estilos de tienda, carrito lateral y checkout
+│   ├── style.css                # Estilos globales y componentes principales
+│   ├── electric-effect.css      # Filtros SVG y animaciones eléctricas
+│   └── store.css                # Estilos de tienda y carrito
 │
 ├── js/
-│   ├── script.js                # Lógica principal, seguridad, preloader 3s, antispam y WhatsApp
-│   ├── hero-carousel.js         # Controlador orbital del hero (8 diapositivas, autoplay 3s y HUD)
-│   ├── beast-cursor.js          # Motor de cursor Beast Breathing con guardas defensivas
-│   └── electric-effect.js       # Motor de inclinación 3D y perspectiva
+│   ├── script.js                # Lógica principal, seguridad y preloader
+│   └── electric-effect.js       # Efectos de inclinación 3D
 │
-├── assets/                      # Identidad visual, logotipos e imágenes HD
+├── assets/                      # Recursos visuales e imágenes de marca
+│   └── store/                   # Catálogo fotográfico de productos
 │
-├── DOCUMENTACION_PROYECTO.md    # Manual técnico detallado de la arquitectura
-└── README.md                    # Documentación principal del repositorio
+├── DOCUMENTACION_PROYECTO.md    # Manual técnico detallado
+└── README.md                    # Este documento
 ```
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
 
-* **HTML5**: Marcado semántico, accesible (ARIA) y estructurado.
-* **CSS3 Vanilla**: Variables CSS personalizadas, Glassmorphism, animaciones aceleradas por GPU, CSS Grid y Flexbox.
-* **JavaScript Moderno (ES6+)**: Vanilla puro (sin frameworks externos pesados), `IntersectionObserver`, `Canvas 2D`, `requestAnimationFrame`.
-* **Tipografía e Iconos**: Google Fonts (*Inter*, *Outfit*), Font Awesome 6.4.0, SVG dinámicos integrados en el DOM.
+* **Lenguajes**: HTML5 Semántico, CSS3 Vanilla, JavaScript Vanilla (ES6+).
+* **Fuentes Tipográficas**: Google Fonts (Inter, Outfit).
+* **Iconografía**: Font Awesome 6.4+, Iconos SVG inline personalizados.
+* **Integraciones**: Despacho directo a API de WhatsApp Web/App.
 
 ---
 
 ## 💻 Guía de Instalación y Ejecución Local
 
-No requiere compilación ni gestores de paquetes pesados:
+Dado que SAIDEX 4.0 es una plataforma web estática moderna sin dependencias complejas, su ejecución local es directa:
 
-### Opción 1: Con extensión Live Server (VS Code)
-1. Abrir la carpeta del proyecto en su editor.
-2. Clic derecho sobre `index.html`.
-3. Seleccionar **"Open with Live Server"**.
-
-### Opción 2: Usando Node.js
-```bash
-npx serve .
-```
-
-### Opción 3: Usando Python
-```bash
-python -m http.server 8000
-```
-Luego abrir `http://localhost:8000`.
+1. **Clonar o descargar el repositorio**:
+   ```bash
+   git clone https://github.com/matias03322-wq/SAIDEX-4.0-DOMOTICA-Y-AUTOMTIZACION.git
+   ```
+2. **Abrir con un servidor local**:
+   * Usando la extensión **Live Server** de Visual Studio Code: Clic derecho sobre `index.html` > *Open with Live Server*.
+   * Usando Node.js / `npx`:
+     ```bash
+     npx serve .
+     ```
+   * O directamente abriendo `index.html` en cualquier navegador web moderno (Chrome, Edge, Firefox, Safari).
 
 ---
 
 ## 📞 Canales de Contacto Oficial
 
 * **Empresa**: SAIDEX 4.0 — Domótica y Automatización
-* **Teléfono / WhatsApp Oficial**: [+51 906 681 667](https://wa.me/51906681667)
-* **Correo Electrónico**: [info@saidex40.com](mailto:info@saidex40.com)
-* **Ubicación**: Lima, Perú (Cobertura a nivel nacional)
-* **Redes Sociales Oficiales**:
-  * [Facebook](https://www.facebook.com/share/1DKk2KMXqo/)
-  * [Instagram](https://www.instagram.com/capri4431?igsh=cWtvcjdqN3Vhbjgz)
-  * [YouTube](https://youtube.com/@jesusronaldocesararellanas5388/community?si=2w9Oj341CV9DP4Bu)
-  * [TikTok](https://www.tiktok.com/@arellanasanchez2006)
-
----
-
-<p align="center">
-  &copy; 2026 <strong>SAIDEX 4.0 Domótica y Automatización</strong>. Todos los derechos reservados.
-</p>
+* **Teléfono / WhatsApp**: +51 906 681 667
+* **Correo Electrónico**: contacto@saidex.com
+* **Ubicación**: Lima, Perú

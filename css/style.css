@@ -58,6 +58,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 85px;
   overflow-x: clip;
   -webkit-overflow-scrolling: touch;
 }
@@ -178,37 +179,114 @@ body.site-loaded .hero .delay-4,
   animation-delay: 0.54s;
 }
 
-/* Cascada Escalonada para Tarjetas de Características */
-body.site-loaded .hero-features-grid .hero-feature-card:nth-child(1),
-.saidex-preloader.is-loaded~main .hero-features-grid .hero-feature-card:nth-child(1) {
-  animation: heroCardCascade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.48s forwards;
-}
-
-body.site-loaded .hero-features-grid .hero-feature-card:nth-child(2),
-.saidex-preloader.is-loaded~main .hero-features-grid .hero-feature-card:nth-child(2) {
-  animation: heroCardCascade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.60s forwards;
-}
-
-body.site-loaded .hero-features-grid .hero-feature-card:nth-child(3),
-.saidex-preloader.is-loaded~main .hero-features-grid .hero-feature-card:nth-child(3) {
-  animation: heroCardCascade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.72s forwards;
-}
-
-@keyframes heroCardCascade {
+/* ========================================================
+   SECUENCIA DE ENTRADA HERO: REBOTE DESDE ARRIBA (UNO A UNO)
+   ======================================================== */
+@keyframes heroBounceDropFromTop {
   0% {
     opacity: 0;
-    transform: translateY(28px) scale(0.92);
+    transform: translateY(-90px) scale(0.92);
   }
-
-  60% {
+  48% {
     opacity: 1;
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(16px) scale(1.03);
   }
-
+  68% {
+    transform: translateY(-8px) scale(0.985);
+  }
+  84% {
+    transform: translateY(3px) scale(1.006);
+  }
+  94% {
+    transform: translateY(-1px) scale(0.998);
+  }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* Estado en espera visible mientras el preloader está activo */
+.saidex-preloader:not(.is-loaded) ~ main .hero .hero-bounce-item,
+body:not(.site-loaded) .saidex-preloader ~ main .hero .hero-bounce-item {
+  opacity: 0;
+  transform: translateY(-90px);
+  will-change: transform, opacity;
+  animation: none !important;
+}
+
+/* Cascada escalonada activada al cargar la página o completar preloader */
+.hero .hero-bounce-item {
+  opacity: 0;
+  transform: translateY(-90px);
+  will-change: transform, opacity;
+  animation: heroBounceDropFromTop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+body.site-loaded .hero .hero-bounce-item,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item {
+  animation: heroBounceDropFromTop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Retrasos escalonados uno por uno desde arriba */
+.hero .hero-bounce-item.item-0,
+body.site-loaded .hero .hero-bounce-item.item-0,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-0 {
+  animation-delay: 0.04s;
+}
+
+.hero .hero-bounce-item.item-1,
+body.site-loaded .hero .hero-bounce-item.item-1,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-1 {
+  animation-delay: 0.12s;
+}
+
+.hero .hero-bounce-item.item-2,
+body.site-loaded .hero .hero-bounce-item.item-2,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-2 {
+  animation-delay: 0.24s;
+}
+
+.hero .hero-bounce-item.item-3,
+body.site-loaded .hero .hero-bounce-item.item-3,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-3 {
+  animation-delay: 0.36s;
+}
+
+.hero .hero-bounce-item.item-3b,
+body.site-loaded .hero .hero-bounce-item.item-3b,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-3b {
+  animation-delay: 0.44s;
+}
+
+.hero .hero-bounce-item.item-4,
+body.site-loaded .hero .hero-bounce-item.item-4,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-4 {
+  animation-delay: 0.50s;
+}
+
+.hero .hero-bounce-item.item-5,
+body.site-loaded .hero .hero-bounce-item.item-5,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-5 {
+  animation-delay: 0.62s;
+}
+
+.hero .hero-bounce-item.item-6,
+body.site-loaded .hero .hero-bounce-item.item-6,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-6 {
+  animation-delay: 0.74s;
+}
+
+.hero .hero-bounce-item.item-7,
+body.site-loaded .hero .hero-bounce-item.item-7,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-7 {
+  animation-delay: 0.86s;
+}
+
+.hero .hero-bounce-item.item-8,
+body.site-loaded .hero .hero-bounce-item.item-8,
+.saidex-preloader.is-loaded ~ main .hero .hero-bounce-item.item-8 {
+  animation-delay: 0.98s;
 }
 
 /* Alternativa para animate-bounce-in independiente */
@@ -218,16 +296,105 @@ body.site-loaded .hero-features-grid .hero-feature-card:nth-child(3),
   will-change: transform, opacity;
 }
 
-.scroll-bounce {
+/* =========================================================================
+   ANIMACIÓN DE APARICIÓN DE SECCIONES - ANTIGRAVITY & UI-MOTION (Silk & Spatial 3D)
+   ========================================================================= */
+.scroll-bounce,
+.scroll-bounce-left,
+.scroll-bounce-right,
+.scroll-bounce-scale {
   opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-bounce.is-visible {
+/* Variante Estándar: Elevación 3D Espacial */
+.scroll-bounce {
+  transform: perspective(1000px) translateY(36px) scale(0.96) rotateX(4deg);
+  filter: blur(8px);
+  transform-origin: center top;
+}
+
+/* Variante Deslizamiento desde la Izquierda */
+.scroll-bounce-left {
+  transform: translateX(-40px) scale(0.97);
+  filter: blur(6px);
+}
+
+/* Variante Deslizamiento desde la Derecha */
+.scroll-bounce-right {
+  transform: translateX(40px) scale(0.97);
+  filter: blur(6px);
+}
+
+/* Variante Escala / Zoom Espacial */
+.scroll-bounce-scale {
+  transform: scale(0.92);
+  filter: blur(8px);
+}
+
+/* Estado Visible Activo */
+.scroll-bounce.is-visible,
+.scroll-bounce-left.is-visible,
+.scroll-bounce-right.is-visible,
+.scroll-bounce-scale.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: perspective(1000px) translateY(0) translateX(0) scale(1) rotateX(0deg);
+  filter: blur(0);
+}
+
+/* Cascada escalonada (Stagger Cascade) */
+.scroll-bounce.delay-1, .scroll-bounce-left.delay-1, .scroll-bounce-right.delay-1, .scroll-bounce-scale.delay-1 { transition-delay: 0.08s; }
+.scroll-bounce.delay-2, .scroll-bounce-left.delay-2, .scroll-bounce-right.delay-2, .scroll-bounce-scale.delay-2 { transition-delay: 0.16s; }
+.scroll-bounce.delay-3, .scroll-bounce-left.delay-3, .scroll-bounce-right.delay-3, .scroll-bounce-scale.delay-3 { transition-delay: 0.24s; }
+.scroll-bounce.delay-4, .scroll-bounce-left.delay-4, .scroll-bounce-right.delay-4, .scroll-bounce-scale.delay-4 { transition-delay: 0.32s; }
+.scroll-bounce.delay-5, .scroll-bounce-left.delay-5, .scroll-bounce-right.delay-5, .scroll-bounce-scale.delay-5 { transition-delay: 0.40s; }
+.scroll-bounce.delay-6, .scroll-bounce-left.delay-6, .scroll-bounce-right.delay-6, .scroll-bounce-scale.delay-6 { transition-delay: 0.48s; }
+
+/* Destello eléctrico breve al activarse */
+.cyber-flash.is-visible {
+  animation: cyberRevealFlash 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cyberRevealFlash {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 229, 255, 0);
+  }
+  40% {
+    box-shadow: 0 0 35px rgba(0, 229, 255, 0.5), inset 0 0 15px rgba(0, 229, 255, 0.25);
+  }
+  100% {
+    box-shadow: inherit;
+  }
+}
+
+/* Efecto de foco sutil al entrar en la sección activa */
+.section-revealed {
+  animation: sectionAmbientFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sectionAmbientFade {
+  0% {
+    opacity: 0.88;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-bounce,
+  .scroll-bounce-left,
+  .scroll-bounce-right,
+  .scroll-bounce-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
 }
 
 /* Efecto Zoom del Carrusel */
@@ -696,7 +863,7 @@ img {
   padding-top: 115px;
   padding-bottom: 60px;
   background-color: #020617;
-  background-image: url('../assets/hero.webp');
+  background-image: url('../assets/Villa%20tropical%20al%20anochecer%20con%20piscina%20infinita.png');
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
@@ -709,16 +876,16 @@ img {
   inset: 0;
   background:
     linear-gradient(to right,
-      rgba(2, 6, 23, 0.98) 0%,
-      rgba(2, 6, 23, 0.92) 32%,
-      rgba(2, 6, 23, 0.70) 50%,
-      rgba(2, 6, 23, 0.25) 70%,
-      rgba(2, 6, 23, 0.05) 100%),
+      rgba(2, 6, 23, 0.94) 0%,
+      rgba(2, 6, 23, 0.88) 32%,
+      rgba(2, 6, 23, 0.58) 52%,
+      rgba(2, 6, 23, 0.18) 74%,
+      rgba(2, 6, 23, 0.02) 100%),
     linear-gradient(to bottom,
-      rgba(2, 6, 23, 0.65) 0%,
-      transparent 22%,
+      rgba(2, 6, 23, 0.55) 0%,
+      transparent 20%,
       transparent 76%,
-      rgba(2, 6, 23, 0.95) 100%);
+      rgba(2, 6, 23, 0.90) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -736,53 +903,222 @@ img {
 
 .hero-container {
   display: grid;
-  grid-template-columns: minmax(0, 58%) minmax(0, 42%);
+  grid-template-columns: minmax(0, 52%) minmax(0, 48%);
   align-items: center;
   position: relative;
   z-index: 3;
   width: 100%;
-  min-height: calc(100vh - 170px);
+  min-height: calc(100vh - 150px);
+  gap: 20px;
 }
 
 .hero-content {
   position: relative;
   z-index: 4;
-  max-width: 660px;
+  max-width: 620px;
   padding: 20px 0;
 }
 
-/* Insignia Superior Tipo Píldora */
+/* Insignia Superior Tipo Píldora de Alta Tecnología */
 .hero-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 18px;
+  gap: 10px;
+  padding: 8px 20px;
   border-radius: 50px;
-  background: rgba(0, 229, 255, 0.08);
-  border: 1px solid rgba(0, 229, 255, 0.35);
+  background: rgba(3, 10, 28, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.45);
   color: #00E5FF;
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin-bottom: 22px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 229, 255, 0.22);
+  transition: all 0.3s ease;
+}
+
+.hero-tag:hover {
+  border-color: #00E5FF;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 229, 255, 0.45);
 }
 
 .hero-tag i {
   font-size: 0.95rem;
   color: #00E5FF;
+  filter: drop-shadow(0 0 6px #00E5FF);
 }
 
+.hero-tag .badge-status-ring {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #39FF14;
+  box-shadow: 0 0 8px #39FF14;
+  animation: badgeStatusPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes badgeStatusPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.55;
+  }
+}
+
+/* ========================================================
+   TÍTULO HERO: EFECTO DE CORRIENTE ELÉCTRICA EN BUCLE
+   (La corriente recorre letra por letra y remata con todo el título)
+   ======================================================== */
 .hero-title {
   font-size: clamp(2.4rem, 4.8vw, 4.2rem);
   font-weight: 800;
-  line-height: 1.12;
+  line-height: 1.14;
   margin-bottom: 18px;
   color: #FFFFFF;
   letter-spacing: -0.02em;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95);
+}
+
+.hero-electric-title {
+  position: relative;
+  display: inline-block;
+  animation: electricTitleGrandSurge 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Filas de texto */
+.electric-row {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Cada letra individual energizada */
+.elec-char {
+  display: inline-block;
+  color: #F8FAFC;
+  transition: transform 0.16s ease, color 0.16s ease;
+  animation: electricCurrentWave 4.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation-delay: calc(var(--c-idx) * 0.055s);
+  will-change: transform, text-shadow, color;
+}
+
+.elec-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+/* Letras con clase cian o segunda fila cian */
+.electric-row.text-neon-cyan .elec-char,
+.electric-row.row-2.text-neon-cyan .elec-char,
+.electric-row.row-2 .elec-char {
+  color: #00E5FF;
+}
+
+/* Fase 1: La corriente eléctrica recorre letra por letra */
+@keyframes electricCurrentWave {
+  0%, 15% {
+    transform: translateY(0) scale(1);
+    color: inherit;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    filter: brightness(1);
+  }
+  4% {
+    transform: translateY(-4px) scale(1.12);
+    color: #FFFFFF !important;
+    text-shadow: 
+      0 0 6px #FFFFFF,
+      0 0 16px #00E5FF,
+      0 0 32px #00E5FF,
+      0 0 55px #39FF14,
+      0 0 80px rgba(0, 229, 255, 0.85) !important;
+    filter: brightness(1.4);
+  }
+  8% {
+    transform: translateY(-1px) scale(1.04);
+    color: #FFFFFF;
+    text-shadow: 
+      0 0 6px #FFFFFF,
+      0 0 16px #00E5FF,
+      0 0 28px #00E5FF;
+  }
+  15%, 100% {
+    transform: translateY(0) scale(1);
+    color: inherit;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    filter: brightness(1);
+  }
+}
+
+/* Fase 2: Gran descarga que energiza TODO el título completo */
+@keyframes electricTitleGrandSurge {
+  0%, 46% {
+    filter: drop-shadow(0 0 0px transparent);
+    transform: scale(1);
+  }
+  49% {
+    filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.8)) drop-shadow(0 0 30px rgba(57, 255, 20, 0.5));
+    transform: scale(1.015);
+  }
+  53% {
+    filter: drop-shadow(0 0 32px #00E5FF) drop-shadow(0 0 65px rgba(0, 229, 255, 0.9)) brightness(1.28);
+    transform: scale(1.025);
+  }
+  58% {
+    filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.7)) drop-shadow(0 0 40px rgba(57, 255, 20, 0.4));
+    transform: scale(1.01);
+  }
+  66%, 100% {
+    filter: drop-shadow(0 0 0px transparent);
+    transform: scale(1);
+  }
+}
+
+/* Rayo / Línea de circuito que se dispara debajo del título al terminar la corriente */
+.hero-electric-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(90deg, transparent 0%, #00E5FF 30%, #FFFFFF 50%, #39FF14 70%, transparent 100%);
+  background-size: 200% 100%;
+  border-radius: 2px;
+  opacity: 0;
+  box-shadow: 0 0 14px #00E5FF, 0 0 28px #39FF14;
+  animation: electricBeamLine 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes electricBeamLine {
+  0%, 46% {
+    opacity: 0;
+    transform: scaleX(0.2);
+    background-position: 100% 0;
+  }
+  49% {
+    opacity: 0.9;
+    transform: scaleX(0.85);
+  }
+  53% {
+    opacity: 1;
+    transform: scaleX(1);
+    background-position: 50% 0;
+    box-shadow: 0 0 20px #00E5FF, 0 0 35px #39FF14;
+  }
+  59% {
+    opacity: 0.6;
+    transform: scaleX(1);
+    background-position: 0% 0;
+  }
+  66%, 100% {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
 }
 
 .hero-title-light {
@@ -799,95 +1135,687 @@ img {
   font-size: clamp(1rem, 1.8vw, 1.25rem);
   color: #CBD5E1;
   line-height: 1.6;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
   max-width: 580px;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.text-highlight-cyan {
+  color: #00E5FF;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
 }
 
 /* ========================================================
-   HERO FEATURES - 3 CARDS IN A SINGLE HORIZONTAL ROW
+   BARRA DE CONFIANZA & MÉTRICAS RÁPIDAS DEL HERO
    ======================================================== */
-.hero-features-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: stretch !important;
-  justify-content: flex-start;
+.hero-trust-strip {
+  display: inline-flex;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 30px;
-  width: 100%;
-  max-width: 480px;
-  flex-wrap: nowrap !important;
+  margin-top: 24px;
+  padding: 10px 22px;
+  border-radius: 40px;
+  background: rgba(3, 8, 24, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hero-feature-card {
-  flex: 1 1 0px !important;
-  min-width: 0 !important;
-  max-width: 150px;
-  min-height: 98px;
-  background: rgba(10, 25, 47, 0.72) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border: 1px solid rgba(0, 229, 255, 0.28) !important;
-  border-radius: 14px !important;
-  padding: 14px 10px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  text-align: center !important;
-  cursor: pointer;
+.hero-trust-strip:hover {
+  border-color: rgba(0, 229, 255, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.trust-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #F1F5F9;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.trust-strip-item i {
+  font-size: 0.95rem;
+}
+
+.trust-strip-item i.text-cyan {
+  color: #00E5FF;
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.6));
+}
+
+.trust-strip-item i.text-green {
+  color: #00E676;
+  filter: drop-shadow(0 0 6px rgba(0, 230, 118, 0.6));
+}
+
+.trust-strip-item i.text-gold {
+  color: #FFB703;
+  filter: drop-shadow(0 0 6px rgba(255, 183, 3, 0.6));
+}
+
+.trust-strip-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 580px) {
+  .hero-trust-strip {
+    gap: 10px;
+    padding: 8px 14px;
+    justify-content: center;
+  }
+  .hero-trust-strip .trust-strip-separator {
+    display: none;
+  }
+  .electric-row {
+    white-space: normal;
+  }
+}
+
+/* ========================================================
+   HERO DERECHO: 5 ICONOS DISPERSOS POR TODA LA COLUMNA DERECHA
+   SIN CONTENEDOR / CAJA (ÍCONOS FLOTANTES LIBRES)
+   CON DIFERENTES COLORES NEÓN, MOVIMIENTO FLOTANTE Y EFECTO HOVER
+   ======================================================== */
+.hero-crescent-showcase {
   position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 540px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   isolation: isolate;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.28s ease,
-              border-color 0.28s ease,
-              box-shadow 0.28s ease;
 }
 
-.hero-feature-card .feature-icon-wrapper {
+.crescent-nodes-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: transparent !important;
+}
+
+/* Nodo / Ícono Flotante Libre (SIN CONTENEDOR / SIN CAJA) */
+.crescent-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 58px;
+  height: 58px;
+  z-index: 5;
+  transition: transform 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Círculo del Ícono - Estilo Neón Premium */
+.crescent-node .node-icon-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.42rem;
+  background: rgba(2, 6, 23, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease,
+              color 0.35s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.crescent-node .node-icon-circle i {
+  transition: transform 0.3s ease, filter 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================================
+   DISEÑO ELEGANTE DEL NOMBRE AL PASAR EL MOUSE (POPUP BADGE)
+   ======================================================== */
+.crescent-node .node-label-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px) scale(0.92);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(3, 7, 20, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 50px;
+  white-space: nowrap;
+  z-index: 30;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Punto indicador luminoso en el popup */
+.crescent-node .node-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: nodeStatusBlink 1.8s ease-in-out infinite;
+}
+
+@keyframes nodeStatusBlink {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
+}
+
+/* Texto del Nombre con alta legibilidad */
+.crescent-node .node-name-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* Al pasar el mouse: Revelar Nombre con bonito diseño */
+.crescent-node:hover .node-label-popup,
+.crescent-node:focus-visible .node-label-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* En nodo 1 (superior derecho), anclaje inteligente a la derecha */
+.crescent-node.node-1 .node-label-popup {
+  left: auto;
+  right: 0;
+  transform: translateY(-6px) scale(0.92);
+}
+.crescent-node.node-1:hover .node-label-popup,
+.crescent-node.node-1:focus-visible .node-label-popup {
+  transform: translateY(0) scale(1);
+}
+
+/* En nodo 2 (superior izquierdo), anclaje inteligente a la izquierda */
+.crescent-node.node-2 .node-label-popup {
+  left: 0;
+  transform: translateY(-6px) scale(0.92);
+}
+.crescent-node.node-2:hover .node-label-popup,
+.crescent-node.node-2:focus-visible .node-label-popup {
+  transform: translateY(0) scale(1);
+}
+
+/* En nodo 5 (inferior), surge hacia arriba para máxima visibilidad */
+.crescent-node.node-5 .node-label-popup {
+  top: auto;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px) scale(0.92);
+}
+.crescent-node.node-5:hover .node-label-popup,
+.crescent-node.node-5:focus-visible .node-label-popup {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* ========================================================
+   POSICIONES DISPERSAS POR TODA LA COLUMNA DERECHA
+   ======================================================== */
+/* 1. Iluminación (Dorado) - Zona Superior Derecha (balcón/áticos) */
+.crescent-node.node-1 {
+  top: 30px;
+  right: 45px;
+  animation: crescentFloat1 5.2s ease-in-out infinite alternate;
+}
+
+/* 2. Climatización (Cian) - Zona Superior Izquierda (techo del patio) */
+.crescent-node.node-2 {
+  top: 110px;
+  left: 35px;
+  animation: crescentFloat2 5.8s ease-in-out infinite alternate;
+}
+
+/* 3. Seguridad (Verde) - Centro Derecho (pared/cascada) */
+.crescent-node.node-3 {
+  top: 225px;
+  right: 110px;
+  animation: crescentFloat3 4.8s ease-in-out infinite alternate;
+}
+
+/* 4. Smartphone (Púrpura) - Zona Inferior Izquierda (lounge de terraza) */
+.crescent-node.node-4 {
+  top: 340px;
+  left: 60px;
+  animation: crescentFloat4 5.5s ease-in-out infinite alternate;
+}
+
+/* 5. Control por Voz (Rojo) - Inferior Centro/Derecho (libre de WhatsApp) */
+.crescent-node.node-5 {
+  top: 440px;
+  right: 180px;
+  animation: crescentFloat5 5.1s ease-in-out infinite alternate;
+}
+
+/* ========================================================
+   MOVIMIENTO FLOTANTE INDEPENDIENTE PARA CADA NODO
+   ======================================================== */
+@keyframes crescentFloat1 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, -7px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes crescentFloat2 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -5px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes crescentFloat3 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-6px, 6px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes crescentFloat4 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -6px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes crescentFloat5 {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, -7px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ========================================================
+   5 COLORES DIFERENCIADOS Y EFECTO DE ILUMINACIÓN PERSISTENTE EN HOVER
+   ======================================================== */
+
+/* 1. Dorado Ámbar (Iluminación Inteligente) */
+.crescent-node.color-gold .node-icon-circle {
+  border: 1.5px solid #FFB703;
+  color: #FFB703;
+  box-shadow: 0 0 16px rgba(255, 183, 3, 0.6), inset 0 0 10px rgba(255, 183, 3, 0.2);
+}
+.crescent-node.color-gold .node-status-dot {
+  background: #FFB703;
+  box-shadow: 0 0 8px #FFB703;
+}
+.crescent-node.color-gold .node-label-popup {
+  border: 1.2px solid rgba(255, 183, 3, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 18px rgba(255, 183, 3, 0.35);
+}
+.crescent-node.color-gold:hover .node-icon-circle,
+.crescent-node.color-gold:focus-visible .node-icon-circle {
+  transform: scale(1.2);
+  border-color: #FFE082;
+  background: rgba(255, 183, 3, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px #FFB703, 0 0 55px rgba(255, 183, 3, 0.65), inset 0 0 16px rgba(255, 183, 3, 0.45);
+}
+.crescent-node.color-gold:hover .node-icon-circle i,
+.crescent-node.color-gold:focus-visible .node-icon-circle i {
+  filter: drop-shadow(0 0 12px #FFB703) drop-shadow(0 0 20px #FFB703);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+.crescent-node.color-gold:hover .node-name-text,
+.crescent-node.color-gold:focus-visible .node-name-text {
+  color: #FFE082;
+  text-shadow: 0 0 12px rgba(255, 183, 3, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* 2. Cian Eléctrico (Climatización Automática) */
+.crescent-node.color-cyan .node-icon-circle {
+  border: 1.5px solid #00E5FF;
+  color: #00E5FF;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.6), inset 0 0 10px rgba(0, 229, 255, 0.2);
+}
+.crescent-node.color-cyan .node-status-dot {
+  background: #00E5FF;
+  box-shadow: 0 0 8px #00E5FF;
+}
+.crescent-node.color-cyan .node-label-popup {
+  border: 1.2px solid rgba(0, 229, 255, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 18px rgba(0, 229, 255, 0.35);
+}
+.crescent-node.color-cyan:hover .node-icon-circle,
+.crescent-node.color-cyan:focus-visible .node-icon-circle {
+  transform: scale(1.2);
+  border-color: #80F4FF;
+  background: rgba(0, 229, 255, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px #00E5FF, 0 0 55px rgba(0, 229, 255, 0.65), inset 0 0 16px rgba(0, 229, 255, 0.45);
+}
+.crescent-node.color-cyan:hover .node-icon-circle i,
+.crescent-node.color-cyan:focus-visible .node-icon-circle i {
+  filter: drop-shadow(0 0 12px #00E5FF) drop-shadow(0 0 20px #00E5FF);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+.crescent-node.color-cyan:hover .node-name-text,
+.crescent-node.color-cyan:focus-visible .node-name-text {
+  color: #A5F3FC;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* 3. Verde Esmeralda Matrix (Seguridad Avanzada) */
+.crescent-node.color-green .node-icon-circle {
+  border: 1.5px solid #00E676;
+  color: #00E676;
+  box-shadow: 0 0 16px rgba(0, 230, 118, 0.6), inset 0 0 10px rgba(0, 230, 118, 0.2);
+}
+.crescent-node.color-green .node-status-dot {
+  background: #00E676;
+  box-shadow: 0 0 8px #00E676;
+}
+.crescent-node.color-green .node-label-popup {
+  border: 1.2px solid rgba(0, 230, 118, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 18px rgba(0, 230, 118, 0.35);
+}
+.crescent-node.color-green:hover .node-icon-circle,
+.crescent-node.color-green:focus-visible .node-icon-circle {
+  transform: scale(1.2);
+  border-color: #69F0AE;
+  background: rgba(0, 230, 118, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px #00E676, 0 0 55px rgba(0, 230, 118, 0.65), inset 0 0 16px rgba(0, 230, 118, 0.45);
+}
+.crescent-node.color-green:hover .node-icon-circle i,
+.crescent-node.color-green:focus-visible .node-icon-circle i {
+  filter: drop-shadow(0 0 12px #00E676) drop-shadow(0 0 20px #00E676);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+.crescent-node.color-green:hover .node-name-text,
+.crescent-node.color-green:focus-visible .node-name-text {
+  color: #A7F3D0;
+  text-shadow: 0 0 12px rgba(0, 230, 118, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* 4. Púrpura Magenta Neón (Control desde Smartphone) */
+.crescent-node.color-purple .node-icon-circle {
+  border: 1.5px solid #D946EF;
+  color: #D946EF;
+  box-shadow: 0 0 16px rgba(217, 70, 239, 0.6), inset 0 0 10px rgba(217, 70, 239, 0.2);
+}
+.crescent-node.color-purple .node-status-dot {
+  background: #D946EF;
+  box-shadow: 0 0 8px #D946EF;
+}
+.crescent-node.color-purple .node-label-popup {
+  border: 1.2px solid rgba(217, 70, 239, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 18px rgba(217, 70, 239, 0.35);
+}
+.crescent-node.color-purple:hover .node-icon-circle,
+.crescent-node.color-purple:focus-visible .node-icon-circle {
+  transform: scale(1.2);
+  border-color: #F5D0FE;
+  background: rgba(217, 70, 239, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px #D946EF, 0 0 55px rgba(217, 70, 239, 0.65), inset 0 0 16px rgba(217, 70, 239, 0.45);
+}
+.crescent-node.color-purple:hover .node-icon-circle i,
+.crescent-node.color-purple:focus-visible .node-icon-circle i {
+  filter: drop-shadow(0 0 12px #D946EF) drop-shadow(0 0 20px #D946EF);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+.crescent-node.color-purple:hover .node-name-text,
+.crescent-node.color-purple:focus-visible .node-name-text {
+  color: #F5D0FE;
+  text-shadow: 0 0 12px rgba(217, 70, 239, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* 5. Rojo Coral Neón (Control por Voz) */
+.crescent-node.color-red .node-icon-circle {
+  border: 1.5px solid #FF3366;
+  color: #FF3366;
+  box-shadow: 0 0 16px rgba(255, 51, 102, 0.6), inset 0 0 10px rgba(255, 51, 102, 0.2);
+}
+.crescent-node.color-red .node-status-dot {
+  background: #FF3366;
+  box-shadow: 0 0 8px #FF3366;
+}
+.crescent-node.color-red .node-label-popup {
+  border: 1.2px solid rgba(255, 51, 102, 0.65);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 18px rgba(255, 51, 102, 0.35);
+}
+.crescent-node.color-red:hover .node-icon-circle,
+.crescent-node.color-red:focus-visible .node-icon-circle {
+  transform: scale(1.2);
+  border-color: #FF85A2;
+  background: rgba(255, 51, 102, 0.25);
+  color: #FFFFFF;
+  box-shadow: 0 0 28px #FF3366, 0 0 55px rgba(255, 51, 102, 0.65), inset 0 0 16px rgba(255, 51, 102, 0.45);
+}
+.crescent-node.color-red:hover .node-icon-circle i,
+.crescent-node.color-red:focus-visible .node-icon-circle i {
+  filter: drop-shadow(0 0 12px #FF3366) drop-shadow(0 0 20px #FF3366);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+.crescent-node.color-red:hover .node-name-text,
+.crescent-node.color-red:focus-visible .node-name-text {
+  color: #FECDD3;
+  text-shadow: 0 0 12px rgba(255, 51, 102, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* Al pasar el mouse: Mantener nodo al frente y pausar la flotación para estabilidad */
+.crescent-node:hover,
+.crescent-node:focus-visible {
+  animation-play-state: paused !important;
+  z-index: 35 !important;
+}
+
+/* Adaptaciones Responsivas para la Medialuna */
+@media (max-width: 1200px) {
+  .hero-crescent-showcase {
+    transform: scale(0.9);
+    transform-origin: center right;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 30px !important;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+  .hero-content {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-tag {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-action-buttons {
+    justify-content: center !important;
+  }
+  .hero-trust-strip {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
+  .hero-crescent-showcase {
+    margin: 0 auto !important;
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-crescent-showcase {
+    transform: scale(0.72);
+    margin: -25px auto -20px !important;
+  }
+}
+
+/* ========================================================
+   BOTONES DE ACCIÓN DEL HERO (COTIZAR PROYECTO + VER VIDEO)
+   ======================================================== */
+.hero-action-buttons {
   display: flex !important;
   align-items: center !important;
+  gap: 16px !important;
+  margin-top: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Botón 1: Verde Brillante Neón */
+.btn-hero-quote {
+  display: inline-flex !important;
+  align-items: center !important;
   justify-content: center !important;
-  font-size: 1.55rem !important;
-  color: #00E5FF !important;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.65)) !important;
-  line-height: 1;
-  transition: transform 0.28s ease, filter 0.28s ease, color 0.28s ease;
-  pointer-events: none;
+  gap: 10px !important;
+  padding: 13px 28px !important;
+  border-radius: 50px !important;
+  background: #00E676 !important;
+  color: #03141f !important;
+  font-weight: 700 !important;
+  font-size: 1.02rem !important;
+  text-decoration: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 24px rgba(0, 230, 118, 0.45) !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  line-height: 1 !important;
 }
 
-.hero-feature-card span {
-  font-size: 0.88rem !important;
+.btn-hero-quote i {
+  font-size: 0.92rem !important;
+  transition: transform 0.25s ease !important;
+}
+
+.btn-hero-quote:hover {
+  background: #10ff88 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 0 34px rgba(0, 230, 118, 0.75), 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  color: #03141f !important;
+}
+
+.btn-hero-quote:hover i {
+  transform: translateX(4px) !important;
+}
+
+/* Botón 2: Cápsula de Cristal con Borde Blanco y Disco Play */
+.btn-hero-video {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  padding: 11px 26px !important;
+  border-radius: 50px !important;
+  background: rgba(10, 25, 47, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+  color: #FFFFFF !important;
   font-weight: 600 !important;
+  font-size: 1.02rem !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  line-height: 1 !important;
+}
+
+.btn-hero-video .video-play-disc {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  color: #041221 !important;
+  font-size: 0.65rem !important;
+  padding-left: 2px !important;
+  transition: transform 0.25s ease !important;
+}
+
+.btn-hero-video:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: #FFFFFF !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.35), 0 8px 24px rgba(0, 0, 0, 0.5) !important;
   color: #FFFFFF !important;
-  letter-spacing: -0.01em;
-  white-space: nowrap !important;
-  line-height: 1.2;
-  text-align: center;
-  transition: color 0.28s ease, text-shadow 0.28s ease;
-  pointer-events: none;
 }
 
-/* Estado Hover */
-.hero-feature-card:hover {
-  transform: translateY(-5px) scale(1.02) !important;
-  background: rgba(14, 34, 61, 0.88) !important;
-  border-color: rgba(0, 229, 255, 0.75) !important;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55), 0 0 24px rgba(0, 229, 255, 0.4) !important;
+.btn-hero-video:hover .video-play-disc {
+  transform: scale(1.14) !important;
 }
 
-.hero-feature-card:hover .feature-icon-wrapper {
-  transform: scale(1.15) !important;
-  filter: drop-shadow(0 0 15px #00E5FF) !important;
+/* Modal de Video Estilo Cibernético */
+.video-modal-content {
+  max-width: 780px !important;
+  width: 92% !important;
+  background: rgba(10, 25, 47, 0.94) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1.5px solid rgba(0, 229, 255, 0.4) !important;
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.3) !important;
+  border-radius: 18px !important;
+  padding: 24px !important;
 }
 
-.hero-feature-card:hover span {
-  color: #FFFFFF !important;
-  text-shadow: 0 0 12px rgba(0, 229, 255, 0.9) !important;
+.video-container-responsive {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #020617;
 }
+
+.video-container-responsive iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+
 
 /* 
    MANO FLOTANTE INDEPENDIENTE + SMARTPHONE
@@ -3968,13 +4896,28 @@ body.site-loaded .hero-floating-device,
     visibility 0.75s ease;
   will-change: opacity, transform;
   overflow: hidden;
+  animation: preloaderHardFailsafe 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes preloaderHardFailsafe {
+  0%, 82% {
+    pointer-events: auto;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
 }
 
 .saidex-preloader.is-loaded {
-  opacity: 0;
-  transform: scale(1.04);
-  pointer-events: none;
-  visibility: hidden;
+  opacity: 0 !important;
+  transform: scale(1.04) !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
 }
 
 /* Background Cyber Grid & Core Glow */
@@ -4242,7 +5185,28 @@ body.site-loaded .hero-floating-device,
   font-family: var(--font-primary, 'Inter', sans-serif);
 }
 
+.cyber-brand-title.hero-electric-title {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cyber-brand-title .elec-char {
+  display: inline-block;
+  color: #FFFFFF;
+  font-family: inherit;
+  transition: transform 0.16s ease, color 0.16s ease;
+  animation: electricCurrentWave 4.6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  animation-delay: calc(var(--c-idx) * 0.055s);
+  will-change: transform, text-shadow, color;
+}
+
 .cyber-neon-cyan {
+  color: #00E5FF;
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.9), 0 0 40px rgba(0, 229, 255, 0.5);
+}
+
+.cyber-brand-title .cyber-neon-cyan .elec-char {
   color: #00E5FF;
   text-shadow: 0 0 20px rgba(0, 229, 255, 0.9), 0 0 40px rgba(0, 229, 255, 0.5);
 }
@@ -4980,4 +5944,447 @@ body.site-loaded .hero-floating-device,
 
 .modal-guarantee i {
   color: #39FF14;
-}
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA CIBERNÉTICO UNIFICADO (DISEÑO TARJETA HERO + MOCKUP + CONTACTO)
+   ========================================================================== */
+
+.footer-cyber-grand-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Gran Tarjeta Cibernética Principal con Borde Neón y Vidrio Oscuro */
+.footer-grand-cyber-card {
+  position: relative;
+  width: 100%;
+  border-radius: 28px;
+  border: 1.5px solid rgba(0, 229, 255, 0.65);
+  background: 
+    radial-gradient(ellipse 60% 70% at 50% 30%, rgba(0, 180, 255, 0.12) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(2, 10, 28, 0.94) 0%, rgba(4, 18, 45, 0.9) 50%, rgba(2, 8, 22, 0.96) 100%);
+  box-shadow: 
+    0 0 35px rgba(0, 210, 255, 0.22),
+    inset 0 0 30px rgba(0, 229, 255, 0.08),
+    0 20px 50px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 40px 45px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1.15fr;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.footer-grand-cyber-card:hover {
+  border-color: rgba(0, 240, 255, 0.85);
+  box-shadow: 
+    0 0 45px rgba(0, 229, 255, 0.32),
+    inset 0 0 35px rgba(0, 229, 255, 0.12),
+    0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* Fondo ambiental sutil de domótica en la tarjeta */
+.footer-grand-cyber-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/footer_app_showcase.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: luminosity;
+}
+
+/* Línea de brillo neón superior */
+.footer-grand-cyber-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00e5ff, #38bdf8, transparent);
+  box-shadow: 0 0 15px #00e5ff;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Las columnas se sitúan por encima del fondo */
+.footer-card-col {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- COLUMNA 1: CTA "¿Tienes un proyecto en mente?" --- */
+.col-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.cta-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  letter-spacing: 0.3px;
+}
+
+.cta-eyebrow .sprout-icon {
+  font-size: 1.15rem;
+  color: #00E676;
+  filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.8));
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.cta-title-cyan {
+  color: #00E5FF;
+  background: linear-gradient(135deg, #00FFFF 0%, #00D2FF 50%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgba(0, 229, 255, 0.6));
+}
+
+.cta-desc {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 360px;
+}
+
+.btn-cta-quote {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #00E676 0%, #00C853 100%);
+  color: #021a0d;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 13px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(0, 230, 118, 0.65), 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.btn-cta-quote i {
+  font-size: 0.95rem;
+  transition: transform 0.25s ease;
+}
+
+.btn-cta-quote:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(135deg, #33FF99 0%, #00E676 100%);
+  box-shadow: 0 0 35px rgba(0, 230, 118, 0.9), 0 8px 20px rgba(0, 0, 0, 0.5);
+  color: #011409;
+}
+
+.btn-cta-quote:hover i {
+  transform: translateX(4px);
+}
+
+/* --- COLUMNA 2: SMARTPHONE 3D MOCKUP INTERACTIVO --- */
+.col-mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup-frame {
+  width: 215px;
+  height: 380px;
+  background: #020817;
+  border-radius: 36px;
+  border: 3px solid #1E293B;
+  box-shadow: 
+    0 0 0 1px rgba(0, 229, 255, 0.5),
+    0 15px 35px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(0, 210, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 12px 10px;
+  box-sizing: border-box;
+  transform: perspective(800px) rotateY(-3deg) rotateX(2deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.phone-mockup-frame:hover {
+  transform: perspective(800px) rotateY(0deg) rotateX(0deg) translateY(-4px);
+  box-shadow: 
+    0 0 0 1.5px rgba(0, 255, 255, 0.85),
+    0 20px 45px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(0, 229, 255, 0.55);
+}
+
+.phone-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px 6px;
+  color: #64748B;
+  font-size: 0.65rem;
+}
+
+.phone-notch {
+  width: 8px;
+  height: 8px;
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.phone-status-icons {
+  display: flex;
+  gap: 5px;
+  font-size: 0.6rem;
+  color: #94a3b8;
+}
+
+.phone-app-header {
+  text-align: center;
+  padding: 4px 0 10px;
+  position: relative;
+}
+
+.phone-app-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: radial-gradient(circle, rgba(0, 180, 255, 0.25) 0%, rgba(2, 14, 38, 0.8) 100%);
+  border: 1.5px solid rgba(0, 229, 255, 0.6);
+  color: #00E5FF;
+  font-size: 1.35rem;
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.6), inset 0 0 10px rgba(0, 210, 255, 0.3);
+  animation: housePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes housePulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(0,229,255,0.5)); }
+  100% { transform: scale(1.05); filter: drop-shadow(0 0 16px rgba(0,229,255,0.9)); }
+}
+
+.phone-app-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.phone-app-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(0, 180, 255, 0.22);
+  color: #E2E8F0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.phone-app-item i {
+  color: #00D2FF;
+  font-size: 0.85rem;
+  width: 16px;
+  text-align: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.phone-app-item:hover {
+  background: rgba(0, 180, 255, 0.18);
+  border-color: #00E5FF;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(0, 210, 255, 0.4), inset 0 0 8px rgba(0, 210, 255, 0.2);
+  transform: translateX(3px);
+}
+
+.phone-app-item:hover i {
+  color: #FFFFFF;
+  transform: scale(1.15);
+  text-shadow: 0 0 8px #00E5FF;
+}
+
+.phone-home-indicator {
+  width: 60px;
+  height: 3px;
+  background: #64748B;
+  border-radius: 2px;
+  margin: 6px auto 2px;
+}
+
+/* --- COLUMNA 3: CONTACTO --- */
+.col-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.col-contact .footer-contact-block {
+  width: 100%;
+  max-width: 380px;
+}
+
+.col-contact .footer-header-cyber {
+  margin-bottom: 18px;
+}
+
+.col-contact .footer-contact-cards {
+  gap: 12px;
+}
+
+.col-contact .contact-pill-card {
+  padding: 9px 18px;
+}
+
+/* --- BARRA INFERIOR UNIFICADA (REDES + DERECHOS + CIRCUITO) --- */
+.footer-bottom-unified {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 10px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-bottom-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-bottom-social .footer-social-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 1.15rem;
+}
+
+.footer-bottom-center {
+  text-align: center;
+}
+
+.footer-bottom-center .footer-copyright-text {
+  color: #94A3B8;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.footer-bottom-center .footer-tech-tag {
+  color: #00E5FF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 3px 0 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.footer-bottom-circuit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 320px;
+  height: 48px;
+}
+
+.footer-circuit-mini-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+@media (max-width: 1100px) {
+  .footer-grand-cyber-card {
+    grid-template-columns: 1fr 1fr;
+    padding: 36px 30px;
+    gap: 28px;
+  }
+  .col-mockup {
+    grid-column: 1 / -1;
+    order: -1;
+    margin-bottom: 10px;
+  }
+  .footer-bottom-unified {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+  .footer-bottom-circuit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grand-cyber-card {
+    grid-template-columns: 1fr;
+    padding: 28px 20px;
+    gap: 26px;
+    border-radius: 20px;
+  }
+  .col-cta {
+    align-items: center;
+    text-align: center;
+  }
+  .cta-title {
+    font-size: 2rem;
+  }
+  .col-contact {
+    align-items: center;
+  }
+  .col-contact .footer-header-cyber {
+    justify-content: center;
+  }
+  .footer-bottom-unified {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  .footer-bottom-social {
+    justify-content: center;
+  }
+}
+
